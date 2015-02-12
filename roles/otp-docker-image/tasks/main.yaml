@@ -1,0 +1,15 @@
+---
+- name: Ensure otp directory is present
+  file: path={{otp_root}} state=directory
+
+- name: Move Dockerfile
+  template: src=Dockerfile.j2 dest={{otp_root}}/Dockerfile owner=root group=root mode=0755
+
+- name: Move Run file
+  template: src=run.sh.j2 dest={{otp_root}}/run.sh owner=root group=root mode=0755
+
+- name: Move Router config file
+  template: src=router-config.json.j2 dest={{otp_root}}/router-config.json
+
+- name: Build OTP docker image
+  command: docker build --tag="{{otp_docker_image}}" --force-rm=true {{otp_root}}

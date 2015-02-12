@@ -1,0 +1,16 @@
+FROM nginx
+MAINTAINER Reittiopas version: 0.1
+
+RUN \
+  mkdir -p {{reverse_proxy_root}} && \
+  echo "{{ansible_date_time.epoch}}"
+
+ADD proxy.conf /etc/nginx/nginx.conf
+
+ADD index.html {{reverse_proxy_root}}/index.html
+
+ADD img {{reverse_proxy_root}}/img
+
+WORKDIR /etc/nginx
+
+CMD ["nginx"]

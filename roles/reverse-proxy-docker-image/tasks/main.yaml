@@ -1,0 +1,18 @@
+---
+- name: Ensure reverse-proxy directory is present
+  file: path={{reverse_proxy_root}} state=directory
+
+- name: Move Dockerfile
+  template: src=Dockerfile.j2 dest={{reverse_proxy_root}}/Dockerfile
+
+- name: Move config file
+  template: src=proxy.conf.j2 dest={{reverse_proxy_root}}/proxy.conf
+
+- name: Move Index file
+  copy: src=index.html dest={{reverse_proxy_root}}/index.html
+
+- name: Move images
+  copy: src=img dest={{reverse_proxy_root}}
+
+- name: Build Reverse-proxy image
+  command: docker build --tag="{{reverse_proxy_docker_image}}" --force-rm=true --no-cache=true {{reverse_proxy_root}}

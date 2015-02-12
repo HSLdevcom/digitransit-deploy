@@ -1,0 +1,15 @@
+---
+- hosts: all
+  vars_files:
+    - ../variables/common.yaml
+    - ../variables/passwords.yaml
+  roles:
+    - { role: hsl-alert-docker-image }
+    - { role: hsl-now-docker-image }
+    - { role: navigator-proto-docker-image }
+    - { role: reverse-proxy-docker-image }
+    - { role: siri2gtfsrt-docker-image }
+    - { role: otp-docker-image }
+    - { role: route-server-docker-image }
+    - { role: navigator-server-docker-image }
+

@@ -1,0 +1,25 @@
+---
+- name: Install Sshguard
+  apt: name=sshguard
+
+- name: Start Sshguard
+  service: name=sshguard state=restarted
+
+- name: Disallow password authentication
+  action: lineinfile dest=/etc/ssh/sshd_config regexp="^PasswordAuthentication" line="PasswordAuthentication no" state=present
+
+- name: Disallow password authentication
+  action: lineinfile dest=/etc/ssh/sshd_config regexp="^UsePAM" line="UsePAM no" state=present
+
+- name: Restart Sshd
+  service: name=ssh state=restarted
+
+- name: Move iptables file
+  template: src=iptables.txt.j2 dest=/root/iptables.txt
+
+- name: Set firewall
+  shell: iptables-restore < /root/iptables.txt
+
+- name: Ensure that Sshguard starts on boot
+  shell: update-rc.d sshguard enable S 2 3 4 5
+

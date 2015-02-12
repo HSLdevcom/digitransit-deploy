@@ -1,0 +1,2 @@
+{"op":"update", "match":{"file":"agency.txt", "agency_id":"9"}, "update":{"agency_id":"Joensuu"}}
+{"op":"retain", "match":{"file":"agency.txt", "agency_id":"Joensuu"}}

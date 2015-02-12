@@ -1,0 +1,146 @@
+#!/bin/bash
+set -e
+set -x
+
+# Basic authentication tokens
+MATKA_PASS={{matka_basic_auth}}
+HSL_PASS={{hsl_basic_auth}}
+
+# Base locations
+ROOT={{route_server_root}}
+FIT_GTFS=${ROOT}/gtfs_shape_mapfit/fit_gtfs.bash
+OBA_GTFS=${ROOT}/one-busaway-gtfs-transformer/onebusaway-gtfs-transformer-cli.jar
+KALKATI_GTFS=${ROOT}/kalkati2gtfs/kalkati2gtfs.py
+OTP_JAR={{otp_root}}/target/otp-1.0.0-SNAPSHOT.jar
+
+# Data location
+mkdir -p ${ROOT}/finland
+
+function retrieveOSM() {
+  echo "Retrieving OSM data..."
+  cd ${ROOT}/finland
+  curl "{{route_server_data_osm}}" -o finland-latest.osm.pbf
+}
+
+function retrieveTampere() {
+  echo "Retrieving Tampere data..."
+  cd ${ROOT}/finland
+  curl "{{route_server_data_tampere}}" -o tampere.zip
+  $FIT_GTFS finland-latest.osm.pbf +init=epsg:3067 tampere.zip tampere_fitted.zip
+  mv tampere_fitted.zip tampere.zip
+}
+
+function retrieveJyvaskyla() {
+  echo "Retrieving Jyväskylä data..."
+  cd ${ROOT}/finland
+  curl "{{route_server_data_jyvaskyla}}" -o jyvaskyla.zip
+}
+
+function retrieveOulu() {
+  echo "Retrieving Oulu data..."
+  cd ${ROOT}/finland
+  curl "{{route_server_data_oulu}}" -o oulu.zip
+}
+
+function retrieveLauttaNet() {
+  echo "Retrieving Lautta.net data..."
+  cd ${ROOT}/finland
+  curl "{{route_server_data_lautta}}" -o lautta.zip
+}
+
+function retrieveHsl() {
+  echo "Retrieving HSL data..."
+  cd ${ROOT}/finland
+  curl --user $HSL_PASS "{{route_server_data_hsl}}" -o hsl.zip
+
+  unzip -o hsl.zip stop_times.txt stops.txt
+  # TODO: Check that the line is in expected format
+  # Needed in order to get rid of shape_travelled
+  cut --complement -f 9 -d, stop_times.txt > stop_times.new
+  mv stop_times.new stop_times.txt
+  # TODO: Get stop positions from jore data
+  # TODO: make shapes nicer
+  #./fix_stops_accessibility.py > stops.new
+  #mv stops.new stops.txt
+  zip -f hsl.zip stop_times.txt stops.txt
+  rm stop_times.txt
+  rm stops.txt
+
+  $FIT_GTFS finland-latest.osm.pbf +init=epsg:3067 hsl.zip hsl_fitted.zip
+  mv hsl_fitted.zip hsl.zip
+}
+
+function retrieveKoontikanta() {
+  echo "Retrieving Koontikanta data..."
+  cd ${ROOT}/finland
+  
+  curl -u $MATKA_PASS "{{route_server_data_matka}}" -o all.zip
+  unzip -o all.zip
+  rm -rf GTFS
+  mkdir -p GTFS
+  PYTHONIOENCODING=UTF-8 python $KALKATI_GTFS LVM.xml GTFS/
+
+  gatherStops
+  transformKoontikantaPart "java -jar $OBA_GTFS --transform=${ROOT}/rules/ep.rule GTFS/EP/ EP.zip"
+  transformKoontikantaPart "java -jar $OBA_GTFS --transform=${ROOT}/rules/linjausok.rule GTFS/LINJAUSOK/ LINJAUSOK.zip"
+  transformKoontikantaPart "java -jar $OBA_GTFS --transform=${ROOT}/rules/pika.rule GTFS/PIKA/ PIKA.zip"
+  transformKoontikantaPart "java -jar $OBA_GTFS --transform=${ROOT}/rules/vakio.rule GTFS/VAKIO/ VAKIO.zip"
+
+  transformKoontikantaPart "java -jar $OBA_GTFS --transform=${ROOT}/rules/vr.rule GTFS/VR/ VR.zip"
+  transformKoontikantaPart "java -jar $OBA_GTFS --transform=${ROOT}/rules/joe.rule GTFS/JOE/ JOE.zip"
+  transformKoontikantaPart "java -jar $OBA_GTFS --transform=${ROOT}/rules/kuo.rule GTFS/KUO/ KUO.zip"
+  transformKoontikantaPart "java -jar $OBA_GTFS --transform=${ROOT}/rules/lpr.rule GTFS/LPR/ LPR.zip"
+  transformKoontikantaPart "java -jar $OBA_GTFS --transform=${ROOT}/rules/tur.rule GTFS/TUR/ TUR.zip"
+  transformKoontikantaPart "java -jar $OBA_GTFS --transform=${ROOT}/rules/finavia.rule GTFS/A2020_FIN/ FINAVIA.zip"
+}
+
+# Gathers stops.txt from different sources and combines them into one stops.txt
+# This a kludge to get current environment working
+function gatherStops() {
+  path=${ROOT}/finland 
+  # Get all stops
+  tail -n +2 ${path}/GTFS/EP/stops.txt > ${path}/combined-stops.txt
+  tail -n +2 ${path}/GTFS/LINJAUSOK/stops.txt >> ${path}/combined-stops.txt
+  tail -n +2 ${path}/GTFS/PIKA/stops.txt >> ${path}/combined-stops.txt
+  tail -n +2 ${path}/GTFS/VAKIO/stops.txt >> ${path}/combined-stops.txt
+
+  # Sort and get unique
+  sort ${path}/combined-stops.txt | uniq > ${path}/combined-stops-without-header.txt
+
+  # insert header
+  head -n 1 ${path}/GTFS/EP/stops.txt > ${path}/combined-stops-with-header.txt
+  cat ${path}/combined-stops-without-header.txt >> ${path}/combined-stops-with-header.txt
+
+  # Copy combined stops to sub folders
+  cp ${path}/combined-stops-with-header.txt ${path}/GTFS/EP/stops.txt
+  cp ${path}/combined-stops-with-header.txt ${path}/GTFS/LINJAUSOK/stops.txt
+  cp ${path}/combined-stops-with-header.txt ${path}/GTFS/PIKA/stops.txt
+  cp ${path}/combined-stops-with-header.txt ${path}/GTFS/VAKIO/stops.txt
+}
+
+# One Bus away transform does not end terminate with a correct error code. Check that here and fail if configuration is set
+function transformKoontikantaPart() {
+  if $1 2>&1 | grep "Exception"
+  then
+    echo "Failed to transform koontikanta part"
+    {% if route_server_fail_build_on_data_error %}
+      exit 1
+    {% endif %}
+  fi
+}
+
+function buildOtpGraph() {
+  echo "Building OTP graph..."
+  cd $ROOT
+  java -Xmx8G -jar $OTP_JAR --build finland/
+}
+
+# Here we go
+retrieveOSM
+retrieveTampere
+retrieveJyvaskyla
+retrieveOulu
+retrieveLauttaNet
+retrieveHsl
+retrieveKoontikanta
+buildOtpGraph

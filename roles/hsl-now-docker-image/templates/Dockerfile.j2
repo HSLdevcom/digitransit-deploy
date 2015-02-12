@@ -1,0 +1,16 @@
+FROM node:0.12
+MAINTAINER Reittiopas version: 0.1
+
+RUN apt-get update
+RUN apt-get install -y git npm sed
+
+RUN \
+  mkdir -p {{hsl_now_root}} && \
+  cd {{hsl_now_root}} && \
+  git clone {{hsl_now_git}} . && \
+  npm install -g serve && \
+  echo "{{ansible_date_time.epoch}}"
+
+WORKDIR {{hsl_now_root}}
+
+CMD serve --port {{hsl_now_exposed_port}}

@@ -1,0 +1,9 @@
+---
+- name: Ensure hsl-now directory is present
+  file: path={{hsl_now_root}} state=directory
+
+- name: Move Dockerfile
+  template: src=Dockerfile.j2 dest={{hsl_now_root}}/Dockerfile owner=root group=root mode=0755
+
+- name: Build docker image
+  command: docker build --tag="{{hsl_now_docker_image}}" --force-rm=true {{hsl_now_root}}

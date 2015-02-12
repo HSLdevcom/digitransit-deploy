@@ -1,0 +1,45 @@
+#/bin/bash
+set -e
+set -x
+
+mkdir -p {{route_server_root}}
+cd {{route_server_root}}
+
+apt-get update
+
+# Kalkati2Gtfs
+echo "Getting Kalkati2Gtfs..."
+git clone https://github.com/hannesj/kalkati2gtfs.git
+
+# One busaway transformer
+echo "Getting One-busaway-gtfs-transformer..."
+mkdir -p {{route_server_root}}/one-busaway-gtfs-transformer
+wget -O {{route_server_root}}/one-busaway-gtfs-transformer/onebusaway-gtfs-transformer-cli.jar "http://nexus.onebusaway.org/service/local/artifact/maven/content?r=public&g=org.onebusaway&a=onebusaway-gtfs-transformer-cli&v=1.3.4-SNAPSHOT"
+
+# Misc stuff needed by build-routes script
+echo "Install misc stuff..."
+apt-get -y install build-essential python-dev protobuf-compiler libprotobuf-dev \
+    make swig g++ python-dev libreadosm-dev \
+    libboost-graph-dev libproj-dev libgoogle-perftools-dev \
+    osmctools unzip zip python-imposm-parser python-pyproj \
+    python-argh
+
+# Install Pip and some dependencies
+echo "Install pip and some dependencies..."
+wget https://bootstrap.pypa.io/get-pip.py; python get-pip.py;
+pip install imposm.parser
+pip install argh
+
+echo "Getting pyproj and building it..."
+git clone https://github.com/jswhit/pyproj.git
+cd pyproj
+python setup.py build
+python setup.py install
+cd ..
+
+echo "Getting gtfs_shape_mapfit and building it..."
+git clone --recursive -b fastmapmatch https://github.com/hannesj/gtfs_shape_mapfit.git
+cd gtfs_shape_mapfit
+make -C pymapmatch
+
+echo "Done installing dependencies."

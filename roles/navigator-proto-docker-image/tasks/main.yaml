@@ -1,0 +1,12 @@
+---
+- name: Ensure navigator proto directory is present
+  file: path={{navigator_proto_root}} state=directory
+
+- name: Move Dockerfile
+  template: src=Dockerfile.j2 dest={{navigator_proto_root}}/Dockerfile owner=root group=root mode=0755
+
+- name: Move config
+  template: src=local_config.coffee.j2 dest={{navigator_proto_root}}/local_config.coffee owner=root group=root mode=0644
+
+- name: Build docker image
+  command: docker build --tag="{{navigator_proto_docker_image}}" --force-rm=true {{navigator_proto_root}} 

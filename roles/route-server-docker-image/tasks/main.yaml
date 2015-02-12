@@ -1,0 +1,21 @@
+---
+- name: Ensure route-server directory is present
+  file: path={{route_server_root}} state=directory
+
+- name: Move Route server Dockerfile
+  template: src=Dockerfile.j2 dest={{route_server_root}}/Dockerfile owner=root group=root mode=0755
+
+- name: Move Route builder script
+  template: src=build-routes.sh.j2 dest={{route_server_root}}/build-routes.sh owner=root group=root mode=0755
+
+- name: Move Route script dependency install file
+  template: src=install-dependencies.sh.j2 dest={{route_server_root}}/install-dependencies.sh owner=root group=root mode=0755
+
+- name: Move Run file
+  template: src=run.sh.j2 dest={{route_server_root}}/run.sh owner=root group=root mode=0755
+
+- name: Move Rules directory
+  copy: src=rules dest={{route_server_root}} owner=root group=root mode=0755
+
+- name: Build Route server image
+  command: docker build --tag="{{route_server_docker_image}}" --force-rm=true {{route_server_root}}

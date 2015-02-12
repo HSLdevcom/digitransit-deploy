@@ -1,0 +1,116 @@
+worker_processes 1;
+
+events { worker_connections 1024; }
+
+daemon off;
+
+http {
+
+    sendfile on;
+
+    gzip              on;
+    gzip_http_version 1.0;
+    gzip_proxied      any;
+    gzip_min_length   500;
+    gzip_disable      "MSIE [1-6]\.";
+    gzip_types        text/plain text/xml text/css
+                      text/comma-separated-values
+                      text/javascript
+                      application/x-javascript
+                      application/atom+xml;
+
+    # Configuration for the server
+    server {
+
+        # Running port
+        listen 80;
+
+        location / {
+            root {{reverse_proxy_root}};
+        }
+
+        location /hsl-now/ {
+            rewrite /hsl-now/(.*) /$1  break;
+            proxy_pass         http://hslnow:{{hsl_now_exposed_port}};
+            proxy_redirect     off;
+            proxy_set_header   Host $host;
+            proxy_set_header   X-Real-IP $remote_addr;
+            proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Host $server_name;
+        }
+
+        location /otp/ {
+            rewrite /otp/routers/(.*)  /otp/routers/$1  break;
+            rewrite /otp/(.*)  /$1  break;
+            proxy_pass         http://otp:8081;
+            proxy_redirect     off;
+            proxy_set_header   Host $host;
+            proxy_set_header   X-Real-IP $remote_addr;
+            proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Host $server_name;
+        }
+
+        # OTP images
+        location /images/ {
+            rewrite /images/(.*)  /images/$1  break;
+            proxy_pass         http://otp:8081;
+            proxy_redirect     off;
+            proxy_set_header   Host $host;
+            proxy_set_header   X-Real-IP $remote_addr;
+            proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Host $server_name;
+        }
+
+        location /route-server/ {
+            rewrite /route-server/(.*) /$1  break;
+            proxy_pass         http://routeserver:{{route_server_exposed_port}};
+            proxy_redirect     off;
+            proxy_set_header   Host $host;
+            proxy_set_header   X-Real-IP $remote_addr;
+            proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Host $server_name;
+        }
+
+        location /navigator-proto/ {
+            rewrite /navigator-proto/(.*) /$1  break;
+            proxy_pass         http://navigatorproto:{{navigator_proto_exposed_port}};
+            proxy_redirect     off;
+            proxy_set_header   Host $host;
+            proxy_set_header   X-Real-IP $remote_addr;
+            proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Host $server_name;
+        }
+
+        location /hsl-alert/ {
+            rewrite /hsl-alert/(.*) /$1  break;
+            proxy_pass         http://hslalert:{{hsl_alert_exposed_port}};
+            proxy_redirect     off;
+            proxy_set_header   Host $host;
+            proxy_set_header   X-Real-IP $remote_addr;
+            proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Host $server_name;
+        }
+
+        location /siri2gtfsrt/ {
+            rewrite /siri2gtfsrt/(.*) /$1  break;
+            proxy_pass         http://siri2gtfsrt:{{siri2gtfsrt_exposed_port}};
+            proxy_redirect     off;
+            proxy_set_header   Host $host;
+            proxy_set_header   X-Real-IP $remote_addr;
+            proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Host $server_name;
+        }
+
+        location /navigator-server/ {
+            rewrite /navigator-server/(.*) /$1  break;
+            proxy_pass         http://navigatorserver:{{navigator_server_exposed_port}};
+            proxy_redirect     off;
+            proxy_set_header   Host $host;
+            proxy_set_header   X-Real-IP $remote_addr;
+            proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Host $server_name;
+            proxy_set_header   Upgrade $http_upgrade;
+            proxy_set_header   Connection "upgrade";
+        }
+    }
+}

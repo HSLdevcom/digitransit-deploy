@@ -1,0 +1,55 @@
+environment_domain: matka.hsl.fi
+
+docker_version: 1.4.1
+docker_user: reittiopas
+docker_build_root: "/home/{{docker_user}}/docker"
+docker_image_base: hsldevcom
+docker_compose_version: 1.1.0
+
+reverse_proxy_root: "{{docker_build_root}}/reverse-proxy"
+reverse_proxy_docker_image: "{{docker_image_base}}/reverse-proxy"
+reverse_proxy_exposed_port: 80
+
+otp_root: "{{docker_build_root}}/otp"
+otp_docker_image: "{{docker_image_base}}/otp"
+otp_exposed_port: 8081
+otp_git: https://github.com/hannesj/OpenTripPlanner.git -b testing
+otp_graphs:
+  finland: http://routeserver:{{route_server_exposed_port}}/Graph.obj
+
+route_server_root: "{{docker_build_root}}/route-server"
+route_server_docker_image: "{{docker_image_base}}/route-server"
+route_server_exposed_port: 8082
+route_server_fail_build_on_data_error: false
+route_server_data_osm: http://download.geofabrik.de/europe/finland-latest.osm.pbf
+route_server_data_tampere: http://data.itsfactory.fi/files/tampere_gtfs_latest.zip
+route_server_data_jyvaskyla: http://data.jyvaskyla.fi/tiedostot/linkkidata.zip
+route_server_data_oulu: http://www.transitdata.fi/oulu/google_transit.zip
+route_server_data_lautta: http://lautta.net/db/gtfs/gtfs.zip
+route_server_data_hsl: http://api.reittiopas.fi/data/google_transit.zip
+route_server_data_matka: http://api.matka.fi/data/all.zip
+
+navigator_proto_root: "{{docker_build_root}}/navigator-proto"
+navigator_proto_docker_image: "{{docker_image_base}}/navigator-proto"
+navigator_proto_exposed_port: 8083
+navigator_proto_git: https://github.com/hannesj/navigator-proto.git
+
+hsl_now_root: "{{docker_build_root}}/hsl-now"
+hsl_now_docker_image: "{{docker_image_base}}/hsl-now"
+hsl_now_exposed_port: 8084
+hsl_now_git: https://github.com/HSLdevcom/hsl-now.git
+
+hsl_alert_root: "{{docker_build_root}}/hsl-alert"
+hsl_alert_docker_image: "{{docker_image_base}}/hsl-alert"
+hsl_alert_exposed_port: 8085
+hsl_alert_git: https://github.com/HSLdevcom/hslalert
+
+siri2gtfsrt_root: "{{docker_build_root}}/siri2gtfsrt"
+siri2gtfsrt_docker_image: "{{docker_image_base}}/siri2gtfsrt"
+siri2gtfsrt_exposed_port: 8086
+siri2gtfsrt_git: https://github.com/hannesj/siri2gtfsrt.git
+
+navigator_server_root: "{{docker_build_root}}/navigator-server"
+navigator_server_docker_image: "{{docker_image_base}}/navigator-server"
+navigator_server_exposed_port: 8087
+navigator_server_git: https://github.com/HSLdevcom/navigator-server.git
