@@ -1,0 +1,19 @@
+FROM hsldevcom/otp:latest
+MAINTAINER Reittiopas version: 0.1
+
+ADD build-routes.sh {{route_server_root}}/build-routes.sh
+
+ADD install-dependencies.sh {{route_server_root}}/install-dependencies.sh  
+
+ADD rules {{route_server_root}}/rules
+
+ADD run.sh {{route_server_root}}/run.sh
+
+RUN \
+  {{route_server_root}}/install-dependencies.sh && \
+  {{route_server_root}}/build-routes.sh && \
+  echo "{{ansible_date_time.epoch}}"
+
+WORKDIR {{route_server_root}}
+
+CMD ./run.sh

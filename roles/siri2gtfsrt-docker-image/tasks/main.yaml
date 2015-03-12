@@ -1,0 +1,9 @@
+---
+- name: Ensure siri2gtfsrt directory is present
+  file: path={{siri2gtfsrt_root}} state=directory
+
+- name: Move Dockerfile
+  template: src=Dockerfile.j2 dest={{siri2gtfsrt_root}}/Dockerfile owner=root group=root mode=0755
+
+- name: Build docker image
+  command: docker build --tag="{{siri2gtfsrt_docker_image}}" --force-rm=true {{siri2gtfsrt_root}}

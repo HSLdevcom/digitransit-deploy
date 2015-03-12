@@ -1,0 +1,7 @@
+# Choose the area.
+citynavi.update_configs 
+  fi: 
+    otp_base_url: "http://{{environment_domain}}/otp/routers/default/"
+    siri_url: "http://{{environment_domain}}/navigator-server/siriaccess/vm/json"
+    faye_url: "http://{{environment_domain}}/navigator-server/faye"
+citynavi.set_config "fi"

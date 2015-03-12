@@ -1,0 +1,19 @@
+FROM node:0.12
+MAINTAINER Reittiopas version: 0.1
+
+RUN \
+  apt-get update && \
+  apt-get install -y git && \ 
+  apt-get install -y python-pip && \
+  pip install protobuf && \
+  pip install flask
+
+RUN \
+  mkdir -p {{hsl_alert_root}} && \
+  cd {{hsl_alert_root}} && \
+  git clone {{hsl_alert_git}} . && \
+  echo "{{ansible_date_time.epoch}}"
+
+WORKDIR {{hsl_alert_root}} 
+
+CMD export PORT={{hsl_alert_exposed_port}} && export TZ="Europe/Helsinki" && python app.py

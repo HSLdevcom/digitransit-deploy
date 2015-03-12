@@ -1,0 +1,41 @@
+---
+- name: Ensure user
+  user: name={{docker_user}}
+
+- name: Ensure docker directory is present
+  file: path={{docker_build_root}} state=directory
+
+- name: Install Pip
+  shell: wget https://bootstrap.pypa.io/get-pip.py; sudo python get-pip.py;
+  args:
+    creates: /usr/local/bin/pip
+
+- name: Move docker installer
+  template: src=install-docker.sh.j2 dest={{docker_build_root}}/install-docker.sh group=root mode=0755
+
+- name: Install curl
+  apt: name=curl
+
+- name: Move docker-compose installer
+  template: src=install-docker-compose.sh.j2 dest={{docker_build_root}}/install-docker-compose.sh group=root mode=0755 
+
+# There seems to be bug with docker and 3.13 kernel
+# See: https://github.com/docker/docker/issues/4036#issuecomment-69244813
+# Ubuntu 14.04.02 might fix this https://launchpad.net/ubuntu/+milestone/ubuntu-14.02
+# This seems to be a workaround
+- name: Install aufs-tools
+  shell: "apt-get install -y linux-image-extra-$(uname -r) aufs-tools"
+
+- name: Install docker
+  command: "{{docker_build_root}}/install-docker.sh"
+  args:
+    creates: /usr/bin/docker
+
+- name: Install Docker python client
+  shell: pip install docker-py
+
+- name: Install docker-compose
+  command: "{{docker_build_root}}/install-docker-compose.sh"
+  args:
+    creates: /usr/local/bin/docker-compose
+

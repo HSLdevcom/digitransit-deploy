@@ -1,0 +1,9 @@
+---
+- name: Ensure navigator server directory is present
+  file: path={{navigator_server_root}} state=directory
+
+- name: Move Dockerfile
+  template: src=Dockerfile.j2 dest={{navigator_server_root}}/Dockerfile owner=root group=root mode=0755
+
+- name: Build docker image
+  command: docker build --tag="{{navigator_server_docker_image}}" --force-rm=true {{navigator_server_root}} 

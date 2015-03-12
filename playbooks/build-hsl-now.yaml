@@ -1,0 +1,6 @@
+---
+- hosts: all
+  vars_files:
+    - ../variables/common.yaml
+  roles:
+    - { role: hsl-now-docker-image }

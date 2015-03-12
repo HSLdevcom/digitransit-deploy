@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Place to store OTP graph
+GRAPHS={{otp_root}}/graphs
+mkdir -p $GRAPHS
+cd $GRAPHS
+
+graphString=""
+{% for graph, location in otp_graphs.iteritems() %}
+mkdir -p $GRAPHS/{{graph}}
+echo "Downloading route graph '{{graph}}' from '{{location}}'"
+wget {{location}} -O $GRAPHS/{{graph}}/Graph.obj
+echo "Copying router-config.json file for '{{graph}}'"
+cp {{otp_root}}/router-config.json $GRAPHS/{{graph}}
+graphString="$graphString --router {{graph}}"
+{% endfor %}
+
+# Run OTP
+echo "graphString is: $graphString"
+java -jar {{otp_root}}/target/otp-1.0.0-SNAPSHOT.jar --server --port {{otp_exposed_port}} --securePort {{9000}} --basePath {{otp_root}} --graphs $GRAPHS $graphString

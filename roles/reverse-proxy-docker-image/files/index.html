@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Open Reittiopas test environment</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+  <style type="text/css">
+    .img-circle {
+      width: 140px; 
+      height: 140px;
+    }
+
+    .buffer {
+      margin-bottom: 3em;
+      margin-top: 3em;
+    }
+
+    .vertical-divider {
+        border-left: 1px solid lightgray;
+    }
+  </style>
+</head>
+
+  <!-- NAVBAR
+  ================================================== -->
+  <body>
+    <div class="navbar-wrapper">
+      <div class="container">
+
+        <nav class="navbar navbar-inverse navbar-static-top">
+          <div class="container">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">Open Reittiopastest environment</a>
+            </div>
+          </div>
+        </nav>
+
+      </div>
+    </div>
+
+    <div class="container marketing">
+      <div class="row buffer">
+        <div class="col-lg-12">
+          <div class="alert alert-warning" role="alert">
+            <h1 class="featurette-heading text-center">
+              Open Reittiopas test environment disclaimer
+            </h1>
+            <p class="lead">
+              This site gives an insight into the development project of the next generation journey planner platform based on open data and open source code.
+
+              The prototypes presented on this site do not necessarily represent the content, functionalities and service level of the final platform.
+            </p>
+            <p class="lead">
+              <a href="http://hsl.ideascale.com/">You can send feedback here</a>
+            </p>
+          </div>
+        </div>
+      </div>  
+    </div>
+
+    <div class="container marketing">
+
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h1 class="featurette-heading">User interface demos</h1>
+        </div>
+      </div>
+
+      <div class="row buffer">
+        <div class="col-lg-3 col-lg-offset-2">
+          <div class="text-center">
+            <img class="img-circle" src="img/hsl-now.png">
+          </div>
+          <h2>Front page demo</h2>
+          <p>HSL Now is a prototype for "Reittiopas frontpage". Basically, it is a technical POC that shows possibilities with Geolocation and search.</p>
+          <p><a class="btn btn-default" href="/hsl-now/" role="button">Open &raquo;</a></p>
+        </div>
+        <div class="col-lg-3 col-lg-offset-2">
+          <div class="text-center">
+            <img class="img-circle" src="img/navigator-proto.png">
+          </div>
+          <h2>Map demo</h2>
+          <p>Navigator proto is a POC for navigation and showing real time vehicle information on a map.</p>
+          <p><a class="btn btn-default" href="/navigator-proto/" role="button">Open &raquo;</a></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h1 class="featurette-heading">Data API interfaces</h1>
+        </div>
+      </div>
+
+      <div class="row buffer">
+        <div class="col-lg-3 col-lg-offset-2">
+          <div class="text-center">
+            <img class="img-circle" src="img/otp.png">
+          </div>
+          <h2>Open Trip Planner</h2>
+          <p>Routing is implemented by Open Trip Planner. It also offers a rudimentary UI for route planning.</p>
+          <p><a class="btn btn-default" href="/otp/" role="button">Open &raquo;</a></p>
+        </div>
+        <div class="col-lg-3 col-lg-offset-2">
+          <div class="text-center">
+            <img class="img-circle" src="img/otp.png">
+          </div>
+          <h2>Realtime server</h2>
+          <p>Navigator server is a Siri realtime server.</p>
+          <p><a class="btn btn-default" href="/navigator-server/" role="button">Open &raquo;</a></p>
+        </div>
+      </div>
+
+      <div class="row buffer text-center">
+        <div class="col-lg-12">
+          <h1 class="featurette-heading">Route data and conversion components</h1>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="text-center">
+            <img class="img-circle" src="img/route-server.png">
+          </div>
+          <h2>OTP Route data</h2>
+          <p>We build OTP graph from multiple datasources.</p>
+          <p><a class="btn btn-default" href="/route-server/" role="button">Open &raquo;</a></p>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="text-center">
+            <img class="img-circle" src="img/hsl-alert.png">
+          </div>
+          <h2>HSL Alert</h2>
+          <p>Converts HSL traffic alert information to GTFS</p>
+          <p><a class="btn btn-default" href="/hsl-alert/" role="button">Open &raquo;</a></p>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="text-center">
+            <img class="img-circle" src="img/siri2gtfsrt.png">
+          </div>
+          <h2>Helsinki Siri2GTFS-RT</h2>
+          <p>Converts HSL Siri json to GTFS-RT</p>
+          <p><a class="btn btn-default" href="/siri2gtfsrt/HSL" role="button">Open &raquo;</a></p>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="text-center">
+            <img class="img-circle" src="img/siri2gtfsrt.png">
+          </div>
+          <h2>Tampere Siri2GTFS-RT</h2>
+          <p>Converts Tampere journeys json to GTFS-RT</p>
+          <p><a class="btn btn-default" href="/siri2gtfsrt/JOLI" role="button">Open &raquo;</a></p>
+        </div>
+      </div>
+
+      <!-- START THE FEATURETTES -->
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Open source code. <span class="text-muted">Join us in GitHub.</span></h2>
+          <p class="lead">All our code is based on open source and is <a href="https://github.com/hsldevcom">stored in GitHub</a>.</p>
+        </div>
+        <div class="col-md-5">
+          
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-5" style="text-align: center; margin-top: 40px;">
+          <img class="featurette-image img-responsive" src="http://upload.wikimedia.org/wikipedia/fi/c/cc/HSL_logo.svg" style="height: 50px; display: inline;">
+          <img class="featurette-image img-responsive" src="http://portal.liikennevirasto.fi/sivu/www/f/images/logo.png" style="height: 50px; display: inline; margin-left: 50px;">
+        </div>
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Open data. <span class="text-muted">By HSL, Liikennevirasto and others.</span></h2>
+          <p class="lead">Route and realtime data across the Finland.</p>
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Open interfaces. <span class="text-muted">Please, use our APIs.</span></h2>
+          <p class="lead">APIs are available for everyone to use.</p>
+        </div>
+        <div class="col-md-5">
+          
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-5" style="text-align: center; margin-top: 40px;">
+        </div>
+        <div class="col-md-7">
+         <h2 class="featurette-heading">Open development. <span class="text-muted">Kanban style.</span></h2>
+          <p class="lead">Checkout our our <a href="https://github.com/HSLdevcom/openjourneyplanner/wiki/">wiki</a>, <a href="https://github.com/HSLdevcom/openjourneyplanner/wiki/Milestones">milestones</a> and <a href="https://waffle.io/hsldevcom/openjourneyplanner">Kanban board</a></p>
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <!-- FOOTER -->
+      <footer>
+        <p>&copy; 2015 HSL & Liikennevirasto</p>
+      </footer>
+
+    </div>
+</body>  
+
+</html>

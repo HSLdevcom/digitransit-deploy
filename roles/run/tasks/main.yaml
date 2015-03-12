@@ -1,0 +1,9 @@
+---
+- name: Move docker installer
+  template: src=run.sh.j2 dest={{docker_build_root}}/run.sh group=root mode=0755
+
+- name: Move docker-compose runtime configuration file
+  template: src=docker-compose.yaml.j2 dest={{docker_build_root}}/docker-compose.yaml group=root mode=0755
+
+- name: Run containers
+  command: "{{docker_build_root}}/run.sh"

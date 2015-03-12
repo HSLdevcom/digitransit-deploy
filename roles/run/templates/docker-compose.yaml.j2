@@ -1,0 +1,58 @@
+reverseproxy:
+  image: {{reverse_proxy_docker_image}}
+  links:
+   - routeserver
+   - otp
+   - navigatorproto
+   - hslnow
+   - hslalert
+   - siri2gtfsrt
+   - navigatorserver
+  ports:
+   - "{{reverse_proxy_exposed_port}}:{{reverse_proxy_exposed_port}}"
+
+routeserver:
+  image: {{route_server_docker_image}}
+  ports:
+   - "{{route_server_exposed_port}}"
+
+otp:
+  image: {{otp_docker_image}}
+  links:
+   - routeserver
+   - hslalert
+   - siri2gtfsrt
+  ports:
+   - "{{otp_exposed_port}}"
+
+navigatorproto:
+  image: {{navigator_proto_docker_image}}
+  links:
+   - otp
+   - navigatorserver
+  ports:
+   - "{{navigator_proto_exposed_port}}"
+
+hslnow:
+  image: {{hsl_now_docker_image}}
+  links:
+   - otp
+  ports:
+   - "{{hsl_now_exposed_port}}"
+
+hslalert:
+  image: {{hsl_alert_docker_image}}
+  ports:
+   - "{{hsl_alert_exposed_port}}"
+
+siri2gtfsrt:
+  image: {{siri2gtfsrt_docker_image}}
+  links:
+   - navigatorserver
+  ports:
+   - "{{siri2gtfsrt_exposed_port}}"
+
+navigatorserver:
+  image: {{navigator_server_docker_image}}
+  ports:
+   - "{{navigator_server_exposed_port}}"
