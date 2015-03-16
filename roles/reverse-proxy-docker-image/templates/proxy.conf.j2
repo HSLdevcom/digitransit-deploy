@@ -23,7 +23,7 @@ http {
     server {
 
         # Running port
-        listen 80;
+        listen {{reverse_proxy_exposed_port}};
 
         location / {
             root {{reverse_proxy_root}};

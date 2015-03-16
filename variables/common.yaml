@@ -6,9 +6,15 @@ docker_build_root: "/home/{{docker_user}}/docker"
 docker_image_base: hsldevcom
 docker_compose_version: 1.1.0
 
+current_environment_file: "{{docker_build_root}}/current-environment.txt"
+
+load_balancer_root: "{{docker_build_root}}/load-balancer"
+load_balancer_docker_image: "{{docker_image_base}}/load-balancer"
+load_balancer_exposed_port: 80
+
 reverse_proxy_root: "{{docker_build_root}}/reverse-proxy"
 reverse_proxy_docker_image: "{{docker_image_base}}/reverse-proxy"
-reverse_proxy_exposed_port: 80
+reverse_proxy_exposed_port: 8080
 
 otp_root: "{{docker_build_root}}/otp"
 otp_docker_image: "{{docker_image_base}}/otp"

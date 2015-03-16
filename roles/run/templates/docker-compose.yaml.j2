@@ -9,7 +9,7 @@ reverseproxy:
    - siri2gtfsrt
    - navigatorserver
   ports:
-   - "{{reverse_proxy_exposed_port}}:{{reverse_proxy_exposed_port}}"
+   - "{{reverse_proxy_exposed_port}}"
 
 routeserver:
   image: {{route_server_docker_image}}

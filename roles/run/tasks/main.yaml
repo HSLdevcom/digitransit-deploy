@@ -1,9 +1,18 @@
 ---
-- name: Move docker installer
+- name: Move run script
   template: src=run.sh.j2 dest={{docker_build_root}}/run.sh group=root mode=0755
 
-- name: Move docker-compose runtime configuration file
-  template: src=docker-compose.yaml.j2 dest={{docker_build_root}}/docker-compose.yaml group=root mode=0755
+- name: Ensure environment 1 runtime directory is present
+  file: path={{docker_build_root}}/environment1 state=directory
+
+- name: Ensure environment 2 runtime directory is present
+  file: path={{docker_build_root}}/environment2 state=directory
+
+- name: Move docker-compose runtime configuration file for environment 1
+  template: src=docker-compose.yaml.j2 dest={{docker_build_root}}/environment1/docker-compose.yaml group=root mode=0755
+
+- name: Move docker-compose runtime configuration file for environment 2
+  template: src=docker-compose.yaml.j2 dest={{docker_build_root}}/environment2/docker-compose.yaml group=root mode=0755
 
 - name: Run containers
   command: "{{docker_build_root}}/run.sh"

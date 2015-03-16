@@ -1,0 +1,15 @@
+---
+- name: Ensure load balancer directory is present
+  file: path={{load_balancer_root}} state=directory
+
+- name: Move Dockerfile
+  template: src=Dockerfile.j2 dest={{load_balancer_root}}/Dockerfile owner=root group=root mode=0755
+
+- name: Move Haproxy config file
+  template: src=haproxy.cfg.j2 dest={{load_balancer_root}}/haproxy.cfg
+
+- name: Move change script
+  template: src=change.sh.j2 dest={{load_balancer_root}}/change.sh mode=0755
+
+- name: Build load balancer docker image
+  command: docker build --tag="{{load_balancer_docker_image}}" --force-rm=true {{load_balancer_root}}

@@ -1,4 +1,16 @@
 #!/bin/bash
-cd {{docker_build_root}}
+
+BACKEND_FILE="{{current_environment_file}}"
+CURRENT_BACKEND=$(cat "$BACKEND_FILE") 
+echo "current backend is set to '$CURRENT_BACKEND'"
+if [ "$CURRENT_BACKEND" == "1" ]; then
+  RUN="2"
+else
+  RUN="1"
+fi
+
+# cd to directory that is not active
+RUNFOLDER="{{docker_build_root}}/environment$RUN"
+cd $RUNFOLDER
 docker-compose stop
 docker-compose up -d
