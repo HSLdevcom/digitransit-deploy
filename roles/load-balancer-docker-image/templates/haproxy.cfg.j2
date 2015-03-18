@@ -15,10 +15,18 @@ defaults
         timeout client  10000
         timeout server  10000
 
-frontend www-http
+frontend www-active
     bind *:80
-    default_backend reittiopas
+    default_backend backend-active
 
-backend reittiopas
+frontend www-passive
+    bind *:8080
+    default_backend backend-passive
+
+backend backend-active
     mode http
-    server nginx reverseproxy:{{reverse_proxy_exposed_port}}
+    server nginx active:{{reverse_proxy_exposed_port}}
+
+backend backend-passive
+    mode http
+    server nginx passive:{{reverse_proxy_exposed_port}}

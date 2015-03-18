@@ -15,7 +15,14 @@ fi
 echo "Restarting haproxy to use $CHANGE_TO"
 docker stop load_balancer || echo "Load balancer was not running"
 docker rm load_balancer || echo "Load balancer not found"
-docker run -d --name="load_balancer" --publish="80:80" --link="environment"$CHANGE_TO"_reverseproxy_1:reverseproxy" hsldevcom/load-balancer haproxy -f haproxy.cfg
+
+docker run -d \
+  --name="load_balancer" \
+  --publish="80:80" \
+  --publish="8080:8080" \
+  --link="environment"$CHANGE_TO"_reverseproxy_1:active" \
+  --link="environment"$CURRENT_ENVIRONMENT"_reverseproxy_1:passive" \
+  hsldevcom/load-balancer haproxy -f haproxy.cfg
 
 # store current active environment number
 echo "$CHANGE_TO" > $ENVIRONMENT_FILE
