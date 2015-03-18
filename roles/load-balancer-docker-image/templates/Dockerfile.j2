@@ -1,0 +1,17 @@
+FROM haproxy:1.5
+MAINTAINER Reittiopas version: 0.1
+
+RUN \
+  mkdir -p {{load_balancer_root}} && \
+  mkdir -p /var/lib/haproxy && \
+  echo "{{ansible_date_time.epoch}}"
+
+ADD haproxy.cfg {{load_balancer_root}}/haproxy.cfg
+
+ADD change.sh {{load_balancer_root}}/change.sh
+
+WORKDIR {{load_balancer_root}}
+
+EXPOSE 80
+
+CMD ./change.sh

@@ -10,6 +10,7 @@
 -A INPUT -p tcp --dport ssh -j sshguard
 -A INPUT -p tcp --dport ssh -j ACCEPT
 -A INPUT -p tcp --dport 80 -j ACCEPT
+-A INPUT -p tcp --dport 8080 -j ACCEPT
 -A FORWARD -i docker0 -o eth0 -j ACCEPT
 -A FORWARD -i eth0 -o docker0 -j ACCEPT
 COMMIT
