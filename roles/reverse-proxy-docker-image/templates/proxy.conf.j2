@@ -26,6 +26,7 @@ http {
         listen {{reverse_proxy_exposed_port}};
 
         location / {
+            include /etc/nginx/mime.types;
             root {{reverse_proxy_root}};
         }
 

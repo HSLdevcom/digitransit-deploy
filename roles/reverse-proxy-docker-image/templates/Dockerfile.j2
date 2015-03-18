@@ -25,6 +25,8 @@ ADD index.html {{reverse_proxy_root}}/index.html
 
 ADD img {{reverse_proxy_root}}/img
 
+ADD css {{reverse_proxy_root}}/css
+
 WORKDIR /etc/nginx
 
 CMD ["nginx"]
