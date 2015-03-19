@@ -34,3 +34,14 @@ Deployment scripts for Open Journey Planner
 ### Using build menu
 - Run ./menu.sh 
 - Menu enables you to build and launch servers, ssh into test, and display docker-compose logs
+
+## Analytics
+Current analytics are implemented with Piwik. You can install piwik like so:
+- mkdir -p /var/lib/mysql
+- docker run --name mysql_db -v /var/lib/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=password -d mysql
+- ssh to db container and create "piwiki" database:
+  - CREATE DATABASE piwik DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+  - GRANT ALL ON piwik.* to 'piwik'@'%' identified by 'password';
+  - Also, check that /etc/mysql/my.cnf bindadress is 0.0.0.0
+- docker run -d --link mysql_db:mysql_db --name="piwik" --publish="8090:80" cbeer/piwik
+- Open browser to http://{host}:8090/
