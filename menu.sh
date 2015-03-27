@@ -33,6 +33,7 @@ function printMenu {
     echo "7) Build Open Trip Planner"
     echo "8) Build Route server"
     echo "9) Build Siri2GTFS-RT"
+    echo "0) Build Map server"
     echo "r) Relaunch passive in '$ENV'"
     echo "c) Change passive to active in '$ENV'"
     echo "p) Print docker processes from '$ENV'"
@@ -88,6 +89,10 @@ function selectAction {
         "9")
             printAction "Building Siri2GTFS-RT"
             ansible-playbook -i environments/$ENV -K -s playbooks/build-siri2gtfsrt.yaml -u $USERNAME
+            ;;
+        "0")
+            printAction "Building Map server"
+            ansible-playbook -i environments/$ENV -K -s playbooks/build-map-server.yaml -u $USERNAME
             ;;
         "r")
             printAction "Running services"

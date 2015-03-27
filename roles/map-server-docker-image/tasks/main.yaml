@@ -1,0 +1,9 @@
+---
+- name: Ensure map server directory is present
+  file: path={{map_server_root}} state=directory
+
+- name: Move Dockerfile
+  template: src=Dockerfile.j2 dest={{map_server_root}}/Dockerfile owner=root group=root mode=0755
+
+- name: Build docker image
+  command: docker build --tag="{{map_server_docker_image}}" --force-rm=true {{map_server_root}}

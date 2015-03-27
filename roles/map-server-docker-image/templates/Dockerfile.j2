@@ -1,0 +1,19 @@
+FROM node:0.12
+MAINTAINER Reittiopas version: 0.1
+
+RUN apt-get update
+RUN apt-get install -y git npm
+
+RUN \
+  mkdir -p {{map_server_root}} && \
+  cd {{map_server_root}} && \
+  git clone {{map_server_style_git}} {{map_server_style}} && \
+  npm install -g tessera && \
+  npm install -g tilelive-tmstyle && \
+  npm install -g tilelive-http && \
+  echo '{ "/hsl-map": "tmstyle://./{{map_server_style}}/"}' > config.json
+  echo "{{ansible_date_time.epoch}}"
+
+WORKDIR {{map_server_root}}
+
+CMD node --max-old-space-size=2048 /usr/bin/tessera --config config.json --port {{map_server_exposed_port}} --cache-size 100 --source-cache-size 100

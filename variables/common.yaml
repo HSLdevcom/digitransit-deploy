@@ -59,3 +59,9 @@ navigator_server_root: "{{docker_build_root}}/navigator-server"
 navigator_server_docker_image: "{{docker_image_base}}/navigator-server"
 navigator_server_exposed_port: 8087
 navigator_server_git: https://github.com/HSLdevcom/navigator-server.git
+
+map_server_root: "{{docker_build_root}}/map-server"
+map_server_docker_image: "{{docker_image_base}}/map-server"
+map_server_exposed_port: 8088
+map_server_style_git: https://github.com/HSLdevcom/openjourneyplanner-map.git
+map_server_style: openjourneyplanner-map.tm2
