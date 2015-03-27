@@ -19,6 +19,8 @@ http {
                       application/x-javascript
                       application/atom+xml;
 
+    proxy_cache_path {{reverse_proxy_root}}/cache/ keys_zone=tiles:200m;
+
     # Configuration for the server
     server {
 
@@ -116,6 +118,7 @@ http {
 
         location /hsl-map/ {
             proxy_pass         http://mapserver:{{map_server_exposed_port}};
+            proxy_cache        tiles;
             proxy_redirect     off;
             proxy_set_header   Host $host;
             proxy_set_header   X-Real-IP $remote_addr;
