@@ -8,6 +8,7 @@ reverseproxy:
    - hslalert
    - siri2gtfsrt
    - navigatorserver
+   - openjourneyplannerui
   expose:
    - "{{reverse_proxy_exposed_port}}"
 
@@ -56,3 +57,8 @@ navigatorserver:
   image: {{navigator_server_docker_image}}
   expose:
    - "{{navigator_server_exposed_port}}"
+
+openjourneyplannerui:
+  image: {{openjourneyplanner_ui_docker_image}}
+  expose:
+   - "{{openjourneyplanner_ui_exposed_port}}"
