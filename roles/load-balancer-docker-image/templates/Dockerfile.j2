@@ -14,4 +14,4 @@ ADD change.sh {{load_balancer_root}}/change.sh
 
 WORKDIR {{load_balancer_root}}
 
-CMD ./change.sh
+CMD haproxy -f haproxy.cfg
