@@ -65,3 +65,12 @@ map_server_docker_image: "{{docker_image_base}}/map-server"
 map_server_exposed_port: 8088
 map_server_style_git: https://github.com/HSLdevcom/openjourneyplanner-map.git
 map_server_style: openjourneyplanner-map.tm2
+
+vector_map_server_root: "{{docker_build_root}}/vector-map-server"
+vector_map_server_docker_image: "{{docker_image_base}}/vector-map-server"
+vector_map_server_exposed_port: 8089
+vector_map_server_style_git: https://github.com/hannesj/osm-bright.tm2source.git
+vector_map_server_style: osm-bright.tm2source
+
+postgis_osm_root: "{{docker_build_root}}/postgis_osm"
+postgis_osm_docker_image: "{{docker_image_base}}/postgis_osm"

@@ -1,0 +1,15 @@
+---
+- name: Ensure postgre server directory is present
+  file: path={{postgis_osm_root}} state=directory
+
+- name: Move Dockerfile
+  template: src=Dockerfile.j2 dest={{postgis_osm_root}}/Dockerfile owner=root group=root mode=0755
+
+- name: Move initdb-postgis.sh
+  template: src=initdb-postgis.sh.j2 dest={{postgis_osm_root}}/initdb-postgis.sh owner=root group=root mode=0755
+
+- name: Move docker-entrypoint.sh
+  template: src=docker-entrypoint.sh.j2 dest={{postgis_osm_root}}/docker-entrypoint.sh owner=root group=root mode=0755
+
+- name: Build docker image
+  command: docker build --tag="{{postgis_osm_docker_image}}" --force-rm=true {{postgis_osm_root}}
