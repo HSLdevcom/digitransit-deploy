@@ -72,5 +72,6 @@ vector_map_server_exposed_port: 8089
 vector_map_server_style_git: https://github.com/hannesj/osm-bright.tm2source.git
 vector_map_server_style: osm-bright.tm2source
 
-postgis_osm_root: "{{docker_build_root}}/postgis_osm"
-postgis_osm_docker_image: "{{docker_image_base}}/postgis_osm"
+postgis_osm_root: "{{docker_build_root}}/postgis-osm"
+postgis_osm_docker_image: "{{docker_image_base}}/postgis-osm"
+postgis_osm_exposed_port: 5432

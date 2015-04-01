@@ -1,0 +1,18 @@
+vector-map-server:
+  image: {{vector_map_server_docker_image}}
+  links:
+   - map-server
+  expose:
+   - "{{reverse_proxy_exposed_port}}"
+
+map-server:
+  image: {{map_server_docker_image}}
+  links:
+   - postgis-osm
+  expose:
+   - "{{map_server_exposed_port}}"
+
+postgis-osm:
+  image: {{postgis_osm_docker_image}}
+  expose:
+   - "{{postgis_osm_exposed_port}}"
