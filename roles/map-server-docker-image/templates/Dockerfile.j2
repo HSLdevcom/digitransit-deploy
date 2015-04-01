@@ -8,6 +8,8 @@ RUN mkdir -p {{map_server_root}}
 
 WORKDIR {{map_server_root}}
 
+RUN echo "{{ansible_date_time.epoch}}" > build_date
+
 RUN npm install tessera
 RUN npm install tilelive-tmstyle
 RUN npm install tilelive-http
@@ -16,9 +18,9 @@ RUN echo "{{ansible_date_time.epoch}}" > build_date
 
 RUN git clone {{map_server_style_git}} {{map_server_style}}
 
-RUN sed -i -e 's#source: "http://tiletest.kapsi.fi:8080/index.json"#source: "tilejson+http://vector-map-server:{{vector_map_server_exposed_port}}/index.json"#' {{map_server_style}}/project.yml
+RUN sed -i -e 's#source: "http://tiletest.kapsi.fi:8080/index.json"#source: "tilejson+http://vectormapserver:{{vector_map_server_exposed_port}}/index.json"#' {{map_server_style}}/project.yml
 
 EXPOSE {{map_server_exposed_port}}
 
-CMD node node_modules/tessera/bin/tessera.js --port {{map_server_exposed_port}} tmstyle://./{{map_server_style}}/
+CMD sleep 500 && node node_modules/tessera/bin/tessera.js --port {{map_server_exposed_port}} tmstyle://./{{map_server_style}}/
 

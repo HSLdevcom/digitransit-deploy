@@ -12,7 +12,13 @@ else
   ACTIVE="1"
   PASSIVE="2"
 fi
-  
+ 
+{% raw %}
+if [ "$(docker inspect -f {{.State.Running}} environment${ACTIVE}_reverseproxy_1)" != "true" ]; then	
+  echo "Passive nginx not running, not changing" && exit 1
+fi
+{% endraw %}
+
 # Restart haproxy by linking to "1" or "2"
 echo "Restarting haproxy to use $ACTIVE"
 docker stop load_balancer || echo "Load balancer was not running"
@@ -24,7 +30,7 @@ docker run -d \
   --publish="8080:8080" \
   --link="environment"$ACTIVE"_reverseproxy_1:active" \
   --link="environment"$PASSIVE"_reverseproxy_1:passive" \
-  hsldevcom/load-balancer haproxy -f haproxy.cfg
+  hsldevcom/load-balancer
 
 # store current active environment number
 echo "$ACTIVE" > $ENVIRONMENT_FILE

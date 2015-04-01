@@ -39,9 +39,10 @@ RUN apt-get update \
 
 RUN mkdir -p /var/run/postgresql && chown -R postgres /var/run/postgresql
 
+RUN mkdir -p /var/lib/postgresql/data
+
 ENV PATH /usr/lib/postgresql/$PG_MAJOR/bin:$PATH
 ENV PGDATA /var/lib/postgresql/data
-VOLUME /var/lib/postgresql/data
 
 RUN mkdir -p /docker-entrypoint-initdb.d
 
