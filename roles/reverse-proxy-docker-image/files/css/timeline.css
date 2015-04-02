@@ -40,6 +40,8 @@ li {
   float: left;
   width: 37px;
   transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
   font: bold 14px arial;
   white-space: nowrap;
 }
@@ -74,6 +76,8 @@ li.in-progress::before {
   border-radius: 3px;
   border: 2px solid rgba(0,0,0,.1);
   transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
   font: 12px arial;
   background: #fff;
   width: 200px;
