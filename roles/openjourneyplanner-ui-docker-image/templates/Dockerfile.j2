@@ -13,7 +13,7 @@ RUN \
   cd {{openjourneyplanner_ui_root}} && \
   git clone {{openjourneyplanner_ui_git}} . && \
   # Remove livereload
-  sed -i '/localhost:9000/d' app/view/layout/layout.html && \
+  sed -i '/localhost:9000/d' js/app.html && \
   npm install -g node-sass && \
   npm install -g browserify && \
   npm install && \
@@ -21,4 +21,4 @@ RUN \
   npm run css:build && \
   npm run browserify:build
 
-CMD export PORT={{openjourneyplanner_ui_exposed_port}}; node app/server/server.js
+CMD export PORT={{openjourneyplanner_ui_exposed_port}}; node server/server.js

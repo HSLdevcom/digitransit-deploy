@@ -63,7 +63,7 @@ navigator_server_git: https://github.com/HSLdevcom/navigator-server.git
 openjourneyplanner_ui_root: "{{docker_build_root}}/openjourneyplanner-ui"
 openjourneyplanner_ui_docker_image: "{{docker_image_base}}/openjourneyplanner-ui"
 openjourneyplanner_ui_exposed_port: 8088
-openjourneyplanner_ui_git: https://github.com/HSLdevcom/openjourneyplanner-ui.git
+openjourneyplanner_ui_git: https://github.com/HSLdevcom/openjourneyplanner-ui.git -b flux
 map_server_root: "{{docker_build_root}}/map-server"
 map_server_docker_image: "{{docker_image_base}}/map-server"
 map_server_exposed_port: 8088
