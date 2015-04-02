@@ -12,4 +12,5 @@
     - { role: otp-docker-image }
     - { role: route-server-docker-image }
     - { role: navigator-server-docker-image }
+    - { role: map-server-docker-image }
 

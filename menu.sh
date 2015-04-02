@@ -34,11 +34,30 @@ function printMenu {
     echo "8) Build Route server"
     echo "9) Build Siri2GTFS-RT"
     echo "10) Build OpenJourneyPlanner-ui"
+    echo "m) Map menu"
     echo "r) Relaunch passive in '$ENV'"
     echo "c) Change passive to active in '$ENV'"
     echo "p) Print docker processes from '$ENV'"
     echo "s) Open SSH to '$ENV'"
     echo "q) Quit"
+    echo ""
+    printf "> "
+}
+
+function printMapMenu {
+    #clear
+    echo "***************************"
+    echo "* Reittiopas build tool   *"
+    echo "***************************"
+    echo ""
+    echo "Build as user: $USERNAME@$ENV"
+    echo ""
+    echo "Please select action"
+    echo "1) Build Postgre database"
+    echo "2) Build Vector Map Server"
+    echo "3) Build Map Server"
+    echo "r) Relaunch maps"
+    echo "q) Bact to menu"
     echo ""
     printf "> "
 }
@@ -98,6 +117,14 @@ function selectAction {
             printAction "Running services"
             ansible-playbook -i environments/$ENV -K -s playbooks/run.yaml -u $USERNAME
             ;;
+        "m")
+            while true
+            do
+                printMapMenu
+                readInput
+                selectMapAction
+            done
+            ;;
         "c")
             printAction "Changing passive to active"
             ansible-playbook -i environments/$ENV -K -s playbooks/change-environment.yaml -u $USERNAME
@@ -119,6 +146,32 @@ function selectAction {
         *)  clear
             ;;
     esac    
+}
+
+function selectMapAction {
+    case $SELECTION in
+        "1")
+            printAction "Building Postgre database"
+            ansible-playbook -i environments/$ENV -K -s playbooks/build-postgis-osm.yaml -u $USERNAME
+            ;;
+        "2")
+            printAction "Building Vector map server"
+            ansible-playbook -i environments/$ENV -K -s playbooks/build-vector-map-server.yaml -u $USERNAME
+            ;;
+        "3")
+            printAction "Building Map server"
+            ansible-playbook -i environments/$ENV -K -s playbooks/build-map-server.yaml -u $USERNAME
+            ;;
+        "r")
+            printAction "Running services"
+            ansible-playbook -i environments/$ENV -K -s playbooks/run-maps.yaml -u $USERNAME
+            ;;
+        "q")
+            break
+            ;;
+        *)  clear
+            ;;
+    esac
 }
 
 # Start

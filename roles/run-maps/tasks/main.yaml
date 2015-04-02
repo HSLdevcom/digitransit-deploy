@@ -1,0 +1,12 @@
+---
+- name: Move run script
+  template: src=run.sh.j2 dest={{docker_build_root}}/run_maps.sh group=root mode=0755
+
+- name: Ensure environment runtime directory is present
+  file: path={{docker_build_root}}/maps_environment state=directory
+
+- name: Move docker-compose runtime configuration file
+  template: src=docker-compose.yaml.j2 dest={{docker_build_root}}/maps_environment/docker-compose.yaml group=root mode=0755
+
+- name: Run containers
+  command: "{{docker_build_root}}/run_maps.sh"
