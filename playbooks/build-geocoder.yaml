@@ -1,0 +1,7 @@
+---
+- hosts: all
+  vars_files:
+    - ../variables/passwords.yaml
+    - ../variables/common.yaml
+  roles:
+    - { role: geocoder-docker-image }

@@ -9,6 +9,7 @@ reverseproxy:
    - siri2gtfsrt
    - navigatorserver
    - openjourneyplannerui
+   - geocoder
   expose:
    - "{{reverse_proxy_exposed_port}}"
 
@@ -62,3 +63,10 @@ openjourneyplannerui:
   image: {{openjourneyplanner_ui_docker_image}}
   expose:
    - "{{openjourneyplanner_ui_exposed_port}}"
+
+geocoder:
+  image: {{geocoder_docker_image}}
+  volumes_from:
+   - geocoding_data
+  expose:
+   - "{{geocoder_exposed_port}}"

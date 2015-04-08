@@ -1,0 +1,15 @@
+---
+- name: Ensure geocoder directory is present
+  file: path={{geocoder_root}} state=directory
+
+- git: repo={{geocoder_git}}
+  dest={{geocoder_root}}/repo
+
+- name: Move geocoder Dockerfile
+  template: src=Dockerfile.j2 dest={{geocoder_root}}/Dockerfile owner=root group=root mode=0755
+
+- name: Build geocoder image
+  command: docker build --tag="{{geocoder_docker_image}}" --force-rm=true {{geocoder_root}}
+
+- name: Build empty data container for geocoder
+  command: docker run --name geocoding_data -v /data busybox true
