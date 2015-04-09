@@ -34,6 +34,7 @@ function printMenu {
     echo "8) Build Route server"
     echo "9) Build Siri2GTFS-RT"
     echo "10) Build OpenJourneyPlanner-ui"
+    echo "11) Build Geocoder"
     echo "m) Map menu"
     echo "r) Relaunch passive in '$ENV'"
     echo "c) Change passive to active in '$ENV'"
@@ -112,6 +113,10 @@ function selectAction {
         "10")
             printAction "Building OpenJourneyPlanner-ui"
             ansible-playbook -i environments/$ENV -K -s playbooks/build-openjourneyplanner-ui.yaml -u $USERNAME
+            ;;
+        "11")
+            printAction "Building Geocoder"
+            ansible-playbook -i environments/$ENV -K -s playbooks/build-geocoder.yaml -u $USERNAME
             ;;
         "r")
             printAction "Running services"
