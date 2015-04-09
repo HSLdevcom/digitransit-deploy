@@ -9,16 +9,25 @@ RUN apt-get install -y git npm
 RUN echo "{{ansible_date_time.epoch}}"
 
 RUN \
+  # Get latest code
   mkdir -p {{openjourneyplanner_ui_root}} && \
   cd {{openjourneyplanner_ui_root}} && \
   git clone {{openjourneyplanner_ui_git}} . && \
+  
   # Remove livereload
-  sed -i '/localhost:9000/d' js/app.html && \
+  sed -i '/localhost:9000/d' app/app.html && \
+  
+  # Change paths for bundles
+  sed -i 's/\/js\/bundle.js/\/openjourneyplanner-ui\/js\/bundle.min.js/g' app/app.html && \
+  sed -i 's/\/css\/bundle.css/\/openjourneyplanner-ui\/css\/bundle.min.css/g' app/app.html && \
+  
+  # Build app
   npm install -g node-sass && \
   npm install -g browserify && \
+  npm install -g minifier && \
+  npm install -g clean-css && \
   npm install && \
   npm run static && \
-  npm run css:build && \
-  npm run browserify:build
+  npm run dist
 
 CMD export PORT={{openjourneyplanner_ui_exposed_port}}; node server/server.js
