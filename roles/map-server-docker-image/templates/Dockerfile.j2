@@ -22,5 +22,5 @@ RUN sed -i -e 's#source: "http://tiletest.kapsi.fi:8080/index.json"#source: "til
 
 EXPOSE {{map_server_exposed_port}}
 
-CMD sleep 500 && node node_modules/tessera/bin/tessera.js --port {{map_server_exposed_port}} tmstyle://./{{map_server_style}}/
+CMD sleep 15 && node node_modules/tessera/bin/tessera.js --port {{map_server_exposed_port}} tmstyle://./{{map_server_style}}/
 

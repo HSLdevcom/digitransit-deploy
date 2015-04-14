@@ -46,20 +46,23 @@ ENV PGDATA /var/lib/postgresql/data
 
 RUN mkdir -p /docker-entrypoint-initdb.d
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
-
 RUN apt-get update && apt-get install -y git imposm ca-certificates wget gdal-bin && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /home/reittiopas/docker/postgis-osm
 
 WORKDIR /home/reittiopas/docker/postgis-osm
 
+RUN echo "{{ansible_date_time.epoch}}"
+
 RUN git clone {{vector_map_server_style_git}}
 RUN git clone https://github.com/mapbox/postgis-vt-util.git
 
 COPY docker-entrypoint.sh /
-COPY initdb-postgis.sh /docker-entrypoint-initdb.d/postgis.sh
+COPY initdb-postgis.sh /docker-entrypoint-initdb.d/00-postgis.sh
+COPY initdb-osm-data.sh /docker-entrypoint-initdb.d/50-osm-data.sh
+
+RUN /docker-entrypoint.sh postgres
 
 EXPOSE 5432
 
-CMD ["postgres"]
+CMD ["gosu", "postgres", "postgres"]

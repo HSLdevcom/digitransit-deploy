@@ -22,6 +22,8 @@ http {
                       application/x-javascript
                       application/atom+xml;
 
+    proxy_cache_path {{reverse_proxy_root}}/cache keys_zone=tiles:10m max_size=200m;
+
     # Configuration for the server
     server {
 
@@ -130,6 +132,18 @@ http {
         location /geocoder/ {
             rewrite /geocoder/(.*) /$1  break;
             proxy_pass         http://geocoder:{{geocoder_exposed_port}};
+            proxy_redirect     off;
+            proxy_set_header   Host $host;
+            proxy_set_header   X-Real-IP $remote_addr;
+            proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Host $server_name;
+        }
+
+        location /hsl-map/ {
+            rewrite /hsl-map/(.*) /$1  break;
+            proxy_pass         http://mapserver:{{map_server_exposed_port}};
+            proxy_cache        tiles;
+            proxy_cache_valid  any  168h;
             proxy_redirect     off;
             proxy_set_header   Host $host;
             proxy_set_header   X-Real-IP $remote_addr;
