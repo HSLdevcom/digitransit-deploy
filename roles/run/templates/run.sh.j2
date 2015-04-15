@@ -12,5 +12,6 @@ fi
 # cd to directory that is not active
 RUNFOLDER="{{docker_build_root}}/environment$RUN"
 cd $RUNFOLDER
-docker-compose stop
+docker-compose kill
+sleep 10
 docker-compose up -d

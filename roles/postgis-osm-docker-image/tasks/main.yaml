@@ -8,6 +8,9 @@
 - name: Move initdb-postgis.sh
   template: src=initdb-postgis.sh.j2 dest={{postgis_osm_root}}/initdb-postgis.sh owner=root group=root mode=0755
 
+- name: Move initdb-postgis.sh
+  template: src=initdb-osm-data.sh.j2 dest={{postgis_osm_root}}/initdb-osm-data.sh owner=root group=root mode=0755
+
 - name: Move docker-entrypoint.sh
   template: src=docker-entrypoint.sh.j2 dest={{postgis_osm_root}}/docker-entrypoint.sh owner=root group=root mode=0755
 

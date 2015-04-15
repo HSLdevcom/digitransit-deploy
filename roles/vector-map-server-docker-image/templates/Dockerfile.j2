@@ -21,5 +21,5 @@ RUN sed -i -e 's/password: postgres/password: mysecretpassword/' {{vector_map_se
 
 EXPOSE {{vector_map_server_exposed_port}}
 
-CMD sleep 450 && node node_modules/tessera/bin/tessera.js --port {{vector_map_server_exposed_port}} tmsource://./{{vector_map_server_style}}/
+CMD sleep 10 && node node_modules/tessera/bin/tessera.js --port {{vector_map_server_exposed_port}} tmsource://./{{vector_map_server_style}}/
 
