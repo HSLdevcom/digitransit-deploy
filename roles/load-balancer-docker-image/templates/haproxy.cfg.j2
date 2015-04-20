@@ -12,8 +12,8 @@ defaults
         option  httplog
         option  dontlognull
         timeout connect  5000
-        timeout client  10000
-        timeout server  10000
+        timeout client  30000
+        timeout server  30000
 
 frontend www-active
     bind *:80
