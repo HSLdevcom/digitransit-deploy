@@ -8,30 +8,21 @@ RUN apt-get install -y git npm
 
 RUN echo "{{ansible_date_time.epoch}}"
 
-RUN \
-  # Get latest code
-  mkdir -p {{openjourneyplanner_ui_root}} && \
+# Get latest code
+RUN mkdir -p {{openjourneyplanner_ui_root}} && \
   cd {{openjourneyplanner_ui_root}} && \
-  git clone {{openjourneyplanner_ui_git}} . && \
-  
-  # Remove livereload
-  sed -i '/localhost:9000/d' app/app.html && \
-  
-  # Change path for js bundle
-  sed -i 's/\/js\/bundle.js/\/openjourneyplanner-ui\/js\/bundle.min.js/g' app/app.html && \
+  git clone {{openjourneyplanner_ui_git}} .
 
-  # Build app
-  npm install -g node-sass && \
-  npm install -g browserify && \
-  npm install -g minifier && \
-  npm install -g clean-css && \
-  npm install && \
+# Build app
+RUN npm install && \
   npm run static && \
-  npm run dist && \
+  npm run build
 
-  # Inline css
-  sed -i '/<link rel="stylesheet" type="text\/css" href="\/css\/bundle.css" charset="utf-8">/r _static/css/bundle.min.css' app/app.html && \
-  sed -i 's/<link rel="stylesheet" type="text\/css" href="\/css\/bundle.css" charset="utf-8">/<style type="text\/css">/g' app/app.html && \
+{% raw %} # HNNGH! - Escaping curly braces
+# Inline css
+RUN sed -i '/{{{ style }}}/r _static/css/bundle.css' app/app.html && \
+  sed -i 's/{{{ style }}}/<style type="text\/css">/g' app/app.html && \
   sed -i 's/<\/head>/<\/style><head>/g' app/app.html
+{% endraw %}
 
-CMD export PORT={{openjourneyplanner_ui_exposed_port}}; node server/server.js
+CMD export PORT={{openjourneyplanner_ui_exposed_port}}; npm run start
