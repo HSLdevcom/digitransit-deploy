@@ -18,7 +18,7 @@ RUN npm install && \
   npm run static && \
   npm run build
 
-{% raw %} # HNNGH! - Escaping curly braces
+{% raw %} # HNNGH! - Escaping curly braces for jinja
 # Inline css
 RUN sed -i '/{{{ style }}}/r _static/css/bundle.css' app/app.html && \
   sed -i 's/{{{ style }}}/<style type="text\/css">/g' app/app.html && \
