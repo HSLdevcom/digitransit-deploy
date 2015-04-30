@@ -67,8 +67,6 @@ openjourneyplannerui:
 
 geocoder:
   image: {{geocoder_docker_image}}
-  volumes_from:
-   - geocoding_data
   expose:
    - "{{geocoder_exposed_port}}"
 
