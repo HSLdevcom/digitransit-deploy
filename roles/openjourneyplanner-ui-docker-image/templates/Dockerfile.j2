@@ -13,6 +13,8 @@ RUN mkdir -p {{openjourneyplanner_ui_root}} && \
   cd {{openjourneyplanner_ui_root}} && \
   git clone {{openjourneyplanner_ui_git}} .
 
+ENV ROOT_PATH="/openjourneyplanner-ui/"
+
 # Build app
 RUN npm install && \
   npm run static && \
