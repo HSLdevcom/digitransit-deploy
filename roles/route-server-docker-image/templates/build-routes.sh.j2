@@ -132,6 +132,7 @@ function transformKoontikantaPart() {
 function buildOtpGraph() {
   echo "Building OTP graph..."
   cd $ROOT
+  cp ${ROOT}/build-config.json ${ROOT}/finland/build-config.json
   java -Xmx8G -jar $OTP_JAR --build finland/
 }
 
