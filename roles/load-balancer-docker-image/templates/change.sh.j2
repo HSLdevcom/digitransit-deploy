@@ -2,25 +2,36 @@
 
 # Load backend number from global
 ENVIRONMENT_FILE="{{current_environment_file}}"
-
 CURRENT_ENVIRONMENT=$(cat "$ENVIRONMENT_FILE") 
+
 echo "current environment is set to '$CURRENT_ENVIRONMENT'"
 if [ "$CURRENT_ENVIRONMENT" == "1" ]; then
-  PASSIVE="1"
-  ACTIVE="2"
+  CURRENT_ACTIVE="1"
+  NEW_ACTIVE="2"
+  CURRENT_PASSIVE="2"
+  NEW_PASSIVE="1"
 else
-  ACTIVE="1"
-  PASSIVE="2"
+  CURRENT_ACTIVE="2"
+  NEW_ACTIVE="1"
+  CURRENT_PASSIVE="1"
+  NEW_PASSIVE="2"
 fi
- 
+
+if [ "$1" == "restartOnly" ]; then
+  echo "Maintaining current active as is"
+  NEW_ACTIVE=$CURRENT_ACTIVE
+  NEW_PASSIVE=$CURRENT_PASSIVE
+else
+  echo "Switching active and passive"  
 {% raw %}
-if [ "$(docker inspect -f {{.State.Running}} environment${ACTIVE}_reverseproxy_1)" != "true" ]; then	
-  echo "Passive nginx not running, not changing" && exit 1
-fi
+  if [ "$(docker inspect -f {{.State.Running}} environment${ACTIVE}_reverseproxy_1)" != "true" ]; then  
+    echo "Passive nginx not running, not changing" && exit 1
+  fi
 {% endraw %}
+fi
 
 # Restart haproxy by linking to "1" or "2"
-echo "Restarting haproxy to use $ACTIVE"
+echo "Restarting haproxy to use $NEW_ACTIVE"
 docker stop load_balancer || echo "Load balancer was not running"
 docker rm load_balancer || echo "Load balancer not found"
 
@@ -28,9 +39,9 @@ docker run -d \
   --name="load_balancer" \
   --publish="80:80" \
   --publish="8080:8080" \
-  --link="environment"$ACTIVE"_reverseproxy_1:active" \
-  --link="environment"$PASSIVE"_reverseproxy_1:passive" \
+  --link="environment"$NEW_ACTIVE"_reverseproxy_1:active" \
+  --link="environment"$NEW_PASSIVE"_reverseproxy_1:passive" \
   hsldevcom/load-balancer
 
 # store current active environment number
-echo "$ACTIVE" > $ENVIRONMENT_FILE
+echo "$NEW_ACTIVE" > $ENVIRONMENT_FILE

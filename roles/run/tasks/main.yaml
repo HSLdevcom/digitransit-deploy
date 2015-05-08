@@ -16,3 +16,6 @@
 
 - name: Run containers
   command: "{{docker_build_root}}/run.sh"
+
+- name: Restart load balancer while maintaining active
+  shell: cd {{load_balancer_root}} && ./change.sh restartOnly
