@@ -24,7 +24,7 @@ if [ "$1" == "restartOnly" ]; then
 else
   echo "Switching active and passive"  
 {% raw %}
-  if [ "$(docker inspect -f {{.State.Running}} environment${ACTIVE}_reverseproxy_1)" != "true" ]; then  
+  if [ "$(docker inspect -f {{.State.Running}} environment${NEW_ACTIVE}_reverseproxy_1)" != "true" ]; then  
     echo "Passive nginx not running, not changing" && exit 1
   fi
 {% endraw %}
