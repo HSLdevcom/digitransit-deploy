@@ -8,11 +8,11 @@ RUN mkdir -p {{vector_map_server_root}}
 
 WORKDIR {{vector_map_server_root}}
 
+RUN echo "{{ansible_date_time.epoch}}" > build_date
+
 RUN npm install tessera
 RUN npm install tilelive-tmsource
 RUN npm install tilelive-xray
-
-RUN echo "{{ansible_date_time.epoch}}" > build_date
 
 RUN git clone {{vector_map_server_style_git}} {{vector_map_server_style}}
 
