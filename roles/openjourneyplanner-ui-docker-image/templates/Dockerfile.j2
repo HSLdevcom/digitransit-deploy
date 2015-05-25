@@ -6,12 +6,16 @@ WORKDIR {{openjourneyplanner_ui_root}}
 RUN apt-get update
 RUN apt-get install -y git npm
 
+# Get initial (cacheable) code
+RUN mkdir -p {{openjourneyplanner_ui_root}} && \
+  cd {{openjourneyplanner_ui_root}} && \
+  git clone {{openjourneyplanner_ui_git}} . && \
+  npm install
+
 RUN echo "{{ansible_date_time.epoch}}"
 
 # Get latest code
-RUN mkdir -p {{openjourneyplanner_ui_root}} && \
-  cd {{openjourneyplanner_ui_root}} && \
-  git clone {{openjourneyplanner_ui_git}} .
+RUN git pull
 
 ENV ROOT_PATH="/openjourneyplanner-ui/"
 
@@ -19,12 +23,5 @@ ENV ROOT_PATH="/openjourneyplanner-ui/"
 RUN npm install && \
   npm run static && \
   npm run build
-
-{% raw %} # HNNGH! - Escaping curly braces for jinja
-# Inline css
-RUN sed -i '/{{{ style }}}/r _static/css/bundle.css' app/app.html && \
-  sed -i 's/{{{ style }}}/<style type="text\/css">/g' app/app.html && \
-  sed -i 's/<\/head>/<\/style><\/head>/g' app/app.html
-{% endraw %}
 
 CMD export PORT={{openjourneyplanner_ui_exposed_port}}; npm run start
