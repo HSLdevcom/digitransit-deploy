@@ -1,6 +1,6 @@
 environment_domain: matka.hsl.fi
 
-docker_version: 1.4.1
+docker_version: 1.6.2
 docker_user: reittiopas
 docker_build_root: "/home/{{docker_user}}/docker"
 docker_image_base: hsldevcom
