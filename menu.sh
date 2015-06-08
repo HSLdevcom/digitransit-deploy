@@ -6,7 +6,7 @@ USERNAME=""
 
 function readUsername {
     echo "***************************"
-    echo "* Reittiopas build tool   *"
+    echo "* Digitransit build tool  *"
     echo "***************************"
     echo ""
     echo "Please enter username in '$ENV'"
@@ -18,7 +18,7 @@ function readUsername {
 function printMenu {
     #clear
     echo "***************************"
-    echo "* Reittiopas build tool   *"
+    echo "* Digitransit build tool  *"
     echo "***************************"
     echo ""
     echo "Build as user: $USERNAME@$ENV"
