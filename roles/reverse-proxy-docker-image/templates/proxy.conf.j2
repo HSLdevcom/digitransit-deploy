@@ -33,6 +33,10 @@ http {
         location / {
             include /etc/nginx/mime.types;
             root {{reverse_proxy_root}};
+            # use $http_host because nginx doesn't copy port to redirects
+            if ($http_host ~* "^matka\.hsl\.fi(:8080)?$") {
+                rewrite ^/$ http://$http_host/openjourneyplanner-ui/ redirect;
+            }
         }
 
         location /hsl-now/ {
