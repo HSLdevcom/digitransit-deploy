@@ -82,7 +82,7 @@ vectormapserver:
   links:
    - postgisosm:postgisosm
   expose:
-   - "{{reverse_proxy_exposed_port}}"
+   - "{{vector_map_server_exposed_port}}"
 
 postgisosm:
   image: {{postgis_osm_docker_image}}
