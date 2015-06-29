@@ -3,4 +3,4 @@
   vars_files:
     - ../variables/common.yaml
   roles:
-    - { role: openjourneyplanner-ui-docker-image }
+    - { role: digitransit-ui-docker-image }

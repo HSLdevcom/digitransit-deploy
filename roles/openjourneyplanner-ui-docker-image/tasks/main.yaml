@@ -1,9 +1,0 @@
----
-- name: Ensure openjourneyplannerui directory is present
-  file: path={{openjourneyplanner_ui_root}} state=directory
-
-- name: Move Dockerfile
-  template: src=Dockerfile.j2 dest={{openjourneyplanner_ui_root}}/Dockerfile owner=root group=root mode=0755
-
-- name: Build openjourneyplannerui docker image
-  command: docker build --tag="{{openjourneyplanner_ui_docker_image}}" --force-rm=true {{openjourneyplanner_ui_root}}

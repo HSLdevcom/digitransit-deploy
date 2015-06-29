@@ -1,5 +1,5 @@
-# openjourneyplanner-deploy
-Deployment scripts for Open Journey Planner
+# digitransit-deploy
+Deployment scripts for Digitransit
 
 ## Localhost - Getting started Mac OSX
 
@@ -32,7 +32,7 @@ Deployment scripts for Open Journey Planner
 - Ensure this works: ansible -i environments/test test -m ping -u {your username in test}
 
 ### Using build menu
-- Run ./menu.sh 
+- Run ./menu.sh
 - Menu enables you to build and launch servers, ssh into test, and display docker-compose logs
 
 ## Analytics

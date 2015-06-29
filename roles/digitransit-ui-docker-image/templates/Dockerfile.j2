@@ -1,15 +1,15 @@
 FROM node:0.12
 MAINTAINER Reittiopas version: 0.1
 
-WORKDIR {{openjourneyplanner_ui_root}}
+WORKDIR {{digitransit_ui_root}}
 
 RUN apt-get update
 RUN apt-get install -y git npm
 
 # Get initial (cacheable) code
-RUN mkdir -p {{openjourneyplanner_ui_root}} && \
-  cd {{openjourneyplanner_ui_root}} && \
-  git clone {{openjourneyplanner_ui_git}} . && \
+RUN mkdir -p {{digitransit_ui_root}} && \
+  cd {{digitransit_ui_root}} && \
+  git clone {{digitransit_ui_git}} . && \
   npm install
 
 RUN echo "{{ansible_date_time.epoch}}"
@@ -17,11 +17,11 @@ RUN echo "{{ansible_date_time.epoch}}"
 # Get latest code
 RUN git pull
 
-ENV ROOT_PATH="/openjourneyplanner-ui/"
+ENV ROOT_PATH="/digitransit-ui/"
 
 # Build app
 RUN npm install && \
   npm run static && \
   npm run build
 
-CMD export PORT={{openjourneyplanner_ui_exposed_port}}; npm run start
+CMD export PORT={{digitransit_ui_exposed_port}}; npm run start

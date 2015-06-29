@@ -12,7 +12,7 @@ function readUsername {
     echo "Please enter username in '$ENV'"
     echo ""
     printf "> "
-    read USERNAME   
+    read USERNAME
 }
 
 function printMenu {
@@ -33,7 +33,7 @@ function printMenu {
     echo "7) Build Open Trip Planner"
     echo "8) Build Route server"
     echo "9) Build Siri2GTFS-RT"
-    echo "10) Build OpenJourneyPlanner-ui"
+    echo "10) Build Digitransit-ui"
     echo "11) Build Geocoder"
     echo "12) Build Postgre database"
     echo "13) Build Vector Map Server"
@@ -48,7 +48,7 @@ function printMenu {
 }
 
 function readInput {
-    read SELECTION   
+    read SELECTION
 }
 
 function printAction {
@@ -82,7 +82,7 @@ function selectAction {
             printAction "Building Navigator-server"
             ansible-playbook -i environments/$ENV -K -s playbooks/build-navigator-server.yaml -u $USERNAME
             ;;
-        "7")    
+        "7")
             printAction "Building Open Trip Planner"
             ansible-playbook -i environments/$ENV -K -s playbooks/build-otp.yaml -u $USERNAME
             ;;
@@ -95,8 +95,8 @@ function selectAction {
             ansible-playbook -i environments/$ENV -K -s playbooks/build-siri2gtfsrt.yaml -u $USERNAME
             ;;
         "10")
-            printAction "Building OpenJourneyPlanner-ui"
-            ansible-playbook -i environments/$ENV -K -s playbooks/build-openjourneyplanner-ui.yaml -u $USERNAME
+            printAction "Building Digitransit-ui"
+            ansible-playbook -i environments/$ENV -K -s playbooks/build-digitransit-ui.yaml -u $USERNAME
             ;;
         "11")
             printAction "Building Geocoder"
@@ -128,7 +128,7 @@ function selectAction {
             ssh $USERNAME@$ip
             clear
             ;;
-        "p") 
+        "p")
             ip=$(sed -n '2p' environments/$ENV)
             ssh -t $USERNAME@$ip "sudo docker ps"
             #clear
@@ -138,7 +138,7 @@ function selectAction {
             ;;
         *)  clear
             ;;
-    esac    
+    esac
 }
 
 # Start

@@ -60,16 +60,16 @@ navigator_server_docker_image: "{{docker_image_base}}/navigator-server"
 navigator_server_exposed_port: 8087
 navigator_server_git: https://github.com/HSLdevcom/navigator-server.git
 
-openjourneyplanner_ui_root: "{{docker_build_root}}/openjourneyplanner-ui"
-openjourneyplanner_ui_docker_image: "{{docker_image_base}}/openjourneyplanner-ui"
-openjourneyplanner_ui_exposed_port: 8088
-openjourneyplanner_ui_git: https://github.com/HSLdevcom/openjourneyplanner-ui.git
+digitransit_ui_root: "{{docker_build_root}}/digitransit-ui"
+digitransit_ui_docker_image: "{{docker_image_base}}/digitransit-ui"
+digitransit_ui_exposed_port: 8088
+digitransit_ui_git: https://github.com/HSLdevcom/digitransit-ui.git
 
 map_server_root: "{{docker_build_root}}/map-server"
 map_server_docker_image: "{{docker_image_base}}/map-server"
 map_server_exposed_port: 8088
-map_server_style_git: https://github.com/HSLdevcom/openjourneyplanner-map.git
-map_server_style: openjourneyplanner-map.tm2
+map_server_style_git: https://github.com/HSLdevcom/digitransit-map.git
+map_server_style: digitransit-map.tm2
 
 vector_map_server_root: "{{docker_build_root}}/vector-map-server"
 vector_map_server_docker_image: "{{docker_image_base}}/vector-map-server"
@@ -84,4 +84,4 @@ postgis_osm_exposed_port: 5432
 geocoder_root: "{{docker_build_root}}/geocoder"
 geocoder_docker_image: "{{docker_image_base}}/geocoder"
 geocoder_exposed_port: 8090
-geocoder_git: https://github.com/HSLdevcom/openjourneyplanner-geocoder.git
+geocoder_git: https://github.com/HSLdevcom/digitransit-geocoder.git

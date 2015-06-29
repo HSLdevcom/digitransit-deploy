@@ -8,7 +8,7 @@ reverseproxy:
    - hslalert
    - siri2gtfsrt
    - navigatorserver
-   - openjourneyplannerui
+   - digitransitui
    - geocoder
    - mapserver
   expose:
@@ -60,10 +60,10 @@ navigatorserver:
   expose:
    - "{{navigator_server_exposed_port}}"
 
-openjourneyplannerui:
-  image: {{openjourneyplanner_ui_docker_image}}
+digitransitui:
+  image: {{digitransit_ui_docker_image}}
   expose:
-   - "{{openjourneyplanner_ui_exposed_port}}"
+   - "{{digitransit_ui_exposed_port}}"
 
 geocoder:
   image: {{geocoder_docker_image}}
