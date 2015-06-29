@@ -4,6 +4,9 @@ events { worker_connections 1024; }
 
 daemon off;
 
+# NOTE: use only absolute redirects and host part $http_host,
+# because nginx doesn't copy port to redirects but always adds :8080
+
 http {
 
     sendfile on;
@@ -34,7 +37,6 @@ http {
         location / {
             include /etc/nginx/mime.types;
             root {{reverse_proxy_root}};
-            # use $http_host because nginx doesn't copy port to redirects
             if ($http_host ~* "^matka\.hsl\.fi(:8080)?$") {
                 rewrite ^/$ http://$http_host/digitransit-ui/ redirect;
             }
@@ -126,7 +128,7 @@ http {
 
         # For legacy support
         location /openjourneyplanner-ui/ {
-            rewrite /openjourneyplanner-ui/(.*) /digitransit-ui/$1 permanent;
+            rewrite /openjourneyplanner-ui/(.*) http://$http_host/digitransit-ui/$1 permanent;
         }
 
         location /digitransit-ui/ {
