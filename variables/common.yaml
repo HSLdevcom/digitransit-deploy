@@ -19,7 +19,7 @@ reverse_proxy_exposed_port: 8080
 otp_root: "{{docker_build_root}}/otp"
 otp_docker_image: "{{docker_image_base}}/otp"
 otp_exposed_port: 8081
-otp_git: https://github.com/hannesj/OpenTripPlanner.git -b testing
+otp_git: https://github.com/HSLdevcom/OpenTripPlanner.git
 otp_graphs:
   finland: http://routeserver:{{route_server_exposed_port}}/Graph.obj
 
@@ -38,7 +38,7 @@ route_server_data_matka: http://api.matka.fi/data/all.zip
 navigator_proto_root: "{{docker_build_root}}/navigator-proto"
 navigator_proto_docker_image: "{{docker_image_base}}/navigator-proto"
 navigator_proto_exposed_port: 8083
-navigator_proto_git: https://github.com/hannesj/navigator-proto.git
+navigator_proto_git: https://github.com/HSLdevcom/navigator-proto.git -b testing
 
 hsl_now_root: "{{docker_build_root}}/hsl-now"
 hsl_now_docker_image: "{{docker_image_base}}/hsl-now"
@@ -53,7 +53,7 @@ hsl_alert_git: https://github.com/HSLdevcom/hslalert
 siri2gtfsrt_root: "{{docker_build_root}}/siri2gtfsrt"
 siri2gtfsrt_docker_image: "{{docker_image_base}}/siri2gtfsrt"
 siri2gtfsrt_exposed_port: 8086
-siri2gtfsrt_git: https://github.com/hannesj/siri2gtfsrt.git
+siri2gtfsrt_git: https://github.com/HSLdevcom/siri2gtfsrt.git
 
 navigator_server_root: "{{docker_build_root}}/navigator-server"
 navigator_server_docker_image: "{{docker_image_base}}/navigator-server"
@@ -74,7 +74,7 @@ map_server_style: digitransit-map.tm2
 vector_map_server_root: "{{docker_build_root}}/vector-map-server"
 vector_map_server_docker_image: "{{docker_image_base}}/vector-map-server"
 vector_map_server_exposed_port: 8089
-vector_map_server_style_git: https://github.com/hannesj/osm-bright.tm2source.git
+vector_map_server_style_git: https://github.com/HSLdevcom/osm-bright.tm2source.git
 vector_map_server_style: osm-bright.tm2source
 
 postgis_osm_root: "{{docker_build_root}}/postgis-osm"
