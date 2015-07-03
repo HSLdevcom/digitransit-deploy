@@ -65,6 +65,9 @@ digitransit_ui_docker_image: "{{docker_image_base}}/digitransit-ui"
 digitransit_ui_exposed_port: 8088
 digitransit_ui_git: https://github.com/HSLdevcom/digitransit-ui.git
 
+digitransit_ui_regional_root: "{{docker_build_root}}/digitransit-ui-regional"
+digitransit_ui_regional_docker_image: "{{docker_image_base}}/digitransit-ui-regional"
+
 map_server_root: "{{docker_build_root}}/map-server"
 map_server_docker_image: "{{docker_image_base}}/map-server"
 map_server_exposed_port: 8088

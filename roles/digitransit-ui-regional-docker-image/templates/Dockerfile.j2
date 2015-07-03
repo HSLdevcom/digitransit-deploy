@@ -1,0 +1,11 @@
+FROM {{digitransit_ui_docker_image}}:latest
+MAINTAINER Reittiopas version: 0.1
+
+WORKDIR {{digitransit_ui_root}}
+
+ENV CONFIG="hsl"
+
+# Build app
+RUN npm run build
+
+CMD export PORT={{digitransit_ui_exposed_port}}; npm run start
