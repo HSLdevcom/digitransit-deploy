@@ -16,10 +16,11 @@ RUN npm install tilelive-xray
 
 RUN git clone {{vector_map_server_style_git}} {{vector_map_server_style}}
 
+COPY config.json {{vector_map_server_root}}/
+
 RUN sed -i -e 's/host: localhost/host: postgisosm/' {{vector_map_server_style}}/data.yml
 RUN sed -i -e 's/password: postgres/password: mysecretpassword/' {{vector_map_server_style}}/data.yml
 
 EXPOSE {{vector_map_server_exposed_port}}
 
-CMD sleep 10 && node node_modules/tessera/bin/tessera.js --port {{vector_map_server_exposed_port}} tmsource://./{{vector_map_server_style}}/
-
+CMD sleep 10 && node node_modules/tessera/bin/tessera.js --port {{vector_map_server_exposed_port}} --config config.json

@@ -18,9 +18,10 @@ RUN echo "{{ansible_date_time.epoch}}" > build_date
 
 RUN git clone {{map_server_style_git}} {{map_server_style}}
 
-RUN sed -i -e 's#source: "http://tiletest.kapsi.fi:8080/index.json"#source: "tilejson+http://vectormapserver:{{vector_map_server_exposed_port}}/index.json"#' {{map_server_style}}/project.yml
+RUN sed -i -e 's#source: "http://tiletest.kapsi.fi:8080/index.json"#source: "tilejson+http://vectormapserver:{{vector_map_server_exposed_port}}/hsl-vector-map/index.json"#' {{map_server_style}}/project.yml
+
+COPY config.json {{map_server_root}}/
 
 EXPOSE {{map_server_exposed_port}}
 
-CMD sleep 15 && node node_modules/tessera/bin/tessera.js --port {{map_server_exposed_port}} tmstyle://{{map_server_root}}/{{map_server_style}}/
-
+CMD sleep 15 && node node_modules/tessera/bin/tessera.js --port {{map_server_exposed_port}} --config config.json

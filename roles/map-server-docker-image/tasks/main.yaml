@@ -5,5 +5,8 @@
 - name: Move Dockerfile
   template: src=Dockerfile.j2 dest={{map_server_root}}/Dockerfile owner=root group=root mode=0755
 
+- name: Move config file
+  template: src=config.json.j2 dest={{map_server_root}}/config.json
+
 - name: Build docker image
   command: docker build --tag="{{map_server_docker_image}}" --force-rm=true {{map_server_root}}

@@ -98,7 +98,6 @@ location /geocoder/ {
 }
 
 location /hsl-map/ {
-    rewrite /hsl-map/(.*) /$1  break;
     proxy_pass         http://mapserver:{{map_server_exposed_port}};
     proxy_cache        tiles;
     proxy_cache_valid  200  168h;
@@ -112,7 +111,6 @@ location /hsl-map/ {
 }
 
 location /hsl-vector-map/ {
-    rewrite /hsl-vector-map/(.*) /$1  break;
     proxy_pass         http://vectormapserver:{{vector_map_server_exposed_port}};
     proxy_cache        tiles;
     proxy_cache_valid  200  168h;
