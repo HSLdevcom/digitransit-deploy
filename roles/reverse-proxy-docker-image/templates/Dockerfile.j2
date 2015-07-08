@@ -7,6 +7,7 @@ RUN mkdir -p {{reverse_proxy_root}}
 RUN mkdir -p {{reverse_proxy_root}}/cache
 
 ADD proxy.conf /etc/nginx/nginx.conf
+ADD common.conf /etc/nginx/common.conf
 
 ADD index.html {{reverse_proxy_root}}/index.html
 

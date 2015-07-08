@@ -9,6 +9,7 @@ reverseproxy:
    - siri2gtfsrt
    - navigatorserver
    - digitransitui
+   - digitransituiregional
    - geocoder
    - mapserver
    - vectormapserver
@@ -63,6 +64,11 @@ navigatorserver:
 
 digitransitui:
   image: {{digitransit_ui_docker_image}}
+  expose:
+   - "{{digitransit_ui_exposed_port}}"
+
+digitransituiregional:
+  image: {{digitransit_ui_regional_docker_image}}
   expose:
    - "{{digitransit_ui_exposed_port}}"
 

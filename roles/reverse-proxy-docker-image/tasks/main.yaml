@@ -8,6 +8,9 @@
 - name: Move config file
   template: src=proxy.conf.j2 dest={{reverse_proxy_root}}/proxy.conf
 
+- name: Move config commons file
+  template: src=common.conf.j2 dest={{reverse_proxy_root}}/common.conf
+
 - name: Move Index file
   copy: src=index.html dest={{reverse_proxy_root}}/index.html
 
