@@ -17,4 +17,4 @@ graphString="$graphString --router {{graph}}"
 
 # Run OTP
 echo "graphString is: $graphString"
-java -Xmx10G -jar {{otp_root}}/target/otp-0.16.0-SNAPSHOT.jar --server --port {{otp_exposed_port}} --securePort {{9000}} --basePath {{otp_root}} --graphs $GRAPHS $graphString
+java -Xmx10G -jar {{otp_root}}/target/otp-0.19.0-SNAPSHOT-shaded.jar --server --port {{otp_exposed_port}} --securePort {{9000}} --basePath {{otp_root}} --graphs $GRAPHS $graphString
