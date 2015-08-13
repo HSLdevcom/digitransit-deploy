@@ -1,11 +1,11 @@
-FROM maven:3.2.3-jdk-7
+FROM maven:3-jdk-8
 MAINTAINER Reittiopas version: 0.1
 
 RUN \
   apt-get update && \
   apt-get install -y git
 
-# Fetch maven dependencies  
+# Fetch maven dependencies
 RUN \
   mkdir -p {{otp_root}} && \
   cd {{otp_root}} && \
