@@ -72,7 +72,7 @@ function selectAction {
             ;;
         "4")
             printAction "Building hsl-alert"
-            ansible-playbook -i environments/$ENV -K -s playbooks/build-hsl-alert.yaml -u $USERNAM
+            ansible-playbook -i environments/$ENV -K -s playbooks/build-hsl-alert.yaml -u $USERNAME
             ;;
         "5")
             printAction "Building Navigator-proto"
