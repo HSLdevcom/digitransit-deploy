@@ -4,7 +4,9 @@ MAINTAINER Reittiopas version: 0.1
 WORKDIR {{digitransit_ui_root}}
 
 RUN apt-get update
-RUN apt-get install -y git npm
+RUN apt-get install -y git
+
+RUN npm install -g npm@3
 
 # Get initial (cacheable) code
 RUN mkdir -p {{digitransit_ui_root}} && \
