@@ -17,6 +17,7 @@ defaults
 
 frontend www-active
     bind *:80
+    use_backend piwik if { hdr(Host) -i piwik.digitransit.fi }
     default_backend backend-active
 
 frontend www-passive
@@ -30,3 +31,7 @@ backend backend-active
 backend backend-passive
     mode http
     server nginx passive:{{reverse_proxy_exposed_port}}
+
+backend piwik
+    mode http
+    server apache-piwik matka.hsl.fi:8090
