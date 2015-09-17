@@ -35,3 +35,5 @@ backend backend-passive
 backend piwik
     mode http
     server apache-piwik matka.hsl.fi:8090
+    option forwardfor
+    option http-server-close
