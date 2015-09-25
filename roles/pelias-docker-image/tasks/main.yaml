@@ -1,0 +1,15 @@
+---
+- name: Ensure pelias directory is present
+  file: path={{pelias_root}} state=directory
+
+- name: Move Dockerfile
+  template: src=Dockerfile.j2 dest={{pelias_root}}/Dockerfile
+
+- name: Move ES config files
+  copy: src=config dest={{pelias_root}}
+
+- name: Move Pelias config
+  copy: src=pelias.json dest={{pelias_root}}/pelias.json
+
+- name: Build pelias image
+  command: docker build --tag="{{pelias_docker_image}}" --force-rm=true {{pelias_root}}

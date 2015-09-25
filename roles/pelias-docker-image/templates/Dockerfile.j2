@@ -1,0 +1,121 @@
+FROM java:8-jre
+MAINTAINER Reittiopas version: 0.1
+
+ENV HOME /root
+ENV DEBIAN_FRONTEND noninteractive
+
+# verify gpg and sha256: http://nodejs.org/dist/v0.10.30/SHASUMS256.txt.asc
+# gpg: aka "Timothy J Fontaine (Work) <tj.fontaine@joyent.com>"
+# gpg: aka "Julien Gilli <jgilli@fastmail.fm>"
+# gpg: aka "Tianon Gravi <tianon@tianon.xyz>"
+# gpg: aka "Elasticsearch (Elasticsearch Signing Key) <dev_ops@elasticsearch.org>"
+RUN set -ex \
+	&& for key in \
+		7937DFD2AB06298B2293C3187D33FF9D0246406D \
+		114F43EE0176B71C7BC219DD50A3051F888C628D \
+    B42F6819007F00F88E364FD4036A9C25BF357DD4 \
+    46095ACC8548582C1A2699A9D27D666CD88E42B4 \
+	; do \
+		gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
+	done
+
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys D27D666CD88E42B4
+
+# grab gosu for easy step-down from root
+RUN arch="$(dpkg --print-architecture)" \
+	&& set -x \
+	&& curl -o /usr/local/bin/gosu -fSL "https://github.com/tianon/gosu/releases/download/1.3/gosu-$arch" \
+	&& curl -o /usr/local/bin/gosu.asc -fSL "https://github.com/tianon/gosu/releases/download/1.3/gosu-$arch.asc" \
+	&& gpg --verify /usr/local/bin/gosu.asc \
+	&& rm /usr/local/bin/gosu.asc \
+	&& chmod +x /usr/local/bin/gosu
+
+# set elasticsearch version and download it
+ENV ELASTICSEARCH_MAJOR 1.7
+ENV ELASTICSEARCH_VERSION 1.7.2
+
+RUN echo "deb http://packages.elasticsearch.org/elasticsearch/$ELASTICSEARCH_MAJOR/debian stable main" > /etc/apt/sources.list.d/elasticsearch.list
+
+RUN set -x \
+	&& apt-get update \
+	&& apt-get install -y --no-install-recommends elasticsearch=$ELASTICSEARCH_VERSION
+
+ENV PATH /usr/share/elasticsearch/bin:$PATH
+
+RUN set -ex \
+	&& for path in \
+		/usr/share/elasticsearch/data \
+		/usr/share/elasticsearch/logs \
+		/usr/share/elasticsearch/config \
+		/usr/share/elasticsearch/config/scripts \
+	; do \
+		mkdir -p "$path"; \
+		chown -R elasticsearch:elasticsearch "$path"; \
+	done
+
+ADD config/logging.yml /usr/share/elasticsearch/config/
+ADD config/elasticsearch.yml /usr/share/elasticsearch/config/
+
+
+# set node and npv version
+ENV NODE_VERSION 0.12.7
+ENV NPM_VERSION 3
+
+RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz" \
+	&& curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
+	&& gpg --verify SHASUMS256.txt.asc \
+	&& grep " node-v$NODE_VERSION-linux-x64.tar.gz\$" SHASUMS256.txt.asc | sha256sum -c - \
+	&& tar -xzf "node-v$NODE_VERSION-linux-x64.tar.gz" -C /usr/local --strip-components=1 \
+	&& rm "node-v$NODE_VERSION-linux-x64.tar.gz" SHASUMS256.txt.asc \
+	&& npm install -g npm@"$NPM_VERSION" \
+	&& npm cache clear
+
+RUN apt-get install -y --no-install-recommends git unzip python python-dev python-pip python-virtualenv \
+  build-essential software-properties-common curl wget apt-utils
+
+# Auxiliary folders
+RUN rm -rf /mnt
+RUN mkdir -p /mnt/data/openstreetmap
+RUN mkdir -p /tmp/openstreetmap/
+RUN mkdir -p /mnt/data/openaddresses
+RUN mkdir -p /mnt/data/quattroshapes
+RUN mkdir -p /mnt/data/geonames
+RUN mkdir -p /var/log/esclient/
+
+#TODO: Convert "proper data" to quattroshapes format and import
+
+WORKDIR /mnt/data/openstreetmap
+RUN curl -O http://download.geofabrik.de/europe/finland-latest.osm.pbf
+
+#TODO: find out run number from http://results.openaddresses.io/state.txt
+WORKDIR /mnt/data/openaddresses
+RUN curl -O http://data.openaddresses.io.s3.amazonaws.com/runs/20415/fi/uusimaa.zip \
+  && unzip uusimaa.zip
+
+
+# setting workdir
+WORKDIR /root
+
+#
+# Pelias
+#
+
+RUN git clone https://github.com/pelias/scripts.git \
+  && cp scripts/scripts/* /usr/share/elasticsearch/config/scripts/ \
+  && chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/config/scripts/*
+
+#  Copying pelias config file
+ADD pelias.json pelias.json
+
+#  Install Pelias CLI
+RUN npm install -g pelias-cli
+
+RUN elasticsearch -d && pelias schema create_index && pelias geonames import -i FI && pelias openaddresses import && pelias openstreetmap import
+#RUN pelias api test
+
+ENV PORT 3000
+
+EXPOSE 3000
+
+#CMD bash
+CMD elasticsearch -d && pelias api start

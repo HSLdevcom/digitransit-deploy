@@ -88,3 +88,7 @@ geocoder_root: "{{docker_build_root}}/geocoder"
 geocoder_docker_image: "{{docker_image_base}}/geocoder"
 geocoder_exposed_port: 8090
 geocoder_git: https://github.com/HSLdevcom/digitransit-geocoder.git
+
+pelias_root: "{{docker_build_root}}/pelias"
+pelias_docker_image: "{{docker_image_base}}/pelias"
+pelias_exposed_port: 3000

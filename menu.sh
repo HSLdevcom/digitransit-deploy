@@ -38,6 +38,7 @@ function printMenu {
     echo "12) Build Postgre database"
     echo "13) Build Vector Map Server"
     echo "14) Build Map Server"
+    echo "15) Build Pelias"
     echo "r) Relaunch passive in '$ENV'"
     echo "c) Change passive to active in '$ENV'"
     echo "p) Print docker processes from '$ENV'"
@@ -113,6 +114,10 @@ function selectAction {
         "14")
             printAction "Building Map server"
             ansible-playbook -i environments/$ENV -K -s playbooks/build-map-server.yaml -u $USERNAME
+            ;;
+        "15")
+            printAction "Building pelias"
+            ansible-playbook -i environments/$ENV -K -s playbooks/build-pelias.yaml -u $USERNAME
             ;;
         "r")
             printAction "Running services"
