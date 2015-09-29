@@ -27,15 +27,15 @@
   "imports": {
     "geonames": {
       "datapath": "/mnt/data/geonames/",
-      "adminLookup": false
+      "adminLookup": true
     },
     "quattroshapes": {
       "datapath": "/mnt/data/quattroshapes/",
-      "adminLookup": false
+      "adminLookup": true
     },
     "openstreetmap": {
       "datapath": "/mnt/data/openstreetmap/",
-      "adminLookup": false,
+      "adminLookup": true,
       "leveldbpath": "/tmp/openstreetmap/",
       "import": [{
         "type": { "node": "osmnode", "way": "osmway" },
@@ -45,7 +45,8 @@
     "openaddresses": {
       "datapath": "/mnt/data/openaddresses/",
       "files": [
-        "fi/uusimaa.csv"
+        "fi/uusimaa.csv",
+        "fi/11/tampere.csv"
       ]
     }
   },
