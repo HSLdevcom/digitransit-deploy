@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 set -x
+set -o pipefail
 
 # Basic authentication tokens
 MATKA_PASS={{matka_basic_auth}}
@@ -26,7 +27,7 @@ function retrieveTampere() {
   echo "Retrieving Tampere data..."
   cd ${ROOT}/finland
   curl "{{route_server_data_tampere}}" -o tampere.zip
-  $FIT_GTFS finland-latest.osm.pbf +init=epsg:3067 tampere.zip tampere_fitted.zip
+  $FIT_GTFS finland-latest.osm.pbf +init=epsg:3067 tampere.zip tampere_fitted.zip 2>&1 | tee tampere.fit.log.txt
   mv tampere_fitted.zip tampere.zip
 }
 
@@ -66,7 +67,7 @@ function retrieveHsl() {
   rm stop_times.txt
   rm stops.txt
 
-  $FIT_GTFS finland-latest.osm.pbf +init=epsg:3067 hsl.zip hsl_fitted.zip
+  $FIT_GTFS finland-latest.osm.pbf +init=epsg:3067 hsl.zip hsl_fitted.zip 2>&1 | tee hsl.fit.log.txt
   mv hsl_fitted.zip hsl.zip
 }
 
@@ -120,7 +121,7 @@ function gatherStops() {
 
 # One Bus away transform does not end terminate with a correct error code. Check that here and fail if configuration is set
 function transformKoontikantaPart() {
-  if $1 2>&1 | grep "Exception"
+  if (! $1 2>&1) | grep "Exception"
   then
     echo "Failed to transform koontikanta part"
     {% if route_server_fail_build_on_data_error %}
@@ -133,7 +134,7 @@ function buildOtpGraph() {
   echo "Building OTP graph..."
   cd $ROOT
   cp {{otp_root}}/build-config.json ${ROOT}/finland/build-config.json
-  java -Xmx8G -jar $OTP_JAR --build finland/
+  java -Xmx8G -jar $OTP_JAR --build finland/ 2>&1 | tee ${ROOT}/finland/Graph.build.log.txt
 }
 
 # Here we go
