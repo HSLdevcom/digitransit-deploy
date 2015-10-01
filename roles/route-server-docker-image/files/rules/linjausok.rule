@@ -1,2 +1,0 @@
-{"op":"update", "match":{"file":"agency.txt", "agency_id":"79656"}, "update":{"agency_id":"Linja-auto"}}
-{"op":"retain", "match":{"file":"agency.txt", "agency_id":"Linja-auto"}}
