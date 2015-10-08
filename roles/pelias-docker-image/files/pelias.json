@@ -43,11 +43,7 @@
       }]
     },
     "openaddresses": {
-      "datapath": "/mnt/data/openaddresses/",
-      "files": [
-        "fi/uusimaa.csv",
-        "fi/11/tampere.csv"
-      ]
+      "datapath": "/mnt/data/openaddresses/"
     }
   },
   "elasticsearch": {
