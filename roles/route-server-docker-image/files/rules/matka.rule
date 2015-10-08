@@ -1,4 +1,6 @@
+# Stops at 0 of some coordinate system
 {"op":"remove", "match":{"file":"stops.txt","stop_lon":"20.142573"}}
+# Local trains with route letter
 {"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"A"}}
 {"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"E"}}
 {"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"H"}}
@@ -14,13 +16,31 @@
 {"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"U"}}
 {"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"Y"}}
 {"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"Z"}}
+# HSL
 {"op":"remove", "match":{"file":"agency.txt", "agency_id":"2"}}
+# Tampere
 {"op":"remove", "match":{"file":"agency.txt", "agency_id":"3"}}
+# Oulu
 {"op":"remove", "match":{"file":"agency.txt", "agency_id":"182982"}}
 {"op":"remove", "match":{"file":"agency.txt", "agency_id":"182983"}}
 {"op":"remove", "match":{"file":"agency.txt", "agency_id":"182984"}}
 {"op":"remove", "match":{"file":"agency.txt", "agency_id":"182985"}}
+# Jyväskylä
 {"op":"remove", "match":{"file":"agency.txt", "agency_id":"182986"}}
+# "HLV" local trains with route letter missing in data
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"225"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"226"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"230"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"231"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"232"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"235"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"236"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"237"}}
+# "HL" local trains with route letter missing in data
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"220"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"223"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"224"}}
+{"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"229"}}
 {"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"8000"}}
 {"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"8001"}}
 {"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"8002"}}
