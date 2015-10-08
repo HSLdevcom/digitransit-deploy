@@ -47,7 +47,6 @@ RUN set -ex \
 		/usr/share/elasticsearch/data \
 		/usr/share/elasticsearch/logs \
 		/usr/share/elasticsearch/config \
-		/usr/share/elasticsearch/config/scripts \
 	; do \
 		mkdir -p "$path"; \
 		chown -R elasticsearch:elasticsearch "$path"; \
@@ -113,10 +112,6 @@ WORKDIR /root
 #
 # Pelias
 #
-
-RUN git clone https://github.com/pelias/scripts.git \
-  && cp scripts/scripts/* /usr/share/elasticsearch/config/scripts/ \
-  && chown -R elasticsearch:elasticsearch /usr/share/elasticsearch/config/scripts/*
 
 #  Copying pelias config file
 ADD pelias.json pelias.json
