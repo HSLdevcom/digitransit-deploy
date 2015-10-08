@@ -80,13 +80,15 @@ function retrieveKoontikanta() {
   rm -rf GTFS
   mkdir -p GTFS
 
-  mkdir GTFS/matka
+  transformKoontikantaPart "java -server -Xmx8G -jar $OBA_GTFS --transform=${ROOT}/rules/matka.rule matka.zip GTFS/matka.tmp"
+  # rename id's as a separate pass to avoid nondeterminism
+  transformKoontikantaPart "java -server -Xmx8G -jar $OBA_GTFS --transform=${ROOT}/rules/matka-id.rule GTFS/matka.tmp GTFS/matka"
+  sed -i -e '1 a''MATKA,matka.fi,http://www.matka.fi/,Europe/Helsinki,' GTFS/matka/agency.txt
+
   cd GTFS/matka
-  unzip ../../matka.zip
+  zip ../../matka.filtered.zip *
   cd ../..
 
-  sed -i -e '1 a''MATKA,matka.fi,http://www.matka.fi/,Europe/Helsinki,' GTFS/matka/agency.txt
-  transformKoontikantaPart "java -jar $OBA_GTFS --transform=${ROOT}/rules/matka.rule GTFS/matka matka.filtered.zip"
   mv matka.filtered.zip matka.zip
 }
 

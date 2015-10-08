@@ -2041,4 +2041,3 @@
 {"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"9997"}}
 {"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"9998"}}
 {"op":"remove", "match":{"file":"routes.txt", "agency_id":"4", "route_short_name":"9999"}}
-{"op":"update", "match":{"file":"agency.txt", "agency_id":"4"}, "update":{"agency_id":"VR"}}
