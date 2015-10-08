@@ -20,13 +20,13 @@ mkdir -p ${ROOT}/finland
 function retrieveOSM() {
   echo "Retrieving OSM data..."
   cd ${ROOT}/finland
-  curl "{{route_server_data_osm}}" -o finland-latest.osm.pbf
+  curl -sS "{{route_server_data_osm}}" -o finland-latest.osm.pbf
 }
 
 function retrieveTampere() {
   echo "Retrieving Tampere data..."
   cd ${ROOT}/finland
-  curl "{{route_server_data_tampere}}" -o tampere.zip
+  curl -sS "{{route_server_data_tampere}}" -o tampere.zip
   $FIT_GTFS finland-latest.osm.pbf +init=epsg:3067 tampere.zip tampere_fitted.zip 2>&1 | tee tampere.fit.log.txt
   mv tampere_fitted.zip tampere.zip
 }
@@ -34,25 +34,25 @@ function retrieveTampere() {
 function retrieveJyvaskyla() {
   echo "Retrieving Jyväskylä data..."
   cd ${ROOT}/finland
-  curl "{{route_server_data_jyvaskyla}}" -o jyvaskyla.zip
+  curl -sS "{{route_server_data_jyvaskyla}}" -o jyvaskyla.zip
 }
 
 function retrieveOulu() {
   echo "Retrieving Oulu data..."
   cd ${ROOT}/finland
-  curl "{{route_server_data_oulu}}" -o oulu.zip
+  curl -sS "{{route_server_data_oulu}}" -o oulu.zip
 }
 
 function retrieveLauttaNet() {
   echo "Retrieving Lautta.net data..."
   cd ${ROOT}/finland
-  curl "{{route_server_data_lautta}}" -o lautta.zip
+  curl -sS "{{route_server_data_lautta}}" -o lautta.zip
 }
 
 function retrieveHsl() {
   echo "Retrieving HSL data..."
   cd ${ROOT}/finland
-  curl --user $HSL_PASS "{{route_server_data_hsl}}" -o hsl.zip
+  curl -sS --user $HSL_PASS "{{route_server_data_hsl}}" -o hsl.zip
 
   unzip -o hsl.zip stop_times.txt stops.txt
   # TODO: Check that the line is in expected format
@@ -75,7 +75,7 @@ function retrieveKoontikanta() {
   echo "Retrieving Koontikanta data..."
   cd ${ROOT}/finland
   
-  curl -u $MATKA_PASS "{{route_server_data_matka}}" -o all.zip
+  curl -sS -u $MATKA_PASS "{{route_server_data_matka}}" -o all.zip
   unzip -o all.zip
   rm -rf GTFS
   mkdir -p GTFS
