@@ -13,4 +13,11 @@
     - { role: route-server-docker-image }
     - { role: navigator-server-docker-image }
     - { role: map-server-docker-image }
+    - { role: pelias-docker-image }
+    - { role: vector-map-server-docker-image }
+    - { role: postgis-osm-docker-image }
+    - { role: geocoder-docker-image }
+    - { role: load-balancer-docker-image }
+    - { role: digitransit-ui-docker-image }
+    - { role: digitransit-ui-regional-docker-image }
 
