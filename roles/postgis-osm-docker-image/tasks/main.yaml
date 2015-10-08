@@ -15,4 +15,4 @@
   template: src=docker-entrypoint.sh.j2 dest={{postgis_osm_root}}/docker-entrypoint.sh owner=root group=root mode=0755
 
 - name: Build docker image
-  command: docker build --tag="{{postgis_osm_docker_image}}" --force-rm=true {{postgis_osm_root}}
+  shell: docker build --tag={{postgis_osm_docker_image|quote}} --force-rm=true {{postgis_osm_root|quote}} >ansible-postgis-osm-build.log 2>&1

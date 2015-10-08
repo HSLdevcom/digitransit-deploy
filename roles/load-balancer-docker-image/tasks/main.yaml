@@ -12,4 +12,4 @@
   template: src=change.sh.j2 dest={{load_balancer_root}}/change.sh mode=0755
 
 - name: Build load balancer docker image
-  command: docker build --tag="{{load_balancer_docker_image}}" --force-rm=true {{load_balancer_root}}
+  shell: docker build --tag={{load_balancer_docker_image|quote}} --force-rm=true {{load_balancer_root|quote}} >ansible-load-balancer-build.log 2>&1

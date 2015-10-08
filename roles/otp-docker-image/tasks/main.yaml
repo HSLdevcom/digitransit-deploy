@@ -15,4 +15,4 @@
   template: src=build-config.json.j2 dest={{otp_root}}/build-config.json
 
 - name: Build OTP docker image
-  command: docker build --tag="{{otp_docker_image}}" --force-rm=true {{otp_root}}
+  shell: docker build --tag={{otp_docker_image|quote}} --force-rm=true {{otp_root|quote}} >ansible-otp-build.log 2>&1

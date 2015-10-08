@@ -18,4 +18,4 @@
   copy: src=rules dest={{route_server_root}} owner=root group=root mode=0755
 
 - name: Build Route server image
-  command: docker build --tag="{{route_server_docker_image}}" --force-rm=true {{route_server_root}}
+  shell: docker build --tag={{route_server_docker_image|quote}} --force-rm=true {{route_server_root|quote}} >ansible-route-server.log 2>&1

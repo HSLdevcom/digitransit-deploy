@@ -6,4 +6,4 @@
   template: src=Dockerfile.j2 dest={{digitransit_ui_root}}/Dockerfile owner=root group=root mode=0755
 
 - name: Build digitransit.ui docker image
-  command: docker build --tag="{{digitransit_ui_docker_image}}" --force-rm=true {{digitransit_ui_root}}
+  shell: docker build --tag={{digitransit_ui_docker_image|quote}} --force-rm=true {{digitransit_ui_root|quote}} >ansible-digitransit-ui-build.log 2>&1

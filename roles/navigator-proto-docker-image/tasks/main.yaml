@@ -9,4 +9,4 @@
   template: src=local_config.coffee.j2 dest={{navigator_proto_root}}/local_config.coffee owner=root group=root mode=0644
 
 - name: Build docker image
-  command: docker build --tag="{{navigator_proto_docker_image}}" --force-rm=true {{navigator_proto_root}} 
+  shell: docker build --tag={{navigator_proto_docker_image|quote}} --force-rm=true {{navigator_proto_root|quote}} >ansible-navigator-proto-build.log 2>&1

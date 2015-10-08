@@ -21,4 +21,4 @@
   copy: src=css dest={{reverse_proxy_root}}
 
 - name: Build Reverse-proxy image
-  command: docker build --tag="{{reverse_proxy_docker_image}}" --force-rm=true --no-cache=true {{reverse_proxy_root}}
+  shell: docker build --tag={{reverse_proxy_docker_image|quote}} --force-rm=true --no-cache=true {{reverse_proxy_root|quote}} >ansible-reverse-proxy-build.log 2>&1

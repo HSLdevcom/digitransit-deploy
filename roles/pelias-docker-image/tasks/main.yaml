@@ -12,4 +12,4 @@
   copy: src=pelias.json dest={{pelias_root}}/pelias.json
 
 - name: Build pelias image
-  command: docker build --tag="{{pelias_docker_image}}" --force-rm=true {{pelias_root}}
+  shell: docker build --tag={{pelias_docker_image|quote}} --force-rm=true {{pelias_root|quote}} >ansible-pelias-build.log 2>&1

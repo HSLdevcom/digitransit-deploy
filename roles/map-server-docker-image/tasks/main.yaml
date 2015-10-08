@@ -9,4 +9,4 @@
   template: src=config.json.j2 dest={{map_server_root}}/config.json
 
 - name: Build docker image
-  command: docker build --tag="{{map_server_docker_image}}" --force-rm=true {{map_server_root}}
+  shell: docker build --tag={{map_server_docker_image|quote}} --force-rm=true {{map_server_root|quote}} >ansible-map-server-build.log 2>&1

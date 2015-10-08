@@ -6,4 +6,4 @@
   template: src=Dockerfile.j2 dest={{navigator_server_root}}/Dockerfile owner=root group=root mode=0755
 
 - name: Build docker image
-  command: docker build --tag="{{navigator_server_docker_image}}" --force-rm=true {{navigator_server_root}} 
+  shell: docker build --tag={{navigator_server_docker_image|quote}} --force-rm=true {{navigator_server_root|quote}} >ansible-navigator-server-build.log 2>&1
