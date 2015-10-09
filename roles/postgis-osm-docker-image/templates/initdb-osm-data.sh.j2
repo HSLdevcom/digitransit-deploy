@@ -8,7 +8,7 @@ wget http://download.geofabrik.de/europe/finland-latest.osm.pbf
 gosu postgres psql -c "create database osm_tanzania;"
 gosu postgres psql -d osm_tanzania -c "CREATE EXTENSION postgis;"
 gosu postgres psql -d osm_tanzania -c "SELECT postgis_full_version();"
-gosu postgres psql -d osm_tanzania -f postgis-vt-util/postgis-vt-util.sql
+gosu postgres psql -d osm_tanzania -f postgis-vt-util/lib.sql
 
 imposm --connection "postgis://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:5432/osm_tanzania" -m osm-bright.tm2source/imposm-mapping.py --read --write --optimize --deploy-production-tables --overwrite-cache finland-latest.osm.pbf
 
