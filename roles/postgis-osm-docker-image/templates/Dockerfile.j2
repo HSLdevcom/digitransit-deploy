@@ -55,7 +55,7 @@ WORKDIR /home/reittiopas/docker/postgis-osm
 RUN echo "{{ansible_date_time.epoch}}"
 
 RUN git clone {{vector_map_server_style_git}}
-RUN git clone https://github.com/mapbox/postgis-vt-util.git
+RUN git clone --branch v0.3.0 https://github.com/mapbox/postgis-vt-util.git
 
 COPY docker-entrypoint.sh /
 COPY initdb-postgis.sh /docker-entrypoint-initdb.d/00-postgis.sh
