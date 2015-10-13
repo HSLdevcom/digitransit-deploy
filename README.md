@@ -5,39 +5,19 @@ Deployment scripts for Digitransit
 Our main issue tracking is handled in [https://digitransit.atlassian.net](https://digitransit.atlassian.net)
 However, we also monitor this repository's issues and import them to Jira. You can create issues in GitHub.
 
-## Localhost - Getting started Mac OSX
-
-### Create and test SSH access
-- Install VirtualBox and Ubuntu on it. You can use e.g. Vagrant to do this or alternatively use Boot2Docker.
-- Ensure forwarded port from host to guest: 2231 -> 22
-- Ensure forwarded port from host to guest: 8080 -> 80
-- Add your personal public key to virtual machine /root/.ssh/authorized_keys
-- Ensure this works: ssh -p 2231 root@localhost
+## Getting started on MAC OSX (sorry, no Windows support yet. Linux should work.)
 
 ### Install Ansible
 - Run: sudo pip install ansible
 - Run: sudo pip install docker-py
-- Ensure this works: ansible -i environments/local local -m ping -u root
+- Ensure that you have an account and your SSH public key on dev and test servers
 
-### Build docker images
-- First get encryption key, you need it to use hsl and matka.fi datasources
-- Build Route-server; Run: ansible-playbook -i environments/local playbooks/build-route-server -u root --ask-vault-pass
-- Build others; Run: ansible-playbook -i environments/local playbooks/{playbook-name} -u root
-
-### Start containers
-- Run: ansible-playbook -i environments/local playbooks/run.yaml -u root
-- Access reverse proxy http://localhost:8080/
-
-## Test environment - Getting started
-
-### Requirements
-- Ensure you have Ansible installed on you local computer
-- Ensure that you have an account and your SSH public key is on the test server
-- Ensure this works: ansible -i environments/test test -m ping -u {your username in test}
+### Check that everything works
+- Execute: ansible -i environments/test test -m ping -u {your username in test}
 
 ### Using build menu
-- Run ./menu.sh
-- Menu enables you to build and launch servers, ssh into test, and display docker-compose logs
+- Run './menu.sh'. This uses your current username and selects 'dev environment' as a default
+- Menu enables you to build and launch containers, ssh into servers, and display docker-compose logs
 
 ## Analytics
 Current analytics are implemented with Piwik. You can install piwik like so:
