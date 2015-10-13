@@ -116,6 +116,13 @@ RUN curl -sS -O http://data.openaddresses.io.s3.amazonaws.com/runs/20415/fi/uusi
   && unzip -o tampere.zip
 
 
+# Install openstreetmap pelias importer
+# Todo, move back to pelias repo after PR is merged
+RUN mkdir $HOME/.pelias \
+  && git clone https://github.com/hannesj/openstreetmap.git $HOME/.pelias/openstreetmap \
+	&& cd $HOME/.pelias/openstreetmap \
+	&& npm install
+
 # setting workdir
 WORKDIR /root
 
