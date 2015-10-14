@@ -60,6 +60,7 @@ ADD config/elasticsearch.yml /usr/share/elasticsearch/config/
 ENV NODE_VERSION 0.12.7
 ENV NPM_VERSION 3
 
+# install Node
 RUN curl -sS -LO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz" \
 	&& curl -sS -LO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
 	&& gpg --verify SHASUMS256.txt.asc \
@@ -69,8 +70,16 @@ RUN curl -sS -LO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-lin
 	&& npm install -g npm@"$NPM_VERSION" \
 	&& npm cache clear
 
+
+# Install other dependencise
 RUN apt-get install -y --no-install-recommends git unzip python python-dev python-pip python-virtualenv \
   build-essential software-properties-common curl wget apt-utils gdal-bin
+
+
+# Install address deduper
+RUN git clone https://github.com/openvenues/address_deduper.git \
+  && cd address_deduper \
+	&& pip install -r requirements.txt
 
 # Auxiliary folders
 RUN rm -rf /mnt
@@ -106,6 +115,13 @@ RUN curl -sS -O http://data.openaddresses.io.s3.amazonaws.com/runs/20415/fi/uusi
   && unzip -o tampere.zip
 
 
+# Install openstreetmap pelias importer
+# Todo, move back to pelias repo after PR is merged
+RUN mkdir $HOME/.pelias \
+  && git clone https://github.com/hannesj/openstreetmap.git $HOME/.pelias/openstreetmap \
+	&& cd $HOME/.pelias/openstreetmap \
+	&& npm install
+
 # setting workdir
 WORKDIR /root
 
@@ -122,10 +138,10 @@ RUN npm install -g pelias-cli
 ENV ES_HEAP_SIZE 4g
 
 RUN elasticsearch -d \
-  && pelias schema create_index \
-  && pelias quattroshapes import locality \
+  && python /address_deduper/app.py serve \
+  & pelias schema create_index \
   && pelias geonames import -i FI \
-  && pelias openaddresses import --admin-values \
+  && pelias openaddresses import --admin-values --deduplicate \
   && pelias openstreetmap import
 
 #RUN pelias api test
