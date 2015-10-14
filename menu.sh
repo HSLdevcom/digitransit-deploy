@@ -1,17 +1,38 @@
 #!/bin/bash
 
-ENV=test
+ENV="dev"
+ENV_DOMAIN="dev.digitransit.fi"
 SELECTION=""
-USERNAME=""
+USERNAME=`whoami`
 
-function readUsername {
-    echo "***************************"
-    echo "* Digitransit build tool  *"
-    echo "***************************"
+function readEnvironment {
     echo ""
-    echo "Please enter username in '$ENV'"
+    echo "Select enviroment"
+    echo ""
+    echo "1) Dev enviroment (dev.digitransit.fi)"
+    echo "2) Test enviroment (matka.hsl.fi)"
     echo ""
     printf "> "
+    read SELECTION
+    case $SELECTION in
+      "1")
+          ENV="dev"
+          ENV_DOMAIN="dev.digitransit.fi"
+          ;;
+      "2")
+          ENV="test"
+          ENV_DOMAIN="matka.hsl.fi"
+          ;;
+      *)
+          readEnvironment
+          ;;
+    esac
+}
+
+
+function readUsername {
+    echo ""
+    printf "Enter username in '$ENV_DOMAIN' > "
     read USERNAME
 }
 
@@ -21,7 +42,7 @@ function printMenu {
     echo "* Digitransit build tool  *"
     echo "***************************"
     echo ""
-    echo "Build as user: $USERNAME@$ENV"
+    echo "Build as user: $USERNAME@$ENV_DOMAIN"
     echo ""
     echo "Please select action"
     echo "1) Build Load balancer"
@@ -39,10 +60,12 @@ function printMenu {
     echo "13) Build Vector Map Server"
     echo "14) Build Map Server"
     echo "15) Build Pelias"
-    echo "r) Relaunch passive in '$ENV'"
-    echo "c) Change passive to active in '$ENV'"
-    echo "p) Print docker processes from '$ENV'"
-    echo "s) Open SSH to '$ENV'"
+    echo "r) Relaunch passive"
+    echo "c) Change passive to active"
+    echo "p) Print docker processes"
+    echo "s) Open SSH"
+    echo "u) Change username (current: '$USERNAME')"
+    echo "e) Change environment (current: '$ENV_DOMAIN')"
     echo "q) Quit"
     echo ""
     printf "> "
@@ -54,7 +77,7 @@ function readInput {
 
 function printAction {
     clear
-    echo "$1 as user $USERNAME@$ENV"
+    echo "$1 as user $USERNAME@$ENV_DOMAIN"
 }
 
 function selectAction {
@@ -138,6 +161,14 @@ function selectAction {
             ssh -t $USERNAME@$ip "sudo docker ps"
             #clear
             ;;
+        "u")
+            readUsername
+            clear
+            ;;
+        "e")
+            readEnvironment
+            clear
+            ;;
         "q")
             exit 0
             ;;
@@ -147,9 +178,6 @@ function selectAction {
 }
 
 # Start
-
-clear
-readUsername
 clear
 
 while true

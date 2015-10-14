@@ -6,6 +6,6 @@ WORKDIR {{digitransit_ui_root}}
 ENV CONFIG="hsl"
 
 # Build app
-RUN npm run build
+RUN npm run build --digitransit-ui:SERVER_ROOT=
 
 CMD export PORT={{digitransit_ui_exposed_port}}; npm run start
