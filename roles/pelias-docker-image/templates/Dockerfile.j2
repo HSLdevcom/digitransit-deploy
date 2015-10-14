@@ -99,10 +99,19 @@ RUN SHAPE_ENCODING="ISO-8859-1" ogr2ogr qs_adm0.shp FIN/FIN_admin0.shp -lco ENCO
 RUN SHAPE_ENCODING="ISO-8859-1" ogr2ogr qs_adm1.shp FIN/FIN_admin1.shp -lco ENCODING=UTF-8
 RUN SHAPE_ENCODING="ISO-8859-1" ogr2ogr qs_adm2.shp FIN/FIN_admin2.shp -lco ENCODING=UTF-8
 RUN SHAPE_ENCODING="ISO-8859-1" ogr2ogr qs_localadmin.shp FIN/FIN_localadmin.shp -lco ENCODING=UTF-8
-RUN SHAPE_ENCODING="ISO-8859-1" ogr2ogr qs_localities.shp FIN/FIN_localities.shp -lco ENCODING=UTF-8
-RUN SHAPE_ENCODING="ISO-8859-1" ogr2ogr qs_neighborhoods.shp FIN/FIN_neighborhoods.shp -lco ENCODING=UTF-8
+# RUN SHAPE_ENCODING="ISO-8859-1" ogr2ogr qs_localities.shp FIN/FIN_localities.shp -lco ENCODING=UTF-8
+# RUN SHAPE_ENCODING="ISO-8859-1" ogr2ogr qs_neighborhoods.shp FIN/FIN_neighborhoods.shp -lco ENCODING=UTF-8
 
 RUN rm -rf FIN/
+
+# Download Finnish municipalities and convert these to quattroshapes format
+RUN curl -sS -O http://kartat.kapsi.fi/files/kuntajako/kuntajako_10k/etrs89/gml/TietoaKuntajaosta_2015_10k.zip \
+  && unzip TietoaKuntajaosta_2015_10k.zip \
+	&& ogr2ogr -t_srs EPSG:4326 -nlt POLYGON -splitlistfields -where "nationalLevel='4thOrder'" -f "ESRI Shapefile" kunnat.shp TietoaKuntajaosta_2015_10k/SuomenKuntajako_2015_10k.xml AdministrativeUnit -lco ENCODING=UTF-8 \
+	&& ogr2ogr -sql "SELECT text1 AS qs_loc FROM kunnat" -f "ESRI Shapefile" qs_localities.shp kunnat.shp -lco ENCODING=UTF-8
+
+# Download zip codes and convert these to quattroshapes format
+RUN ogr2ogr -t_srs EPSG:4326 -nlt POLYGON -sql "SELECT CONCAT( posti_alue, ' ', nimi ) AS name from 'postialue:pno_meri_2015'" -f "ESRI Shapefile" qs_neighborhoods.shp WFS:http://geo.stat.fi/geoserver/postialue/postialue%3Apno_meri_2015/wfs -lco ENCODING=UTF-8
 
 WORKDIR /mnt/data/openstreetmap
 RUN curl -sS -O http://download.geofabrik.de/europe/finland-latest.osm.pbf
