@@ -25,6 +25,6 @@ ENV ROOT_PATH="/digitransit-ui/"
 # Build app, use current host as SERVER_ROOT
 RUN npm install && \
   npm run static && \
-  SERVER_ROOT= npm run build
+  SENTRY_DSN={{sentry_dsn}} SERVER_ROOT= npm run build
 
-CMD export PORT={{digitransit_ui_exposed_port}}; npm run start
+CMD export PORT={{digitransit_ui_exposed_port}}; SENTRY_SECRET_DSN={{sentry_secret_dsn}} npm run start

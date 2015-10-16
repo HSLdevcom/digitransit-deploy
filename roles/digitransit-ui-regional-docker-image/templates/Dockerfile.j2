@@ -6,6 +6,7 @@ WORKDIR {{digitransit_ui_root}}
 ENV CONFIG="hsl"
 
 # Build app
-RUN SERVER_ROOT= npm run build
+RUN SENTRY_DSN={{sentry_dsn}} SERVER_ROOT= npm run build
 
-CMD export PORT={{digitransit_ui_exposed_port}}; npm run start
+# Start app
+CMD export PORT={{digitransit_ui_exposed_port}}; SENTRY_SECRET_DSN={{sentry_secret_dsn}} npm run start
