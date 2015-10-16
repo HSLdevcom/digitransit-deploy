@@ -120,7 +120,7 @@ function selectAction {
             ;;
         "10")
             printAction "Building Digitransit-ui"
-            ansible-playbook -i environments/$ENV -K -s playbooks/build-digitransit-ui.yaml -u $USERNAME
+            ansible-playbook -i environments/$ENV -K -s playbooks/build-digitransit-ui.yaml -u $USERNAME --ask-vault-pass
             ;;
         "11")
             printAction "Building Geocoder"
