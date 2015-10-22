@@ -18,8 +18,6 @@ defaults
 frontend www-active
     bind *:80
     use_backend piwik if { hdr(Host) -i piwik.digitransit.fi }
-    use_backend dev if { hdr(Host) -i testing.digitransit.fi }
-    use_backend dev if { hdr(Host) -i dev.digitransit.fi }
     default_backend backend-active
 
 frontend www-passive
@@ -37,11 +35,5 @@ backend backend-passive
 backend piwik
     mode http
     server apache-piwik matka.hsl.fi:8090
-    option forwardfor
-    option http-server-close
-
-backend dev
-    mode http
-    server testing 136.243.66.163
     option forwardfor
     option http-server-close

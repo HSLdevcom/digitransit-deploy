@@ -29,18 +29,10 @@ http {
     proxy_cache_path {{reverse_proxy_root}}/cache keys_zone=tiles:10m max_size=200m;
 
     server {
-        # Running port
         listen {{reverse_proxy_exposed_port}};
-
-        server_name matka.hsl.fi;
+        server_name matka.hsl.fi dev.reittiopas.fi
 
         location / {
-            include /etc/nginx/mime.types;
-            root {{reverse_proxy_root}};
-            rewrite ^/$ http://$http_host/digitransit-ui/ redirect;
-        }
-
-        location /digitransit-ui/ {
             proxy_pass         http://digitransituiregional:{{digitransit_ui_exposed_port}};
             proxy_redirect     off;
             proxy_set_header   Host $host;
@@ -49,23 +41,18 @@ http {
             proxy_set_header   X-Forwarded-Host $server_name;
         }
 
+        location ~ ^/digitransit-ui/? {
+            rewrite /digitransit-ui/?(.*) http://$host/$1 permanent;
+        }
+
         include common.conf;
     }
 
-    # Configuration for the server
     server {
-
-        # Running port
         listen {{reverse_proxy_exposed_port}};
-
-        server_name digitransit.fi www.digitransit.fi digitransit.com www.digitransit.com;
+        server_name dev.digitransit.fi beta.digitransit.fi;
 
         location / {
-            include /etc/nginx/mime.types;
-            root {{reverse_proxy_root}};
-        }
-
-        location /digitransit-ui/ {
             proxy_pass         http://digitransitui:{{digitransit_ui_exposed_port}};
             proxy_redirect     off;
             proxy_set_header   Host $host;
@@ -74,6 +61,25 @@ http {
             proxy_set_header   X-Forwarded-Host $server_name;
         }
 
+        location ~ ^/digitransit-ui/? {
+            rewrite /digitransit-ui/?(.*) http://$host/$1 permanent;
+        }
+
         include common.conf;
+    }
+
+    # Configuration for the server
+    server {
+        listen {{reverse_proxy_exposed_port}};
+        server_name digitransit.fi www.digitransit.fi;
+
+        location / {
+            include /etc/nginx/mime.types;
+            root {{reverse_proxy_root}};
+        }
+
+        location ~ ^/digitransit-ui/? {
+            rewrite /digitransit-ui/?(.*) http://$host/$1 permanent;
+        }
     }
 }
