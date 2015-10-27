@@ -30,7 +30,7 @@ http {
 
     server {
         listen {{reverse_proxy_exposed_port}};
-        server_name matka.hsl.fi dev.reittiopas.fi
+        server_name matka.hsl.fi dev.reittiopas.fi;
 
         location / {
             proxy_pass         http://digitransituiregional:{{digitransit_ui_exposed_port}};
