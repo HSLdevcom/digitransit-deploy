@@ -74,25 +74,22 @@ function retrieveHsl() {
 function retrieveKoontikanta() {
   echo "Retrieving Koontikanta data..."
   cd ${ROOT}/finland
-  
-  curl -sS -u $MATKA_PASS "{{route_server_data_matka}}" -o all.zip
-  unzip -o all.zip
+
+  curl -sS -u "$MATKA_PASS" "{{route_server_data_matka}}" -o matka.zip
+
   rm -rf GTFS
   mkdir -p GTFS
-  PYTHONIOENCODING=UTF-8 python $KALKATI_GTFS LVM.xml GTFS/
 
-  gatherStops
-  transformKoontikantaPart "java -jar $OBA_GTFS --transform=${ROOT}/rules/ep.rule GTFS/EP/ EP.zip"
-  transformKoontikantaPart "java -jar $OBA_GTFS --transform=${ROOT}/rules/linjausok.rule GTFS/LINJAUSOK/ LINJAUSOK.zip"
-  transformKoontikantaPart "java -jar $OBA_GTFS --transform=${ROOT}/rules/pika.rule GTFS/PIKA/ PIKA.zip"
-  transformKoontikantaPart "java -jar $OBA_GTFS --transform=${ROOT}/rules/vakio.rule GTFS/VAKIO/ VAKIO.zip"
+  transformKoontikantaPart "java -server -Xmx8G -jar $OBA_GTFS --transform=${ROOT}/rules/matka.rule matka.zip GTFS/matka.tmp"
+  # rename id's as a separate pass to avoid nondeterminism
+  transformKoontikantaPart "java -server -Xmx8G -jar $OBA_GTFS --transform=${ROOT}/rules/matka-id.rule GTFS/matka.tmp GTFS/matka"
+  sed -i -e '1 a''MATKA,matka.fi,http://www.matka.fi/,Europe/Helsinki,' GTFS/matka/agency.txt
 
-  transformKoontikantaPart "java -jar $OBA_GTFS --transform=${ROOT}/rules/vr.rule GTFS/VR/ VR.zip"
-  transformKoontikantaPart "java -jar $OBA_GTFS --transform=${ROOT}/rules/joe.rule GTFS/JOE/ JOE.zip"
-  transformKoontikantaPart "java -jar $OBA_GTFS --transform=${ROOT}/rules/kuo.rule GTFS/KUO/ KUO.zip"
-  transformKoontikantaPart "java -jar $OBA_GTFS --transform=${ROOT}/rules/lpr.rule GTFS/LPR/ LPR.zip"
-  transformKoontikantaPart "java -jar $OBA_GTFS --transform=${ROOT}/rules/tur.rule GTFS/TUR/ TUR.zip"
-  transformKoontikantaPart "java -jar $OBA_GTFS --transform=${ROOT}/rules/finavia.rule GTFS/A2020_FIN/ FINAVIA.zip"
+  cd GTFS/matka
+  zip ../../matka.filtered.zip *
+  cd ../..
+
+  mv matka.filtered.zip matka.zip
 }
 
 # Gathers stops.txt from different sources and combines them into one stops.txt

@@ -33,7 +33,7 @@ route_server_data_jyvaskyla: http://data.jyvaskyla.fi/tiedostot/linkkidata.zip
 route_server_data_oulu: http://www.transitdata.fi/oulu/google_transit.zip
 route_server_data_lautta: http://lautta.net/db/gtfs/gtfs.zip
 route_server_data_hsl: http://api.reittiopas.fi/data/google_transit.zip
-route_server_data_matka: http://api.matka.fi/data/all.zip
+route_server_data_matka: http://api.matka.fi/data/gtfs.zip
 
 navigator_proto_root: "{{docker_build_root}}/navigator-proto"
 navigator_proto_docker_image: "{{docker_image_base}}/navigator-proto"
