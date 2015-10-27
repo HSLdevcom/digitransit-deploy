@@ -81,5 +81,7 @@ http {
         location ~ ^/digitransit-ui/? {
             rewrite /digitransit-ui/?(.*) http://$host/$1 permanent;
         }
+
+        include common.conf;
     }
 }
