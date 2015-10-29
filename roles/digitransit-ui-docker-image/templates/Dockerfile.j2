@@ -20,7 +20,7 @@ RUN mkdir -p {{digitransit_ui_root}} && \
 # Get latest code
 RUN git pull
 
-ENV ROOT_PATH="/"
+ENV ROOT_PATH=""
 
 # Build app, use current host as SERVER_ROOT
 RUN npm install && \
