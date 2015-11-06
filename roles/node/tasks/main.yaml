@@ -1,0 +1,11 @@
+---
+
+- name: Initialize node
+  command: curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+  args:
+    creates: /usr/bin/node
+
+- name: Install node
+  command: apt-get install -y nodejs
+  args:
+    creates: /usr/bin/node

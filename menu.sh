@@ -60,6 +60,7 @@ function printMenu {
     echo "13) Build Vector Map Server"
     echo "14) Build Map Server"
     echo "15) Build Pelias"
+    echo "d) Digibot world domination and humiliation"
     echo "r) Relaunch passive"
     echo "c) Change passive to active"
     echo "p) Print docker processes"
@@ -141,6 +142,10 @@ function selectAction {
         "15")
             printAction "Building pelias"
             ansible-playbook -i environments/$ENV -K -s playbooks/build-pelias.yaml -u $USERNAME
+            ;;
+        "d")
+            printAction "Restarting digibot"
+            ansible-playbook -i environments/$ENV -K -s playbooks/digibot.yaml -u $USERNAME --ask-vault-pass
             ;;
         "r")
             printAction "Running services"

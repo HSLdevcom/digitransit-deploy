@@ -1,0 +1,8 @@
+---
+- hosts: all
+  vars_files:
+    - ../variables/common.yaml
+    - ../variables/passwords.yaml
+  roles:
+    - { role: node }
+    - { role: digibot }

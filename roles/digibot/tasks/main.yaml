@@ -1,0 +1,31 @@
+---
+- name: Ensure digibot directory is present
+  file: path={{digibot_root}} state=directory
+
+- name: Move digibot
+  copy: src=scripts dest={{digibot_root}}
+- copy: src=bin dest={{digibot_root}} mode="u+rwx,o+rwx"
+- copy: src=package.json dest={{digibot_root}}
+- copy: src=external-scripts.json dest={{digibot_root}}
+- template: src=digibot.service.j2 dest=/etc/systemd/user/digibot.service owner=root group=root
+
+- name: Run npm install
+  command: npm install
+  args:
+    chdir: "{{digibot_root}}"
+
+- name: enable digibot service
+  shell: systemctl enable /etc/systemd/user/digibot.service
+
+# Problems!
+# This is not currently working. It just jams and nothing seems to work.
+# How to proceed?
+# 1) Kill ansible by ctrl-c
+# 2) Open shell to enviroment. Change to root.
+# 3) run 'systemctl kill digibot'
+# 4) run 'systemctl start digibot'. This command also jams.
+# 5) press ctrl-c
+# 6) Run 'journalctl -f'. Service should no be up. Go figure??
+# It might be related to this: https://github.com/systemd/systemd/issues/719
+- name: Start digibot
+  service: name=digibot state=restarted

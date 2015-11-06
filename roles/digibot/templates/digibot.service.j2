@@ -1,0 +1,19 @@
+[Unit]
+Description=Digitransit Digibot
+Requires=network.target
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory={{digibot_root}}
+User=www-data
+
+Restart=always
+RestartSec=10
+
+Environment=PORT={{digibot_port}}
+Environment=HUBOT_SLACK_TOKEN={{slack_digibot_apikey}}
+ExecStart={{digibot_root}}/bin/hubot --adapter slack
+
+[Install]
+WantedBy=multi-user.target

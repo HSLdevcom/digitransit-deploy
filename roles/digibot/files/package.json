@@ -1,0 +1,15 @@
+{
+  "name": "digitransit-digibot",
+  "version": "0.0.0",
+  "private": true,
+  "author": "Digitransit",
+  "description": "Destroy all humans",
+  "dependencies": {
+    "hubot": "^2.16.0",
+    "hubot-help": "^0.1.2",
+    "hubot-slack": "^3.4.1"
+  },
+  "engines": {
+    "node": "0.10.x"
+  }
+}
