@@ -118,10 +118,14 @@ RUN curl -sS -O http://download.geofabrik.de/europe/finland-latest.osm.pbf
 
 #TODO: find out run number from http://results.openaddresses.io/state.txt
 WORKDIR /mnt/data/openaddresses
-RUN curl -sS -O http://data.openaddresses.io.s3.amazonaws.com/runs/20415/fi/uusimaa.zip \
-  && unzip -o uusimaa.zip \
-  && curl -sS -O http://data.openaddresses.io.s3.amazonaws.com/runs/23121/fi/11/tampere.zip \
-  && unzip -o tampere.zip
+RUN curl -sS -O http://data.openaddresses.io.s3.amazonaws.com/runs/37881/fi/18/helsinki.zip \
+  && unzip -o helsinki.zip \
+  && curl -sS -O http://data.openaddresses.io.s3.amazonaws.com/runs/37878/fi/14/oulu.zip \
+  && unzip -o oulu.zip \
+  && curl -sS -O http://data.openaddresses.io.s3.amazonaws.com/runs/37883/fi/11/tampere.zip \
+  && unzip -o tampere.zip \
+  && curl -sS -O http://data.openaddresses.io.s3.amazonaws.com/runs/32517/fi/19/turku.zip \
+  && unzip -o turku.zip \
 
 
 # Install openstreetmap pelias importer
