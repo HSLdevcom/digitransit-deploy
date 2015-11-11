@@ -3,15 +3,18 @@ MAINTAINER Reittiopas version: 0.1
 
 ADD build-routes.sh {{route_server_root}}/build-routes.sh
 
-ADD install-dependencies.sh {{route_server_root}}/install-dependencies.sh  
+ADD install-dependencies.sh {{route_server_root}}/install-dependencies.sh
 
 ADD rules {{route_server_root}}/rules
 
 ADD run.sh {{route_server_root}}/run.sh
 
+ADD citybikes.kml {{route_server_root}}/citybikes.kml
+
 RUN \
   {{route_server_root}}/install-dependencies.sh && \
   {{route_server_root}}/build-routes.sh && \
+  mv {{route_server_root}}/citybikes.kml {{route_server_root}}/finland/ && \
   echo "{{ansible_date_time.epoch}}"
 
 WORKDIR {{route_server_root}}
