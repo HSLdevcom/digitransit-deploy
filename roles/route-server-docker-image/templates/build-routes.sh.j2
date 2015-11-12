@@ -92,30 +92,6 @@ function retrieveKoontikanta() {
   mv matka.filtered.zip matka.zip
 }
 
-# Gathers stops.txt from different sources and combines them into one stops.txt
-# This a kludge to get current environment working
-function gatherStops() {
-  path=${ROOT}/finland 
-  # Get all stops
-  tail -n +2 ${path}/GTFS/EP/stops.txt > ${path}/combined-stops.txt
-  tail -n +2 ${path}/GTFS/LINJAUSOK/stops.txt >> ${path}/combined-stops.txt
-  tail -n +2 ${path}/GTFS/PIKA/stops.txt >> ${path}/combined-stops.txt
-  tail -n +2 ${path}/GTFS/VAKIO/stops.txt >> ${path}/combined-stops.txt
-
-  # Sort and get unique
-  sort ${path}/combined-stops.txt | uniq > ${path}/combined-stops-without-header.txt
-
-  # insert header
-  head -n 1 ${path}/GTFS/EP/stops.txt > ${path}/combined-stops-with-header.txt
-  cat ${path}/combined-stops-without-header.txt >> ${path}/combined-stops-with-header.txt
-
-  # Copy combined stops to sub folders
-  cp ${path}/combined-stops-with-header.txt ${path}/GTFS/EP/stops.txt
-  cp ${path}/combined-stops-with-header.txt ${path}/GTFS/LINJAUSOK/stops.txt
-  cp ${path}/combined-stops-with-header.txt ${path}/GTFS/PIKA/stops.txt
-  cp ${path}/combined-stops-with-header.txt ${path}/GTFS/VAKIO/stops.txt
-}
-
 # One Bus away transform does not end terminate with a correct error code. Check that here and fail if configuration is set
 function transformKoontikantaPart() {
   if (! $1 2>&1) | grep "Exception"
