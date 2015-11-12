@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="citybikes" id="citybikes">
+	<SimpleField name="ID" type="int"></SimpleField>
+</Schema>
+  <Placemark>
+	<name>Neitsytpolku 1</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.950682884886643,60.155923430488102</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Huvilakuja 4</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.942748697006113,60.15502536716528</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Laivasillankatu 6</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.955307192295226,60.159806256635747</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Vuorimiehenpuistikko 8</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.946533451345299,60.158895788612611</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Eiran Puisto</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.941194524925205,60.15771421895861</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Viiskulma</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.941801627513442,60.161019950316494</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Perämiehenkatu 7</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.934591983160473,60.158665386718887</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Bulevardi 46</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.931213211320618,60.162424314780338</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Fredrikinkatu 27</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.939603788199364,60.1626075196532</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kasarmikatu 24</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.947159817039488,60.163305306594708</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kolmikulma</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.943911326653559,60.164589089192766</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Annankatu 16</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.939151402457593,60.165374358863183</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Erottaja (Tori Tai Aukio)</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.944143067759256,60.1670619795295</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Pohjoinen Makasiinikatu 9</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.949043759638371,60.165576130277159</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Eteläesplanadi 4</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.950904453619994,60.167416505018267</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Helenankatu 1</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.955820832291419,60.167895777467237</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Satamakatu 3</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.962002038885387,60.167852957189282</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mastokatu 3</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.96855632555318,60.165101298131638</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Merisotilaankuja</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.975007927348315,60.167638630857446</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Senaatintori</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.952717486531213,60.169160053635231</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kirkkokatu 9</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.955482056454024,60.171055367334034</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Pohjoisranta 20a</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.961333566877734,60.174179467874808</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Yrjö-Koskisen Katu 1</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.949319563139895,60.173062331365088</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Fabianinkatu 20</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.948933308101271,60.169919174714757</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kaivokatu 6</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.942464718306823,60.170787614262935</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Läntinen Teatterikuja 2</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.942889483062714,60.172944091440918</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Eero Erkon Katu 2</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.938135539359536,60.172795017318876</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Asema-Aukio (Tori Tai Aukio)</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.940435703470207,60.170768532695753</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kiasma</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.937116816616463,60.171330984529455</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kolmensepänaukio</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.940833196692715,60.168705154116857</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mauno Koiviston Aukio</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.935184432297241,60.170104486918014</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kamppi (Metroasema)</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.930534202142752,60.168583819185756</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Eerikinkatu 5</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.935756643314715,60.167327482218525</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Ruoholahdenkatu 3</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.927193144262059,60.165825013295127</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mechelininkatu 1a</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.922449153747007,60.163993272208344</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Ruoholahden Metroasema</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.914306834643874,60.163191912416885</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mechelininkatu 3a</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.921825050881477,60.168033070970957</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Ainonkatu 4</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.931987831153574,60.171283099908784</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Arkadiankatu 20</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.925031837874759,60.171076384261248</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Hfantellin Aukio</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.932560936940902,60.174333676872095</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Museokatu 24</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.926739787195999,60.174848169704354</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Mika Waltarin Puisto</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.922676479357229,60.176110986269698</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Pohjoinen Hesperiankatu 3</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.928358145191648,60.177550107066025</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Töölöntori</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.923657529720828,60.178921826439328</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Paavo Nurmen Polku</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.927378013675497,60.182217110115992</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Siltasaarenkatu 7</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.950769933050903,60.179470550327245</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Eläintarhantie 1</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.949021056295649,60.180883567032573</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Haapaniemenkatu 2</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.956883407964888,60.181919793620324</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Agricolankatu 8</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.952679887882081,60.18415049252787</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Sörnäisten Metroasema</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.960963135356369,60.187771838156891</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Helsinginkatu 25a</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.950744553838309,60.186886979817039</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>Kolmas Linja 39</name>
+	<ExtendedData><SchemaData schemaUrl="#citybikes">
+		<SimpleData name="ID">0</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>24.941540107662551,60.1862197597533</coordinates></Point>
+  </Placemark>
+</Document></kml>
