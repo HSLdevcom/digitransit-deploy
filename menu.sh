@@ -55,7 +55,6 @@ function printMenu {
     echo "8) Build Route server"
     echo "9) Build Siri2GTFS-RT"
     echo "10) Build Digitransit-ui"
-    echo "11) Build Geocoder"
     echo "12) Build Postgre database"
     echo "13) Build Vector Map Server"
     echo "14) Build Map Server"
@@ -121,10 +120,6 @@ function selectAction {
         "10")
             printAction "Building Digitransit-ui"
             ansible-playbook -i environments/$ENV -K -s playbooks/build-digitransit-ui.yaml -u $USERNAME --ask-vault-pass
-            ;;
-        "11")
-            printAction "Building Geocoder"
-            ansible-playbook -i environments/$ENV -K -s playbooks/build-geocoder.yaml -u $USERNAME
             ;;
         "12")
             printAction "Building Postgre database"
