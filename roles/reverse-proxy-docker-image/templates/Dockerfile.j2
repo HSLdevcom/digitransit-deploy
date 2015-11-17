@@ -27,7 +27,8 @@ RUN set -ex \
 ENV NPM_CONFIG_LOGLEVEL info
 ENV NODE_VERSION 5.0.0
 
-RUN apt-get install curl \
+RUN apt-get update \
+  && apt-get install curl git python build-essential -y \
   && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz" \
   && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
   && gpg --verify SHASUMS256.txt.asc \
@@ -39,8 +40,9 @@ RUN git clone {{site_git}} {{reverse_proxy_root}}/site \
   && cd {{reverse_proxy_root}}/site \
   && npm install -g gatsby \
   && npm install \
-  && npm gatsby build \
-  && cp pages/*.svg public/
+  && gatsby build \
+  && cp pages/*.svg public/ \
+  && echo "{{ansible_date_time.epoch}}"
 
 WORKDIR /etc/nginx
 
