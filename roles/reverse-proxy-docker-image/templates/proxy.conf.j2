@@ -75,7 +75,7 @@ http {
 
         location / {
             include /etc/nginx/mime.types;
-            root {{reverse_proxy_root}};
+            root {{reverse_proxy_root}}/site/build;
         }
 
         location ~ ^/digitransit-ui/? {
