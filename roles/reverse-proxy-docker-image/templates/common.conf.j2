@@ -91,16 +91,6 @@ location /openjourneyplanner-ui/ {
     rewrite /openjourneyplanner-ui/(.*) http://$http_host/digitransit-ui/$1 permanent;
 }
 
-location /geocoder/ {
-    rewrite /geocoder/(.*) /$1  break;
-    proxy_pass         http://geocoder:{{geocoder_exposed_port}};
-    proxy_redirect     off;
-    proxy_set_header   Host $host;
-    proxy_set_header   X-Real-IP $remote_addr;
-    proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header   X-Forwarded-Host $server_name;
-}
-
 location /hsl-map/ {
     proxy_pass         http://mapserver:{{map_server_exposed_port}};
     proxy_cache        tiles;
