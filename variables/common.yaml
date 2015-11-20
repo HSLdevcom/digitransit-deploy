@@ -89,3 +89,5 @@ postgis_osm_exposed_port: 5432
 pelias_root: "{{docker_build_root}}/pelias"
 pelias_docker_image: "{{docker_image_base}}/pelias"
 pelias_exposed_port: 3000
+
+piwik_address: "//piwik.digitransit.fi/piwik.php"

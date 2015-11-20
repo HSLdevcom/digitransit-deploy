@@ -1,2 +1,6 @@
 [dev]
 136.243.66.163
+
+[dev:vars]
+digitransit-ui_national_piwik=7
+digitransit-ui_regional_piwik=5

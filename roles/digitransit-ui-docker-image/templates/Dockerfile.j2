@@ -27,4 +27,4 @@ RUN npm install && \
   npm run static && \
   SENTRY_DSN={{sentry_dsn}} SERVER_ROOT= npm run build
 
-CMD export PORT={{digitransit_ui_exposed_port}}; SENTRY_SECRET_DSN={{sentry_secret_dsn}} npm run start
+CMD export PORT={{digitransit_ui_exposed_port}}; SENTRY_SECRET_DSN={{sentry_secret_dsn}} PIWIK_ID={{digitransit-ui_national_piwik}} PIWIK_ADDRESS={{piwik_address}} npm run start

@@ -9,4 +9,4 @@ ENV CONFIG="hsl"
 RUN SENTRY_DSN={{sentry_dsn}} SERVER_ROOT= npm run build
 
 # Start app
-CMD export PORT={{digitransit_ui_exposed_port}}; SENTRY_SECRET_DSN={{sentry_secret_dsn}} npm run start
+CMD export PORT={{digitransit_ui_exposed_port}}; SENTRY_SECRET_DSN={{sentry_secret_dsn}} PIWIK_ID={{digitransit-ui_regional_piwik}} PIWIK_ADDRESS={{piwik_address}} npm run start
