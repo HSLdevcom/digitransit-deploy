@@ -59,6 +59,7 @@ function printMenu {
     echo "13) Build Vector Map Server"
     echo "14) Build Map Server"
     echo "15) Build Pelias"
+    echo "16) Build raildigitraffic2gtfsrt"
     echo "r) Relaunch passive"
     echo "c) Change passive to active"
     echo "p) Print docker processes"
@@ -136,6 +137,10 @@ function selectAction {
         "15")
             printAction "Building pelias"
             ansible-playbook -i environments/$ENV -K -s playbooks/build-pelias.yaml -u $USERNAME
+            ;;
+        "16")
+            printAction "Building pelias"
+            ansible-playbook -i environments/$ENV -K -s playbooks/build-raildigitraffic2gtfsrt.yaml -u $USERNAME
             ;;
         "r")
             printAction "Running services"
