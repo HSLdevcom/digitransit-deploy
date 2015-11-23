@@ -1,16 +1,15 @@
-FROM node:0.12
+FROM python:2
 MAINTAINER Reittiopas version: 0.1
 
 RUN \
   apt-get update && apt-get install -y \
-    git\
-    python-pip
+    git
 
 RUN \
   mkdir -p {{raildigitraffic2gtfsrt_root}} && \
   cd {{raildigitraffic2gtfsrt_root}} && \
   git clone {{raildigitraffic2gtfsrt_git}} . && \
-  pip install -r requirements.txt && \
+  pip install -r requirements.txt && pip install requests &&\
   echo "{{ansible_date_time.epoch}}"
 
 WORKDIR {{raildigitraffic2gtfsrt_root}}
