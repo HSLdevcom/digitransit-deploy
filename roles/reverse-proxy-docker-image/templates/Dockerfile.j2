@@ -41,7 +41,6 @@ RUN git clone {{site_git}} {{reverse_proxy_root}}/site \
   && npm install -g gatsby \
   && npm install \
   && gatsby build \
-  && cp pages/*.svg public/ \
   && echo "{{ansible_date_time.epoch}}"
 
 WORKDIR /etc/nginx
