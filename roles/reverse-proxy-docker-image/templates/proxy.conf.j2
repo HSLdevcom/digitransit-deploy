@@ -71,7 +71,7 @@ http {
     # Configuration for the server
     server {
         listen {{reverse_proxy_exposed_port}};
-        server_name digitransit.fi www.digitransit.fi digitransit.com www.digitransit.com;
+        server_name digitransit.fi www.digitransit.fi;
 
         location / {
             include /etc/nginx/mime.types;
@@ -83,5 +83,12 @@ http {
         }
 
         include common.conf;
+    }
+
+    server {
+        listen {{reverse_proxy_exposed_port}};
+        server_name digitransit.com www.digitransit.com;
+
+        rewrite  ^/(.*)$  http://digitransit.fi/$1 permanent;
     }
 }
