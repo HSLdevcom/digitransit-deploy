@@ -27,6 +27,7 @@ otp:
    - routeserver
    - hslalert
    - siri2gtfsrt
+   - raildigitraffic2gtfsrt
   expose:
    - "{{otp_exposed_port}}"
 
@@ -49,6 +50,11 @@ hslalert:
   image: {{hsl_alert_docker_image}}
   expose:
    - "{{hsl_alert_exposed_port}}"
+
+raildigitraffic2gtfsrt:
+  image: {{raildigitraffic2gtfsrt_docker_image}}
+  expose:
+   - "{{raildigitraffic2gtfsrt_exposed_port}}"
 
 siri2gtfsrt:
   image: {{siri2gtfsrt_docker_image}}
