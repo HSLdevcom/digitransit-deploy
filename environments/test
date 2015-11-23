@@ -1,6 +1,6 @@
 [test]
 78.46.44.146
 
-[dev:vars]
-digitransit-ui_national_piwik=6
-digitransit-ui_regional_piwik=4
+[test:vars]
+digitransit_ui_national_piwik=6
+digitransit_ui_regional_piwik=4
