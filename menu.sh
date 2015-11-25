@@ -139,7 +139,7 @@ function selectAction {
             ansible-playbook -i environments/$ENV -K -s playbooks/build-pelias.yaml -u $USERNAME
             ;;
         "16")
-            printAction "Building pelias"
+            printAction "ldigitraffic2gtfsrt"
             ansible-playbook -i environments/$ENV -K -s playbooks/build-raildigitraffic2gtfsrt.yaml -u $USERNAME
             ;;
         "r")
