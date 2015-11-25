@@ -11,14 +11,5 @@
 - name: Move config commons file
   template: src=common.conf.j2 dest={{reverse_proxy_root}}/common.conf
 
-- name: Move Index file
-  copy: src=index.html dest={{reverse_proxy_root}}/index.html
-
-- name: Move images
-  copy: src=img dest={{reverse_proxy_root}}
-
-- name: Move css
-  copy: src=css dest={{reverse_proxy_root}}
-
 - name: Build Reverse-proxy image
   shell: docker build --tag={{reverse_proxy_docker_image|quote}} --force-rm=true --no-cache=true {{reverse_proxy_root|quote}} >ansible-reverse-proxy-build.log 2>&1

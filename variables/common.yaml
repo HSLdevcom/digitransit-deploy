@@ -16,6 +16,8 @@ reverse_proxy_root: "{{docker_build_root}}/reverse-proxy"
 reverse_proxy_docker_image: "{{docker_image_base}}/reverse-proxy"
 reverse_proxy_exposed_port: 8080
 
+site_git: "https://github.com/HSLdevcom/digitransit-site.git"
+
 otp_root: "{{docker_build_root}}/otp"
 otp_docker_image: "{{docker_image_base}}/otp"
 otp_exposed_port: 8081
@@ -92,3 +94,5 @@ postgis_osm_exposed_port: 5432
 pelias_root: "{{docker_build_root}}/pelias"
 pelias_docker_image: "{{docker_image_base}}/pelias"
 pelias_exposed_port: 3000
+
+piwik_address: "//piwik.digitransit.fi/piwik.php"
