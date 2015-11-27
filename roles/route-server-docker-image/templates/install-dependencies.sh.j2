@@ -29,6 +29,7 @@ pip install argh
 echo "Getting pyproj and building it..."
 git clone https://github.com/jswhit/pyproj.git
 cd pyproj
+git checkout ec9151e8c6909f7fac72bb2eab927ff18fa4cf1d # TODO: Fix when it deploys again
 python setup.py build
 python setup.py install
 cd ..
