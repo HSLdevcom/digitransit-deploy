@@ -25,10 +25,6 @@
     "level": "verbose"
   },
   "imports": {
-    "geonames": {
-      "datapath": "/mnt/data/geonames/",
-      "adminLookup": true
-    },
     "quattroshapes": {
       "datapath": "/mnt/data/quattroshapes/",
       "adminLookup": true
