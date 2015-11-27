@@ -39,6 +39,22 @@
       "sourceType": "kml",
       "url": "http://routeserver:{{route_server_exposed_port}}/citybikes.kml",
       "frequencySec": -1
+    },
+    {
+      "type": "stop-time-updater",
+      "frequencySec": 60,
+      "sourceType": "gtfs-http",
+      "url": "http://raildigitraffic2gtfsrt:{{raildigitraffic2gtfsrt_exposed_port}}/national",
+      "defaultAgencyId": "MATKA",
+      "fuzzyTripMatching": true
+    },
+    {
+      "type": "stop-time-updater",
+      "frequencySec": 60,
+      "sourceType": "gtfs-http",
+      "url": "http://raildigitraffic2gtfsrt:{{raildigitraffic2gtfsrt_exposed_port}}/hsl",
+      "defaultAgencyId": "HSL",
+      "fuzzyTripMatching": true
     }
   ],
   boardTimes: {

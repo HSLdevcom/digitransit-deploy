@@ -1,0 +1,9 @@
+---
+- name: Ensure directory is present
+  file: path={{raildigitraffic2gtfsrt_root}} state=directory
+
+- name: Move Dockerfile
+  template: src=Dockerfile.j2 dest={{raildigitraffic2gtfsrt_root}}/Dockerfile owner=root group=root mode=0755
+
+- name: Build docker image
+  shell: docker build --tag={{raildigitraffic2gtfsrt_docker_image|quote}} --force-rm=true {{raildigitraffic2gtfsrt_root|quote}} >ansible-raildigitraffic2gtfsrt-build.log 2>&1
