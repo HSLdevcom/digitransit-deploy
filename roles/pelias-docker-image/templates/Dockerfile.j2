@@ -87,7 +87,6 @@ RUN mkdir -p /mnt/data/openstreetmap
 RUN mkdir -p /tmp/openstreetmap/
 RUN mkdir -p /mnt/data/openaddresses
 RUN mkdir -p /mnt/data/quattroshapes
-RUN mkdir -p /mnt/data/geonames
 RUN mkdir -p /var/log/esclient/
 
 # Download data
@@ -153,7 +152,6 @@ ENV ES_HEAP_SIZE 4g
 RUN elasticsearch -d \
   && python /address_deduper/app.py serve \
   & pelias schema create_index \
-  && pelias geonames import -i FI \
   && pelias openaddresses import --admin-values --deduplicate \
   && pelias openstreetmap import
 
