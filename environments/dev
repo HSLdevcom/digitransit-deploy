@@ -4,3 +4,5 @@
 [dev:vars]
 digitransit_ui_national_piwik=7
 digitransit_ui_regional_piwik=5
+digitransit_ui_national_server_root=http://dev.digitransit.fi
+digitransit_ui_regional_server_root=http://dev.reittiopas.fi
