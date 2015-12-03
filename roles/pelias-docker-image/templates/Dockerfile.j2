@@ -87,6 +87,7 @@ RUN mkdir -p /mnt/data/openstreetmap
 RUN mkdir -p /tmp/openstreetmap/
 RUN mkdir -p /mnt/data/openaddresses
 RUN mkdir -p /mnt/data/quattroshapes
+RUN mkdir -p /mnt/data/nls-places
 RUN mkdir -p /var/log/esclient/
 
 # Download data
@@ -126,13 +127,23 @@ RUN curl -sS -O http://data.openaddresses.io.s3.amazonaws.com/runs/37881/fi/18/h
   && curl -sS -O http://data.openaddresses.io.s3.amazonaws.com/runs/32517/fi/19/turku.zip \
   && unzip -o turku.zip
 
-
 # Install openstreetmap pelias importer
 # Todo, move back to pelias repo after PR is merged
 RUN mkdir $HOME/.pelias \
   && git clone https://github.com/hannesj/openstreetmap.git $HOME/.pelias/openstreetmap \
-	&& cd $HOME/.pelias/openstreetmap \
-	&& npm install
+  && cd $HOME/.pelias/openstreetmap \
+  && npm install
+
+
+WORKDIR /mnt/data/nls-places
+# Download nls paikat data
+RUN curl -sS -O http://kartat.kapsi.fi/files/nimisto/paikat/etrs89/gml/paikat_2015_05.zip \
+  && unzip paikat_2015_05.zip
+
+# Install nls paikat importer
+RUN git clone -b DT-481 https://github.com/HSLdevcom/pelias-nlsfi-places-importer.git $HOME/.pelias/nls-fi-places \
+  && cd $HOME/.pelias/nls-fi-places \
+  && npm install
 
 # setting workdir
 WORKDIR /root
@@ -152,6 +163,7 @@ ENV ES_HEAP_SIZE 4g
 RUN elasticsearch -d \
   && python /address_deduper/app.py serve \
   & pelias schema create_index \
+  && node $HOME/.pelias/nls-fi-places/lib/index -d /mnt/data/nls-places \
   && pelias openaddresses import --admin-values --deduplicate \
   && pelias openstreetmap import
 
