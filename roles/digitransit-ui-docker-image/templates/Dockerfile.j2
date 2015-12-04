@@ -8,8 +8,8 @@ RUN apt-get install -y git libglew-dev
 
 RUN npm install -g npm@3
 
-# This will disable caching
-RUN echo "{{ansible_date_time.epoch}}"
+# reset cache monthly
+RUN echo "{{ansible_date_time.month}}"
 
 # Get initial (cacheable) code
 RUN mkdir -p {{digitransit_ui_root}} && \
@@ -18,7 +18,7 @@ RUN mkdir -p {{digitransit_ui_root}} && \
   npm install
 
 # Get latest code
-RUN git pull
+RUN git pull && echo "{{ansible_date_time.month}}"
 
 ENV ROOT_PATH=""
 
