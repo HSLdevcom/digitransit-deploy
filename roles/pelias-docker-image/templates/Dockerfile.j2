@@ -90,6 +90,9 @@ RUN mkdir -p /mnt/data/quattroshapes
 RUN mkdir -p /mnt/data/nls-places
 RUN mkdir -p /var/log/esclient/
 
+#Reset cahce
+RUN echo "{{ansible_date_time.epoch}}"
+
 # Download data
 WORKDIR /mnt/data/quattroshapes
 RUN curl -sS -O http://quattroshapes.mapzen.com/quattroshapes/alpha3/FIN.tgz
