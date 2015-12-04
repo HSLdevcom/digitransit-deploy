@@ -161,7 +161,7 @@ RUN npm install -g pelias-cli
 ENV ES_HEAP_SIZE 4g
 
 RUN elasticsearch -d \
-  && python /address_deduper/app.py serve \
+  && python /address_deduper/app.py serve \ #The address deduper will run trough the build process, so start it in the background
   & pelias schema create_index \
   && node $HOME/.pelias/nls-fi-places/lib/index -d /mnt/data/nls-places \
   && pelias openaddresses import --admin-values --deduplicate \
