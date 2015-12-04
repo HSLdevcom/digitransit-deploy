@@ -18,7 +18,7 @@ RUN mkdir -p {{digitransit_ui_root}} && \
   npm install
 
 # Get latest code
-RUN git pull && echo "{{ansible_date_time.month}}"
+RUN git pull && echo "{{ansible_date_time.epoch}}"
 
 ENV ROOT_PATH=""
 
