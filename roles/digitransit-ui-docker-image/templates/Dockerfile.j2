@@ -7,16 +7,17 @@ RUN apt-get update
 RUN apt-get install -y git
 
 # reset cache monthly
-RUN echo "{{ansible_date_time.month}}"
+#RUN echo "{{ansible_date_time.month}}"
 
 # Get initial (cacheable) code
 RUN mkdir -p {{digitransit_ui_root}} && \
   cd {{digitransit_ui_root}} && \
   git clone {{digitransit_ui_git}} . && \
-  npm install
+  echo "{{ansible_date_time.epoch}}"
 
 # Get latest code
-RUN git pull && echo "{{ansible_date_time.epoch}}"
+# Commented out due to https://github.com/npm/npm/issues/9863
+#RUN git pull && echo "{{ansible_date_time.epoch}}"
 
 ENV ROOT_PATH=""
 
