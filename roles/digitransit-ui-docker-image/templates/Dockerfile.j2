@@ -3,11 +3,6 @@ MAINTAINER Reittiopas version: 0.1
 
 WORKDIR {{digitransit_ui_root}}
 
-RUN apt-get update
-RUN apt-get install -y git libglew-dev
-
-RUN npm install -g npm@3
-
 # reset cache monthly
 RUN echo "{{ansible_date_time.month}}"
 
