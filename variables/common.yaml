@@ -52,6 +52,8 @@ hsl_alert_docker_image: "{{docker_image_base}}/hsl-alert"
 hsl_alert_exposed_port: 8085
 hsl_alert_git: https://github.com/HSLdevcom/hslalert
 
+oulu_gtfsrt_url: "http://92.62.36.215:8080/gtfs-rt"
+
 siri2gtfsrt_root: "{{docker_build_root}}/siri2gtfsrt"
 siri2gtfsrt_docker_image: "{{docker_image_base}}/siri2gtfsrt"
 siri2gtfsrt_exposed_port: 8086
