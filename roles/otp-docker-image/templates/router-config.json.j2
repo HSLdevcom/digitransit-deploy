@@ -58,6 +58,22 @@
       "defaultAgencyId": "HSL",
       "fuzzyTripMatching": true,
       "alwaysIncremental": true
+    },
+    {
+      "type": "stop-time-updater",
+      "frequencySec": 60,
+      "sourceType": "gtfs-http",
+      "url": "http://92.62.36.215:8080/gtfs-rt/trip-updates",
+      "defaultAgencyId": "7317",
+      "fuzzyTripMatching": true,
+      "alwaysIncremental": true
+    },
+    {
+      "type": "real-time-alerts",
+      "frequencySec": 30,
+      "url": "http://92.62.36.215:8080/gtfs-rt/service-alerts",
+      "defaultAgencyId": "7317",
+      "fuzzyTripMatching": true
     }
   ],
   boardTimes: {
