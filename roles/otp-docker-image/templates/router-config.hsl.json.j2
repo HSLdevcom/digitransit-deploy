@@ -1,0 +1,52 @@
+{
+  "routingDefaults": {
+      "walkSpeed": 1.3,
+            "transferSlack": 120,
+            "maxTransfers": 4,
+            "waitReluctance": 0.95,
+            "waitAtBeginningFactor": 0.7,
+            "walkReluctance": 1.75,
+            "stairsReluctance": 1.65,
+            "walkBoardCost": 540
+  },
+
+  "updaters": [
+    {
+      "type": "stop-time-updater",
+      "frequencySec": 60,
+      "sourceType": "gtfs-http",
+      "url": "http://siri2gtfsrt:{{siri2gtfsrt_exposed_port}}/HSL",
+      "defaultAgencyId": "HSL",
+      "fuzzyTripMatching": true,
+      "alwaysIncremental": true
+    },
+    {
+      "type": "real-time-alerts",
+      "frequencySec": 30,
+      "url": "http://hslalert:{{hsl_alert_exposed_port}}/",
+      "defaultAgencyId": "HSL",
+      "fuzzyTripMatching": true
+    },
+    {
+      "type": "bike-rental",
+      "sourceType": "kml",
+      "url": "http://routeserver:{{route_server_exposed_port}}/citybikes.kml",
+      "frequencySec": -1
+    },
+    {
+      "type": "stop-time-updater",
+      "frequencySec": 60,
+      "sourceType": "gtfs-http",
+      "url": "http://raildigitraffic2gtfsrt:{{raildigitraffic2gtfsrt_exposed_port}}/hsl",
+      "defaultAgencyId": "HSL",
+      "fuzzyTripMatching": true,
+      "alwaysIncremental": true
+    }
+  ],
+  boardTimes: {
+    AIRPLANE: 2700
+  },
+  alightTimes: {
+    AIRPLANE: 1200
+  }
+}

@@ -11,7 +11,7 @@ mkdir -p $GRAPHS/{{graph}}
 echo "Downloading route graph '{{graph}}' from '{{location}}'"
 wget {{location}} -O $GRAPHS/{{graph}}/Graph.obj
 echo "Copying router-config.json file for '{{graph}}'"
-cp {{otp_root}}/router-config.json $GRAPHS/{{graph}}
+cp {{otp_root}}/router-config.{{graph}}.json $GRAPHS/{{graph}}/router-config.json
 graphString="$graphString --router {{graph}}"
 {% endfor %}
 

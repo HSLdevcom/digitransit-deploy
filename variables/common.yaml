@@ -24,12 +24,14 @@ otp_exposed_port: 8081
 otp_git: https://github.com/HSLdevcom/OpenTripPlanner.git
 otp_graphs:
   finland: http://routeserver:{{route_server_exposed_port}}/Graph.obj
+  hsl: http://routeserver:{{route_server_exposed_port}}/hsl/Graph.obj
 
 route_server_root: "{{docker_build_root}}/route-server"
 route_server_docker_image: "{{docker_image_base}}/route-server"
 route_server_exposed_port: 8082
 route_server_fail_build_on_data_error: false
-route_server_data_osm: http://download.geofabrik.de/europe/finland-latest.osm.pbf
+route_server_data_osm_finland: http://download.geofabrik.de/europe/finland-latest.osm.pbf
+route_server_data_osm_hsl: https://s3.amazonaws.com/metro-extracts.mapzen.com/helsinki_finland.osm.pbf
 route_server_data_tampere: http://data.itsfactory.fi/files/tampere_gtfs_latest.zip
 route_server_data_jyvaskyla: http://data.jyvaskyla.fi/tiedostot/linkkidata.zip
 route_server_data_oulu: http://www.transitdata.fi/oulu/google_transit.zip
