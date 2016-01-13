@@ -1,6 +1,0 @@
----
-- hosts: all
-  vars_files:
-    - ../variables/common.yaml
-  roles:
-    - { role: vector-map-server-docker-image }

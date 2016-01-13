@@ -11,7 +11,6 @@ reverseproxy:
    - digitransitui
    - digitransituiregional
    - mapserver
-   - vectormapserver
    - pelias
    - raildigitraffic2gtfsrt
   expose:
@@ -82,16 +81,9 @@ digitransituiregional:
 mapserver:
   image: {{map_server_docker_image}}
   links:
-   - vectormapserver
-  expose:
-   - "{{map_server_exposed_port}}"
-
-vectormapserver:
-  image: {{vector_map_server_docker_image}}
-  links:
    - postgisosm:postgisosm
   expose:
-   - "{{vector_map_server_exposed_port}}"
+   - "{{map_server_exposed_port}}"
 
 postgisosm:
   image: {{postgis_osm_docker_image}}
