@@ -1,8 +1,8 @@
-FROM node:0.12
+FROM node:4
 MAINTAINER Reittiopas version: 0.1
 
-RUN apt-get update
-RUN apt-get install -y git npm
+RUN apt-get update \
+  && apt-get install -y git npm
 
 RUN mkdir -p {{map_server_root}}
 
@@ -10,18 +10,25 @@ WORKDIR {{map_server_root}}
 
 RUN echo "{{ansible_date_time.epoch}}" > build_date
 
-RUN npm install tessera
-RUN npm install tilelive-tmstyle
-RUN npm install tilelive-http
-
-RUN echo "{{ansible_date_time.epoch}}" > build_date
+RUN npm install tessera \
+  tilejson \
+  tilelive-http \
+  tilelive-otp-stops \
+  tilelive-tmsource \
+  tilelive-tmstyle \
+  tilelive-vector \
+  tilelive-xray
 
 RUN git clone {{map_server_style_git}} {{map_server_style}}
+RUN git clone {{vector_map_server_style_git}} {{vector_map_server_style}}
 
-RUN sed -i -e 's#source: "http://tiletest.kapsi.fi:8080/index.json"#source: "tilejson+http://vectormapserver:{{vector_map_server_exposed_port}}/hsl-vector-map/index.json"#' {{map_server_style}}/project.yml
+RUN sed -i -e 's#source: "http://tiletest.kapsi.fi:8080/index.json"#source: "tilejson+http://localhost:{{map_server_exposed_port}}/hsl-vector-map/index.json"#' {{map_server_style}}/project.yml
+
+RUN sed -i -e 's/host: localhost/host: postgisosm/' {{vector_map_server_style}}/data.yml
+RUN sed -i -e 's/password: postgres/password: mysecretpassword/' {{vector_map_server_style}}/data.yml
 
 COPY config.json {{map_server_root}}/
 
 EXPOSE {{map_server_exposed_port}}
 
-CMD sleep 15 && node node_modules/tessera/bin/tessera.js --port {{map_server_exposed_port}} --config config.json
+CMD sleep 15 && node --harmony node_modules/tessera/bin/tessera.js --port {{map_server_exposed_port}} --config config.json -r {{map_server_root}}/node_modules/tilelive-otp-stops/

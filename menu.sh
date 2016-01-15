@@ -56,7 +56,7 @@ function printMenu {
     echo "9) Build Siri2GTFS-RT"
     echo "10) Build Digitransit-ui"
     echo "12) Build Postgre database"
-    echo "13) Build Vector Map Server"
+    echo "13) "
     echo "14) Build Map Server"
     echo "15) Build Pelias"
     echo "16) Build raildigitraffic2gtfsrt"
@@ -127,8 +127,7 @@ function selectAction {
             ansible-playbook -i environments/$ENV -K -s playbooks/build-postgis-osm.yaml -u $USERNAME
             ;;
         "13")
-            printAction "Building Vector map server"
-            ansible-playbook -i environments/$ENV -K -s playbooks/build-vector-map-server.yaml -u $USERNAME
+            printAction "Deprecated"
             ;;
         "14")
             printAction "Building Map server"

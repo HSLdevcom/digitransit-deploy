@@ -1,5 +1,14 @@
 {
+  "/hsl-vector-map": {
+    "source": "tmsource://./{{vector_map_server_style}}/"
+  },
   "/hsl-map": {
-    "source": "tmstyle://{{map_server_root}}/{{map_server_style}}/"
+    "source": "tmstyle://./{{map_server_style}}/"
+  },
+  "/hsl-stop-map": {
+    "source": "otpstops://{% print digitransit_ui_regional_server_root[7:] %}/otp/routers/hsl/index/graphql"
+  },
+  "/finland-stop-map": {
+    "source": "otpstops://{% print digitransit_ui_national_server_root[7:] %}/otp/routers/finland/index/graphql"
   }
 }
