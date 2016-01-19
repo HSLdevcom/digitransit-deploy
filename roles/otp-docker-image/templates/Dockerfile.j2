@@ -10,7 +10,7 @@ RUN \
   mkdir -p {{otp_root}} && \
   cd {{otp_root}} && \
   rm -rf * && \
-  git clone {{otp_git}} . && \
+  git clone {{otp_git}} -b merge-upstream . && \
   mvn dependency:resolve
 
 # Build OTP
