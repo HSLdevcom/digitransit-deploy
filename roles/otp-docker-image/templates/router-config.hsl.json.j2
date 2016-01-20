@@ -16,15 +16,14 @@
       "frequencySec": 60,
       "sourceType": "gtfs-http",
       "url": "http://siri2gtfsrt:{{siri2gtfsrt_exposed_port}}/HSL",
-      "defaultAgencyId": "HSL",
+      "feedId": "5",
       "fuzzyTripMatching": true,
-      "alwaysIncremental": true
     },
     {
       "type": "real-time-alerts",
       "frequencySec": 30,
       "url": "http://hslalert:{{hsl_alert_exposed_port}}/",
-      "defaultAgencyId": "HSL",
+      "feedId": "1",
       "fuzzyTripMatching": true
     },
     {
@@ -32,15 +31,6 @@
       "sourceType": "kml",
       "url": "http://routeserver:{{route_server_exposed_port}}/citybikes.kml",
       "frequencySec": -1
-    },
-    {
-      "type": "stop-time-updater",
-      "frequencySec": 60,
-      "sourceType": "gtfs-http",
-      "url": "http://raildigitraffic2gtfsrt:{{raildigitraffic2gtfsrt_exposed_port}}/hsl",
-      "defaultAgencyId": "HSL",
-      "fuzzyTripMatching": true,
-      "alwaysIncremental": true
     }
   ],
   boardTimes: {
