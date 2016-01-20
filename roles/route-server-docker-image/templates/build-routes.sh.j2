@@ -15,11 +15,18 @@ OTP_JAR={{otp_root}}/target/otp-0.20.0-SNAPSHOT-shaded.jar
 
 # Ensure data location
 mkdir -p ${ROOT}/finland
+mkdir -p ${ROOT}/hsl
 
-function retrieveOSM() {
+function retrieveOSMFinland() {
   echo "Retrieving OSM data..."
   cd ${ROOT}/finland
-  curl -sS "{{route_server_data_osm}}" -o finland-latest.osm.pbf
+  curl -sS "{{route_server_data_osm_finland}}" -o finland-latest.osm.pbf
+}
+
+function retrieveOSMHSL() {
+  echo "Retrieving OSM data..."
+  cd ${ROOT}/hsl
+  curl -sS "{{route_server_data_osm_hsl}}" -o helsinki_finland.osm.pbf
 }
 
 function retrieveTampere() {
@@ -68,6 +75,7 @@ function retrieveHsl() {
 
   $FIT_GTFS finland-latest.osm.pbf +init=epsg:3067 hsl.zip hsl_fitted.zip 2>&1 | tee hsl.fit.log.txt
   mv hsl_fitted.zip hsl.zip
+  cp hsl.zip ${ROOT}/hsl/hsl.zip
 }
 
 function retrieveKoontikanta() {
@@ -102,19 +110,31 @@ function transformKoontikantaPart() {
   fi
 }
 
-function buildOtpGraph() {
+function buildOtpGraphFinland() {
   echo "Building OTP graph..."
   cd $ROOT
   cp {{otp_root}}/build-config.json ${ROOT}/finland/build-config.json
   java -Xmx8G -jar $OTP_JAR --build finland/ 2>&1 | tee ${ROOT}/finland/Graph.build.log.txt
 }
 
+function buildOtpGraphHSL() {
+  echo "Building OTP graph..."
+  cd $ROOT
+  cp {{otp_root}}/build-config.json ${ROOT}/hsl/build-config.json
+  java -Xmx8G -jar $OTP_JAR --build hsl/ 2>&1 | tee ${ROOT}/hsl/Graph.build.log.txt
+}
+
 # Here we go
-retrieveOSM
+retrieveOSMFinland
+retrieveOSMHSL
 retrieveTampere
 retrieveJyvaskyla
 retrieveOulu
 retrieveLauttaNet
 retrieveHsl
 retrieveKoontikanta
-buildOtpGraph
+buildOtpGraphFinland
+buildOtpGraphHSL
+
+# Move hsl folder into root folder for web server
+mv ${ROOT}/hsl ${ROOT}/finland/

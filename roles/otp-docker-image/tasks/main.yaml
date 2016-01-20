@@ -9,7 +9,10 @@
   template: src=run.sh.j2 dest={{otp_root}}/run.sh owner=root group=root mode=0755
 
 - name: Move Router config file
-  template: src=router-config.json.j2 dest={{otp_root}}/router-config.json
+  template: src=router-config.finland.json.j2 dest={{otp_root}}/router-config.finland.json
+
+- name: Move Router config file
+  template: src=router-config.hsl.json.j2 dest={{otp_root}}/router-config.hsl.json
 
 - name: Move Build config file
   template: src=build-config.json.j2 dest={{otp_root}}/build-config.json
