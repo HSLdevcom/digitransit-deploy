@@ -33,9 +33,9 @@ function retrieveTampere() {
   echo "Retrieving Tampere data..."
   cd ${ROOT}/finland
   curl -sS "{{route_server_data_tampere}}" -o tampere.zip
-  add_feed_id tampere.zip JOLI
   $FIT_GTFS finland-latest.osm.pbf +init=epsg:3067 tampere.zip tampere_fitted.zip 2>&1 | tee tampere.fit.log.txt
   mv tampere_fitted.zip tampere.zip
+  add_feed_id tampere.zip JOLI
 }
 
 function retrieveJyvaskyla() {
@@ -63,7 +63,6 @@ function retrieveHsl() {
   echo "Retrieving HSL data..."
   cd ${ROOT}/finland
   curl -sS --user $HSL_PASS "{{route_server_data_hsl}}" -o hsl.zip
-  add_feed_id hsl.zip HSL
 
   unzip -o hsl.zip stop_times.txt stops.txt
   # TODO: Check that the line is in expected format
@@ -80,6 +79,7 @@ function retrieveHsl() {
 
   $FIT_GTFS finland-latest.osm.pbf +init=epsg:3067 hsl.zip hsl_fitted.zip 2>&1 | tee hsl.fit.log.txt
   mv hsl_fitted.zip hsl.zip
+  add_feed_id hsl.zip HSL
   cp hsl.zip ${ROOT}/hsl/hsl.zip
 }
 
@@ -88,8 +88,6 @@ function retrieveKoontikanta() {
   cd ${ROOT}/finland
 
   curl -sS -u "$MATKA_PASS" "{{route_server_data_matka}}" -o matka.zip
-
-  add_feed_id matka.zip MATKA
 
   rm -rf GTFS
   mkdir -p GTFS
@@ -104,6 +102,8 @@ function retrieveKoontikanta() {
   cd ../..
 
   mv matka.filtered.zip matka.zip
+
+  add_feed_id matka.zip MATKA
 }
 
 # One Bus away transform does not end terminate with a correct error code. Check that here and fail if configuration is set
