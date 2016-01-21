@@ -165,7 +165,7 @@ EOT
   fi
 
   # add feed_info to zip
-  zip -u tampere_gtfs_latest.zip feed_info.txt
+  zip -u $filename feed_info.txt
   set -o pipefail
 }
 
