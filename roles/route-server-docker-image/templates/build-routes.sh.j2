@@ -42,7 +42,7 @@ function retrieveJyvaskyla() {
   echo "Retrieving Jyväskylä data..."
   cd ${ROOT}/finland
   curl -sS "{{route_server_data_jyvaskyla}}" -o jyvaskyla.zip
-#  add_feed_id jyvaskyla.zip JY
+  add_feed_id jyvaskyla.zip LINKKI
 }
 
 function retrieveOulu() {
@@ -56,7 +56,7 @@ function retrieveLauttaNet() {
   echo "Retrieving Lautta.net data..."
   cd ${ROOT}/finland
   curl -sS "{{route_server_data_lautta}}" -o lautta.zip
-#  add_feed_id lautta.zip NNN
+  add_feed_id lautta.zip LAUTTA
 }
 
 function retrieveHsl() {
@@ -140,28 +140,28 @@ function add_feed_id() {
   contains_fileinfo=`unzip -l $filename|grep feed_info.txt|wc -l`
 
   if [ "$contains_fileinfo" -ne "1" ]; then
-     echo "creating new feed-info"
-     #no feed info available in zip, write whole file
-     cat <<EOT > feed_info.txt
+    echo "creating new feed-info"
+    #no feed info available in zip, write whole file
+    cat <<EOT > feed_info.txt
 feed_publisher_name,feed_publisher_url,feed_lang,feed_id
 $id-fake-name,$id-fake-url,$id-fake-lang,$id
 EOT
   else
-     unzip -o $filename feed_info.txt
-     #see if if feed_id is already there
-     count=`grep feed_id feed_info.txt|wc -l`
-     if [ "$count" -ne "1" ]; then
-       echo "adding feed_id column"
-       #no feed_id in feed_info.txt, append
-       awk -vc="feed_id" -vd="$id" 'NR==1{$0=c","$0}NR!=1{$0=d","$0}1' feed_info.txt > feed_info_new.txt
-       #todo rename
-     else
-       echo "chaning existing id"
-       #existing feed_id, replace it
-       original=`awk -F ',' 'NR==1 {for (i=1; i<=NF; i++) {ix[$i] = i}}NR>1 {printf "%s\n", $ix["feed_id"]}' c1=feed_id feed_info.txt`       echo "chaning existing id $original to $id"
-       cat feed_info.txt | sed s/$original/$id/g > feed_info_new.txt
-     fi
-     mv feed_info_new.txt feed_info.txt
+    unzip -o $filename feed_info.txt
+    #see if if feed_id is already there
+    count=`grep feed_id feed_info.txt|wc -l`
+    if [ "$count" -ne "1" ]; then
+      echo "adding feed_id column"
+      #no feed_id in feed_info.txt, append
+      awk -vc="feed_id" -vd="$id" 'NR==1{$0=c","$0}NR!=1{$0=d","$0}1' feed_info.txt > feed_info_new.txt
+    else
+      echo "changing existing id"
+      #existing feed_id, replace it
+      original=`awk -F ',' 'NR==1 {for (i=1; i<=NF; i++) {ix[$i] = i}}NR>1 {printf "%s\n", $ix["feed_id"]}' c1=feed_id feed_info.txt`
+      echo "chaning existing id $original to $id"
+      cat feed_info.txt | sed s/$original/$id/g > feed_info_new.txt
+    fi
+    mv feed_info_new.txt feed_info.txt
   fi
 
   # add feed_info to zip
