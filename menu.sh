@@ -131,7 +131,7 @@ function selectAction {
             ;;
         "14")
             printAction "Building Map server"
-            ansible-playbook -i environments/$ENV -K -s playbooks/build-map-server.yaml -u $USERNAME
+            ansible-playbook -i environments/$ENV -K -s playbooks/build-map-server.yaml -u $USERNAME --ask-vault-pass
             ;;
         "15")
             printAction "Building pelias"

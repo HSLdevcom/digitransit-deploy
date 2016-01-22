@@ -6,7 +6,7 @@
   template: src=Dockerfile.j2 dest={{map_server_root}}/Dockerfile owner=root group=root mode=0755
 
 - name: Move config file
-  template: src=config.json.j2 dest={{map_server_root}}/config.json
+  template: src=config.js.j2 dest={{map_server_root}}/config.js
 
 - name: Build docker image
   shell: docker build --tag={{map_server_docker_image|quote}} --force-rm=true {{map_server_root|quote}} >ansible-map-server-build.log 2>&1

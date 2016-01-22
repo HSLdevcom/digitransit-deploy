@@ -2,7 +2,7 @@ FROM node:4
 MAINTAINER Reittiopas version: 0.1
 
 RUN apt-get update \
-  && apt-get install -y git npm
+  && DEBIAN_FRONTEND=noninteractive apt-get install -y git libgl1-mesa-glx xserver-xorg-video-dummy unzip
 
 RUN mkdir -p {{map_server_root}}
 
@@ -14,21 +14,26 @@ RUN npm install tessera \
   tilejson \
   tilelive-http \
   tilelive-otp-stops \
-  tilelive-tmsource \
-  tilelive-tmstyle \
-  tilelive-vector \
+  mbtiles \
   tilelive-xray
 
-RUN git clone {{map_server_style_git}} {{map_server_style}}
-RUN git clone {{vector_map_server_style_git}} {{vector_map_server_style}}
+RUN curl https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/finland.mbtiles > finland.mbtiles
 
-RUN sed -i -e 's#source: "http://tiletest.kapsi.fi:8080/index.json"#source: "tilejson+http://localhost:{{map_server_exposed_port}}/hsl-vector-map/index.json"#' {{map_server_style}}/project.yml
+RUN curl http://xpra.org/xorg.conf > xorg.conf
 
-RUN sed -i -e 's/host: localhost/host: postgisosm/' {{vector_map_server_style}}/data.yml
-RUN sed -i -e 's/password: postgres/password: mysecretpassword/' {{vector_map_server_style}}/data.yml
+RUN npm install https://github.com/hannesj/tilelive-gl.git
 
-COPY config.json {{map_server_root}}/
+RUN npm install https://github.com/HSLdevcom/hsl-map-style.git
+
+RUN cd {{map_server_root}}/node_modules/hsl-map-style && \
+  unzip -P {{fontstack_zip_password}} fontstack.zip && \
+  sed -i -e 's#/Users/hannes/hsl-map-generator/#{{map_server_root}}/node_modules/#' hsl-gl-map-v8.json && \
+  sed -i -e 's#localhost:8000/#localhost:{{map_server_exposed_port}}/hsl-vector-map/#' hsl-gl-map-v8.json
+
+COPY config.js {{map_server_root}}/
 
 EXPOSE {{map_server_exposed_port}}
 
-CMD sleep 15 && node --harmony node_modules/tessera/bin/tessera.js --port {{map_server_exposed_port}} --config config.json -r {{map_server_root}}/node_modules/tilelive-otp-stops/
+CMD Xorg -noreset +extension GLX +extension RANDR +extension RENDER -logfile ./10.log -config ./xorg.conf :10 & \
+  sleep 15 && \
+  DISPLAY=":10" node --harmony node_modules/tessera/bin/tessera.js --port {{map_server_exposed_port}} --config config.js -r {{map_server_root}}/node_modules/tilelive-otp-stops/ -r {{map_server_root}}/node_modules/tilelive-gl/

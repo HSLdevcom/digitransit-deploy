@@ -81,7 +81,7 @@ digitransituiregional:
 mapserver:
   image: {{map_server_docker_image}}
   links:
-   - postgisosm:postgisosm
+   - otp
   expose:
    - "{{map_server_exposed_port}}"
 
