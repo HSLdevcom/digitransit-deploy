@@ -87,10 +87,6 @@ raildigitraffic2gtfsrt_docker_image: "{{docker_image_base}}/raildigitraffic2gtfs
 raildigitraffic2gtfsrt_exposed_port: 8090
 raildigitraffic2gtfsrt_git: https://github.com/pailakka/raildigitraffic2gtfsrt
 
-postgis_osm_root: "{{docker_build_root}}/postgis-osm"
-postgis_osm_docker_image: "{{docker_image_base}}/postgis-osm"
-postgis_osm_exposed_port: 5432
-
 pelias_root: "{{docker_build_root}}/pelias"
 pelias_docker_image: "{{docker_image_base}}/pelias"
 pelias_exposed_port: 3000

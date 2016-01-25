@@ -55,7 +55,7 @@ function printMenu {
     echo "8) Build Route server"
     echo "9) Build Siri2GTFS-RT"
     echo "10) Build Digitransit-ui"
-    echo "12) Build Postgre database"
+    echo "12) "
     echo "13) "
     echo "14) Build Map Server"
     echo "15) Build Pelias"
@@ -123,15 +123,14 @@ function selectAction {
             ansible-playbook -i environments/$ENV -K -s playbooks/build-digitransit-ui.yaml -u $USERNAME --ask-vault-pass
             ;;
         "12")
-            printAction "Building Postgre database"
-            ansible-playbook -i environments/$ENV -K -s playbooks/build-postgis-osm.yaml -u $USERNAME
+            printAction "Deprecated"
             ;;
         "13")
             printAction "Deprecated"
             ;;
         "14")
             printAction "Building Map server"
-            ansible-playbook -i environments/$ENV -K -s playbooks/build-map-server.yaml -u $USERNAME
+            ansible-playbook -i environments/$ENV -K -s playbooks/build-map-server.yaml -u $USERNAME --ask-vault-pass
             ;;
         "15")
             printAction "Building pelias"

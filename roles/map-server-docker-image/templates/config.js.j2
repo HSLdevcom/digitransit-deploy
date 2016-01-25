@@ -1,0 +1,18 @@
+module.exports = {
+  "/hsl-vector-map": {
+    "source": "mbtiles://./finland.mbtiles"
+  },
+  "/hsl-map": {
+    "source": {
+      "protocol": "gl:",
+      "query": {},
+      "style": require("hsl-map-style")
+    }
+  },
+  "/hsl-stop-map": {
+    "source": "otpstops://otp:{{otp_exposed_port}}/otp/routers/hsl/index/graphql"
+  },
+  "/finland-stop-map": {
+    "source": "otpstops://otp:{{otp_exposed_port}}/otp/routers/finland/index/graphql"
+  }
+}
