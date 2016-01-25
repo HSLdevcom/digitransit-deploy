@@ -85,11 +85,6 @@ mapserver:
   expose:
    - "{{map_server_exposed_port}}"
 
-postgisosm:
-  image: {{postgis_osm_docker_image}}
-  expose:
-   - "{{postgis_osm_exposed_port}}"
-
 pelias:
   image: {{pelias_docker_image}}
   expose:
