@@ -53,6 +53,8 @@ hslalert:
 
 raildigitraffic2gtfsrt:
   image: {{raildigitraffic2gtfsrt_docker_image}}
+  links:
+   - routeserver
   expose:
    - "{{raildigitraffic2gtfsrt_exposed_port}}"
 
