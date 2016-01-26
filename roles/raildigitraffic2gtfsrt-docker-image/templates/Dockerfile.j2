@@ -9,7 +9,8 @@ RUN \
   mkdir -p {{raildigitraffic2gtfsrt_root}} && \
   cd {{raildigitraffic2gtfsrt_root}} && \
   git clone {{raildigitraffic2gtfsrt_git}} . && \
-  pip install -r requirements.txt && pip install requests &&\
+  pip install -r requirements.txt && pip install requests && \
+  sed -i -e 's#http://digitransit.fi/route-server/#http://routeserver:{{route_server_exposed_port}}/#' {{raildigitraffic2gtfsrt_root}}/app.py && \
   echo "{{ansible_date_time.epoch}}"
 
 WORKDIR {{raildigitraffic2gtfsrt_root}}
