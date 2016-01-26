@@ -3,7 +3,7 @@ MAINTAINER Reittiopas version: 0.1
 
 RUN \
   apt-get update && \
-  apt-get install -y git && \ 
+  apt-get install -y git && \
   apt-get install -y python-pip && \
   pip install transitfeed && \
   pip install protobuf && \
@@ -15,11 +15,12 @@ RUN \
   mkdir -p {{siri2gtfsrt_root}} && \
   cd {{siri2gtfsrt_root}} && \
   git clone {{siri2gtfsrt_git}} . && \
+  sed -i -e 's#http://digitransit.fi/raildigitraffic2gtfsrt/#http://raildigitraffic2gtfsrt:{{raildigitraffic2gtfsrt_exposed_port}}/#' {{siri2gtfsrt_root}}/siri2gtfsrt.py && \
   echo "{{ansible_date_time.epoch}}"
 
 EXPOSE {{siri2gtfsrt_exposed_port}}
 
-WORKDIR {{siri2gtfsrt_root}} 
+WORKDIR {{siri2gtfsrt_root}}
 
 CMD export PORT={{siri2gtfsrt_exposed_port}} && \
     export HSL_URL=http://navigatorserver:{{navigator_server_exposed_port}}/siriaccess/vm/json?operatorRef=HSL && \
