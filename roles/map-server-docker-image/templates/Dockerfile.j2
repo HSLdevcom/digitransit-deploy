@@ -16,7 +16,7 @@ RUN npm install tessera \
   tilelive-otp-stops \
   mbtiles \
   tilelive-xray \
-  nodemon
+  forever
 
 RUN curl https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/finland.mbtiles > finland.mbtiles
 
@@ -37,4 +37,7 @@ EXPOSE {{map_server_exposed_port}}
 
 CMD Xorg -noreset +extension GLX +extension RANDR +extension RENDER -logfile ./10.log -config ./xorg.conf :10 & \
   sleep 15 && \
-  DISPLAY=":10" node_modules/.bin/nodemon --harmony node_modules/tessera/bin/tessera.js --port {{map_server_exposed_port}} --config config.js -r {{map_server_root}}/node_modules/tilelive-otp-stops/ -r {{map_server_root}}/node_modules/tilelive-gl/
+  DISPLAY=":10" node_modules/.bin/forever start -c "node --harmony" \
+  node_modules/tessera/bin/tessera.js --port {{map_server_exposed_port}} --config config.js \
+  -r {{map_server_root}}/node_modules/tilelive-otp-stops/ -r {{map_server_root}}/node_modules/tilelive-gl/ \
+  && sleep 10 && node_modules/.bin/forever --fifo logs 0
