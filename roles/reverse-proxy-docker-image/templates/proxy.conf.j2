@@ -27,7 +27,7 @@ http {
                       application/atom+xml;
 
     proxy_temp_path {{reverse_proxy_root}}/temp-cache;
-    proxy_cache_path {{reverse_proxy_root}}/cache keys_zone=tiles:10m max_size=200m;
+    proxy_cache_path {{reverse_proxy_root}}/cache keys_zone=tiles:10m max_size=2048m;
 
     server {
         listen {{reverse_proxy_exposed_port}};
