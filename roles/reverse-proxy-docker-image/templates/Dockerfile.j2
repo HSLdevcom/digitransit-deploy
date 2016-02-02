@@ -11,6 +11,8 @@ RUN mkdir -p {{reverse_proxy_root}}/site
 ADD proxy.conf /etc/nginx/nginx.conf
 ADD common.conf /etc/nginx/common.conf
 
+RUN chown -R nginx:nogroup {{reverse_proxy_root}}
+
 # gpg keys listed at https://github.com/nodejs/node
 RUN set -ex \
   && for key in \
