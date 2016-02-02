@@ -14,6 +14,7 @@ RUN npm install tessera \
   tilejson \
   tilelive-http \
   tilelive-otp-stops \
+  tilelive-hsl-parkandride \
   mbtiles \
   tilelive-xray \
   forever
@@ -39,5 +40,7 @@ CMD Xorg -noreset +extension GLX +extension RANDR +extension RENDER -logfile ./1
   sleep 15 && \
   DISPLAY=":10" node_modules/.bin/forever start -c "node --harmony" \
   node_modules/tessera/bin/tessera.js --port {{map_server_exposed_port}} --config config.js \
-  -r {{map_server_root}}/node_modules/tilelive-otp-stops/ -r {{map_server_root}}/node_modules/tilelive-gl/ \
+  -r {{map_server_root}}/node_modules/tilelive-otp-stops/ \
+  -r {{map_server_root}}/node_modules/tilelive-gl/ \
+  -r {{map_server_root}}/node_modules/tilelive-hsl-parkandride \
   && sleep 10 && node_modules/.bin/forever --fifo logs 0
