@@ -15,8 +15,10 @@ RUN \
   mkdir -p {{siri2gtfsrt_root}} && \
   cd {{siri2gtfsrt_root}} && \
   git clone {{siri2gtfsrt_git}} . && \
-  sed -i -e 's#http://digitransit.fi/raildigitraffic2gtfsrt/#http://raildigitraffic2gtfsrt:{{raildigitraffic2gtfsrt_exposed_port}}/#' {{siri2gtfsrt_root}}/siri2gtfsrt.py && \
   echo "{{ansible_date_time.epoch}}"
+
+ENV CHAIN_URL=http://raildigitraffic2gtfsrt:{{raildigitraffic2gtfsrt_exposed_port}}/hsl
+ENV TRIP_UPDATE_URL=http://hslalert:{{hsl_alert_exposed_port}}/
 
 EXPOSE {{siri2gtfsrt_exposed_port}}
 
