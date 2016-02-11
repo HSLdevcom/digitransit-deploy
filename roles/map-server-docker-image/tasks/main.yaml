@@ -8,5 +8,8 @@
 - name: Move config file
   template: src=config.js.j2 dest={{map_server_root}}/config.js
 
+- name: Move xconfig file
+  template: src=xorg.conf.j2 dest={{map_server_root}}/xorg.conf
+
 - name: Build docker image
   shell: docker build --tag={{map_server_docker_image|quote}} --force-rm=true {{map_server_root|quote}} >ansible-map-server-build.log 2>&1

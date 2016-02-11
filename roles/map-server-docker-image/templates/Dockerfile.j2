@@ -1,8 +1,11 @@
 FROM node:4
 MAINTAINER Reittiopas version: 0.1
 
+RUN echo "deb http://http.debian.net/debian jessie-backports main" >> /etc/apt/sources.list
+
 RUN apt-get update \
-  && DEBIAN_FRONTEND=noninteractive apt-get install -y git libgl1-mesa-glx xserver-xorg-video-dummy unzip
+  && DEBIAN_FRONTEND=noninteractive apt-get install -y git unzip \
+  && DEBIAN_FRONTEND=noninteractive apt-get install -y -t jessie-backports libgl1-mesa-glx libgl1-mesa-dri xserver-xorg-video-dummy
 
 RUN mkdir -p {{map_server_root}}
 
@@ -21,7 +24,7 @@ RUN npm install tessera \
 
 RUN curl https://osm2vectortiles-downloads.os.zhdk.cloud.switch.ch/v1.0/extracts/finland.mbtiles > finland.mbtiles
 
-RUN curl http://xpra.org/xorg.conf > xorg.conf
+ADD xorg.conf {{map_server_root}}/xorg.conf
 
 RUN npm install https://github.com/hannesj/tilelive-gl.git
 
@@ -36,7 +39,7 @@ COPY config.js {{map_server_root}}/
 
 EXPOSE {{map_server_exposed_port}}
 
-CMD Xorg -noreset +extension GLX +extension RANDR +extension RENDER -logfile ./10.log -config ./xorg.conf :10 & \
+CMD Xorg -dpi 96 -nolisten tcp -noreset +extension GLX +extension RANDR +extension RENDER -logfile ./10.log -config ./xorg.conf :10 & \
   sleep 15 && \
   DISPLAY=":10" node_modules/.bin/forever start -c "node --harmony" \
   node_modules/tessera/bin/tessera.js --port {{map_server_exposed_port}} --config config.js \
