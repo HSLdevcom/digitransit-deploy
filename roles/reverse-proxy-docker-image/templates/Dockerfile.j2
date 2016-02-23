@@ -42,7 +42,7 @@ RUN apt-get update \
 
 RUN git clone {{site_git}} {{reverse_proxy_root}}/site \
   && cd {{reverse_proxy_root}}/site \
-  && npm install -g gatsby \
+  && npm install -g gatsby@0.7.7 \
   && npm install \
   && gatsby build \
   && echo "{{ansible_date_time.epoch}}"
