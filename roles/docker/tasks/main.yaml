@@ -17,7 +17,7 @@
   apt: name=curl
 
 - name: Move docker-compose installer
-  template: src=install-docker-compose.sh.j2 dest={{docker_build_root}}/install-docker-compose.sh group=root mode=0755 
+  template: src=install-docker-compose.sh.j2 dest={{docker_build_root}}/install-docker-compose.sh group=root mode=0755
 
 # There seems to be bug with docker and 3.13 kernel
 # See: https://github.com/docker/docker/issues/4036#issuecomment-69244813
@@ -28,14 +28,9 @@
 
 - name: Install docker
   command: "{{docker_build_root}}/install-docker.sh"
-  args:
-    creates: /usr/bin/docker
 
 - name: Install Docker python client
   shell: pip install docker-py
 
 - name: Install docker-compose
   command: "{{docker_build_root}}/install-docker-compose.sh"
-  args:
-    creates: /usr/local/bin/docker-compose
-
