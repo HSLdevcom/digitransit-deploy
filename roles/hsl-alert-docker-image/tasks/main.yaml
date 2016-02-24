@@ -1,9 +1,9 @@
 ---
-- name: Ensure hsl-alert directory is present
-  file: path={{hsl_alert_root}} state=directory
+- name: Ensure hsl-alert directory is not present
+  file: path={{hsl_alert_root}} state=absent
 
-- name: Move Dockerfile
-  template: src=Dockerfile.j2 dest={{hsl_alert_root}}/Dockerfile owner=root group=root mode=0755
+- git: repo={{hsl_alert_git}}
+       dest={{hsl_alert_root}}
 
 - name: Build docker image
   shell: docker build --tag={{hsl_alert_docker_image|quote}} --force-rm=true {{hsl_alert_root|quote}} >ansible-hsl-alert-build.log 2>&1
