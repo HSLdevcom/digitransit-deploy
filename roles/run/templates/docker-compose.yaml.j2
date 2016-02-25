@@ -60,6 +60,10 @@ raildigitraffic2gtfsrt:
 
 siri2gtfsrt:
   image: {{siri2gtfsrt_docker_image}}
+  environment:
+    CHAIN_URL: http://raildigitraffic2gtfsrt:{{raildigitraffic2gtfsrt_exposed_port}}/hsl
+    TRIP_UPDATE_URL: http://hslalert:{{hsl_alert_exposed_port}}/
+    HSL_URL: http://navigatorserver:{{navigator_server_exposed_port}}/siriaccess/vm/json?operatorRef=HSL
   links:
    - navigatorserver
    - raildigitraffic2gtfsrt

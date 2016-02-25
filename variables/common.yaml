@@ -51,14 +51,14 @@ hsl_now_git: https://github.com/HSLdevcom/hsl-now.git
 
 hsl_alert_root: "{{docker_build_root}}/hsl-alert"
 hsl_alert_docker_image: "{{docker_image_base}}/hsl-alert"
-hsl_alert_exposed_port: 8085
+hsl_alert_exposed_port: 5000
 hsl_alert_git: https://github.com/HSLdevcom/hslalert
 
 oulu_gtfsrt_url: "http://92.62.36.215:8080/gtfs-rt"
 
 siri2gtfsrt_root: "{{docker_build_root}}/siri2gtfsrt"
 siri2gtfsrt_docker_image: "{{docker_image_base}}/siri2gtfsrt"
-siri2gtfsrt_exposed_port: 8086
+siri2gtfsrt_exposed_port: 8080
 siri2gtfsrt_git: https://github.com/HSLdevcom/siri2gtfsrt.git
 
 navigator_server_root: "{{docker_build_root}}/navigator-server"
