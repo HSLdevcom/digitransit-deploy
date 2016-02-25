@@ -1,9 +1,9 @@
 ---
-- name: Ensure siri2gtfsrt directory is present
-  file: path={{siri2gtfsrt_root}} state=directory
+- name: Ensure siri2gtfsrt directory is not present
+  file: path={{siri2gtfsrt_root}} state=absent
 
-- name: Move Dockerfile
-  template: src=Dockerfile.j2 dest={{siri2gtfsrt_root}}/Dockerfile owner=root group=root mode=0755
+- git: repo={{siri2gtfsrt_git}}
+       dest={{siri2gtfsrt_root}}
 
 - name: Build docker image
   shell: docker build --tag={{siri2gtfsrt_docker_image|quote}} --force-rm=true {{siri2gtfsrt_root|quote}} >ansible-siri2gtfsrt-build.log 2>&1
