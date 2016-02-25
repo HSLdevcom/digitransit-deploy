@@ -83,11 +83,14 @@ digitransituiregional:
    - "{{digitransit_ui_exposed_port}}"
 
 mapserver:
-  image: {{map_server_docker_image}}
+  image: {{hsl_map_server_docker_image}}
   links:
    - otp
   expose:
-   - "{{map_server_exposed_port}}"
+   - "{{hsl_map_server_exposed_port}}"
+  environment:
+   - OTP_URL=otp
+   - OTP_PORT=8081
 
 pelias:
   image: {{pelias_docker_image}}
