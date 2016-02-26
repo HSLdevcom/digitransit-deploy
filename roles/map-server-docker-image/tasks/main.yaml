@@ -1,15 +1,9 @@
 ---
-- name: Ensure map server directory is present
-  file: path={{map_server_root}} state=directory
+- name: Ensure map server directory is absent
+  file: path={{hsl_map_server_root}} state=absent
 
-- name: Move Dockerfile
-  template: src=Dockerfile.j2 dest={{map_server_root}}/Dockerfile owner=root group=root mode=0755
-
-- name: Move config file
-  template: src=config.js.j2 dest={{map_server_root}}/config.js
-
-- name: Move xconfig file
-  template: src=xorg.conf.j2 dest={{map_server_root}}/xorg.conf
+- git: repo={{hsl_map_server_git}}
+       dest={{hsl_map_server_root}}
 
 - name: Build docker image
-  shell: docker build --tag={{map_server_docker_image|quote}} --force-rm=true {{map_server_root|quote}} >ansible-map-server-build.log 2>&1
+  shell: docker build --tag={{hsl_map_server_docker_image|quote}} --force-rm=true {{hsl_map_server_root|quote}} >ansible-hsl-map-server-build.log 2>&1

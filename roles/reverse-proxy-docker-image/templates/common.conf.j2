@@ -92,7 +92,7 @@ location /openjourneyplanner-ui/ {
 }
 
 location /hsl-map/ {
-    proxy_pass         http://mapserver:{{map_server_exposed_port}};
+    proxy_pass         http://mapserver:{{hsl_map_server_exposed_port}};
     proxy_cache        tiles;
     proxy_cache_use_stale error timeout http_500 http_502 http_503 http_504;
     proxy_cache_revalidate on;
@@ -106,7 +106,7 @@ location /hsl-map/ {
 }
 
 location /hsl-vector-map/ {
-    proxy_pass         http://mapserver:{{map_server_exposed_port}};
+    proxy_pass         http://mapserver:{{hsl_map_server_exposed_port}};
     proxy_cache        tiles;
     proxy_cache_use_stale error timeout http_500 http_502 http_503 http_504;
     proxy_cache_revalidate on;
@@ -120,7 +120,7 @@ location /hsl-vector-map/ {
 }
 
 location /hsl-stop-map/ {
-    proxy_pass         http://mapserver:{{map_server_exposed_port}};
+    proxy_pass         http://mapserver:{{hsl_map_server_exposed_port}};
     proxy_cache        tiles;
     proxy_cache_use_stale error timeout http_500 http_502 http_503 http_504;
     proxy_cache_revalidate on;
@@ -134,7 +134,7 @@ location /hsl-stop-map/ {
 }
 
 location /finland-stop-map/ {
-    proxy_pass         http://mapserver:{{map_server_exposed_port}};
+    proxy_pass         http://mapserver:{{hsl_map_server_exposed_port}};
     proxy_cache        tiles;
     proxy_cache_use_stale error timeout http_500 http_502 http_503 http_504;
     proxy_cache_revalidate on;
@@ -148,7 +148,7 @@ location /finland-stop-map/ {
 }
 
 location /hsl-parkandride-map/ {
-    proxy_pass         http://mapserver:{{map_server_exposed_port}};
+    proxy_pass         http://mapserver:{{hsl_map_server_exposed_port}};
     proxy_cache        tiles;
     proxy_cache_use_stale error timeout http_500 http_502 http_503 http_504;
     proxy_cache_revalidate on;
