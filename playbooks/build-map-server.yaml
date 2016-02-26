@@ -1,7 +1,6 @@
 ---
 - hosts: all
   vars_files:
-    - ../variables/passwords.yaml
     - ../variables/common.yaml
   roles:
     - { role: map-server-docker-image }
