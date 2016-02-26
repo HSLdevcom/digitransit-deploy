@@ -6,4 +6,4 @@
        dest={{hsl_map_server_root}}
 
 - name: Build docker image
-  shell: docker build --build-arg FONTSTACK_PASSWORD={{fontstack_zip_password}} --tag={{hsl_map_server_docker_image|quote}} --force-rm=true {{hsl_map_server_root|quote}} >ansible-hsl-map-server-build.log 2>&1
+  shell: docker build --tag={{hsl_map_server_docker_image|quote}} --force-rm=true {{hsl_map_server_root|quote}} >ansible-hsl-map-server-build.log 2>&1

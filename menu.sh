@@ -130,7 +130,7 @@ function selectAction {
             ;;
         "14")
             printAction "Building Map server"
-            ansible-playbook -i environments/$ENV -K -s playbooks/build-map-server.yaml -u $USERNAME --ask-vault-pass
+            ansible-playbook -i environments/$ENV -K -s playbooks/build-map-server.yaml -u $USERNAME
             ;;
         "15")
             printAction "Building pelias"
@@ -142,7 +142,7 @@ function selectAction {
             ;;
         "r")
             printAction "Running services"
-            ansible-playbook -i environments/$ENV -K -s playbooks/run.yaml -u $USERNAME
+            ansible-playbook -i environments/$ENV -K -s playbooks/run.yaml -u $USERNAME --ask-vault-pass
             ;;
         "c")
             printAction "Changing passive to active"
