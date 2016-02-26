@@ -90,7 +90,7 @@ mapserver:
    - "{{hsl_map_server_exposed_port}}"
   environment:
    - OTP_URL=otp
-   - OTP_PORT=8081
+   - OTP_PORT={{otp_exposed_port}}
    - FONTSTACK_PASSWORD={{fontstack_zip_password}}
 
 pelias:
