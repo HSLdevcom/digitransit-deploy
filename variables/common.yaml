@@ -81,8 +81,8 @@ hsl_map_server_git: https://github.com/HSLdevcom/hsl-map-server.git
 
 raildigitraffic2gtfsrt_root: "{{docker_build_root}}/raildigitraffic2gtfsrt"
 raildigitraffic2gtfsrt_docker_image: "{{docker_image_base}}/raildigitraffic2gtfsrt"
-raildigitraffic2gtfsrt_exposed_port: 8090
-raildigitraffic2gtfsrt_git: https://github.com/pailakka/raildigitraffic2gtfsrt
+raildigitraffic2gtfsrt_exposed_port: 8080
+raildigitraffic2gtfsrt_git: https://github.com/HSLdevcom/raildigitraffic2gtfsrt
 
 pelias_root: "{{docker_build_root}}/pelias"
 pelias_docker_image: "{{docker_image_base}}/pelias"
