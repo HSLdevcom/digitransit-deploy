@@ -13,6 +13,7 @@ reverseproxy:
    - mapserver
    - pelias
    - raildigitraffic2gtfsrt
+   - pelias-api
   expose:
    - "{{reverse_proxy_exposed_port}}"
 
@@ -101,3 +102,15 @@ pelias:
   image: {{pelias_docker_image}}
   expose:
    - "{{pelias_exposed_port}}"
+
+pelias-api:
+  image: {{pelias_api_docker_image}}
+  links:
+   - pelias-data-container
+  expose:
+   - "{{pelias_api_exposed_port}}"
+
+pelias-data-container:
+  image: {{pelias_data_container_docker_image}}
+  expose:
+   - "{{pelias_data_container_exposed_port}}"
