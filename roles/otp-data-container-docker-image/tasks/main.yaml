@@ -6,4 +6,4 @@
        dest={{otp_data_container_root}}
 
 - name: Build otp-data-container image
-  shell: docker build --build-arg MATKA_PASSWORD={{matka_basic_auth}} --build-arg HSL_PASSWORD={{hsl_basic_auth}} --tag={{otp_data_container_docker_image|quote}} --force-rm=true {{otp_data_container_root|quote}} >ansible-otp-data-container.log 2>&1
+  shell: docker build --no-cache --build-arg MATKA_PASSWORD={{matka_basic_auth}} --build-arg HSL_PASSWORD={{hsl_basic_auth}} --tag={{otp_data_container_docker_image|quote}} --force-rm=true {{otp_data_container_root|quote}} >ansible-otp-data-container.log 2>&1
