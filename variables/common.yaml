@@ -84,8 +84,15 @@ raildigitraffic2gtfsrt_docker_image: "{{docker_image_base}}/raildigitraffic2gtfs
 raildigitraffic2gtfsrt_exposed_port: 8080
 raildigitraffic2gtfsrt_git: https://github.com/HSLdevcom/raildigitraffic2gtfsrt
 
-pelias_root: "{{docker_build_root}}/pelias"
-pelias_docker_image: "{{docker_image_base}}/pelias"
-pelias_exposed_port: 3000
+pelias_api_root: "{{docker_build_root}}/pelias-api"
+pelias_api_docker_image: "{{docker_image_base}}/pelias-api"
+pelias_api_exposed_port: 3100
+pelias_api_git: https://github.com/HSLdevcom/pelias-api.git
+
+pelias_data_container_root: "{{docker_build_root}}/pelias-data-container"
+pelias_data_container_docker_image: "{{docker_image_base}}/pelias-data-container"
+pelias_data_container_exposed_port: 9200
+pelias_data_container_git: https://github.com/HSLdevcom/pelias-data-container.git
+
 
 piwik_address: "//piwik.digitransit.fi/piwik.php"
