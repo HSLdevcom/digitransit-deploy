@@ -1,0 +1,9 @@
+---
+- name: Ensure pelias directory is not present
+  file: path={{pelias_api_root}} state=absent
+
+- git: repo={{pelias_api_git}}
+       dest={{pelias_api_root}}
+
+- name: Build pelias api image
+  shell: docker build --tag={{pelias_api_docker_image|quote}} --force-rm=true {{pelias_api_root|quote}} >ansible-pelias-api-build.log 2>&1
