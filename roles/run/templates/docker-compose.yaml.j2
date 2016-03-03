@@ -73,6 +73,8 @@ siri2gtfsrt:
 
 navigatorserver:
   image: {{navigator_server_docker_image}}
+  environment:
+    PORT: {{navigator_server_exposed_port}}
   expose:
    - "{{navigator_server_exposed_port}}"
 
