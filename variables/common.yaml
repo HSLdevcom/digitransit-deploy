@@ -63,7 +63,7 @@ siri2gtfsrt_git: https://github.com/HSLdevcom/siri2gtfsrt.git
 
 navigator_server_root: "{{docker_build_root}}/navigator-server"
 navigator_server_docker_image: "{{docker_image_base}}/navigator-server"
-navigator_server_exposed_port: 8087
+navigator_server_exposed_port: 9002
 navigator_server_git: https://github.com/HSLdevcom/navigator-server.git
 
 digitransit_ui_root: "{{docker_build_root}}/digitransit-ui"
