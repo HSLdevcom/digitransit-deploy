@@ -177,7 +177,7 @@ location /hsl-parkandride-map/ {
 
 location /pelias/ {
     rewrite /pelias/(.*) /$1  break;
-    proxy_pass         http://pelias:{{pelias_exposed_port}};
+    proxy_pass         http://pelias-api:{{pelias_api_exposed_port}};
     proxy_redirect     off;
     proxy_set_header   Host $host;
     proxy_set_header   X-Real-IP $remote_addr;

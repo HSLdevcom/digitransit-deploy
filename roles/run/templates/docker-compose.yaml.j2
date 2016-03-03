@@ -11,8 +11,8 @@ reverseproxy:
    - digitransitui
    - digitransituiregional
    - mapserver
-   - pelias
    - raildigitraffic2gtfsrt
+   - pelias-api
   expose:
    - "{{reverse_proxy_exposed_port}}"
 
@@ -73,6 +73,8 @@ siri2gtfsrt:
 
 navigatorserver:
   image: {{navigator_server_docker_image}}
+  environment:
+    PORT: {{navigator_server_exposed_port}}
   expose:
    - "{{navigator_server_exposed_port}}"
 
@@ -97,7 +99,14 @@ mapserver:
    - OTP_PORT={{otp_exposed_port}}
    - FONTSTACK_PASSWORD={{fontstack_zip_password}}
 
-pelias:
-  image: {{pelias_docker_image}}
+pelias-api:
+  image: {{pelias_api_docker_image}}
+  links:
+   - pelias-data-container
   expose:
-   - "{{pelias_exposed_port}}"
+   - "{{pelias_api_exposed_port}}"
+
+pelias-data-container:
+  image: {{pelias_data_container_docker_image}}
+  expose:
+   - "{{pelias_data_container_exposed_port}}"

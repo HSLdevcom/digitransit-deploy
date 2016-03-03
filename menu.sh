@@ -58,8 +58,10 @@ function printMenu {
     echo "12) "
     echo "13) "
     echo "14) Build Map Server"
-    echo "15) Build Pelias"
+    echo "15) "
     echo "16) Build raildigitraffic2gtfsrt"
+    echo "17) Build Pelias-api"
+    echo "18) Build Pelias-data-container"
     echo "r) Relaunch passive"
     echo "c) Change passive to active"
     echo "p) Print docker processes"
@@ -133,12 +135,19 @@ function selectAction {
             ansible-playbook -i environments/$ENV -K -s playbooks/build-map-server.yaml -u $USERNAME
             ;;
         "15")
-            printAction "Building pelias"
-            ansible-playbook -i environments/$ENV -K -s playbooks/build-pelias.yaml -u $USERNAME
+            printAction "Deprecated"
             ;;
         "16")
             printAction "digitraffic2gtfsrt"
             ansible-playbook -i environments/$ENV -K -s playbooks/build-raildigitraffic2gtfsrt.yaml -u $USERNAME
+            ;;
+        "17")
+            printAction "Building pelias-api"
+            ansible-playbook -i environments/$ENV -K -s playbooks/build-pelias-api.yaml -u $USERNAME
+            ;;
+        "18")
+            printAction "Building pelias-data-container"
+            ansible-playbook -i environments/$ENV -K -s playbooks/build-pelias-data-container.yaml -u $USERNAME
             ;;
         "r")
             printAction "Running services"
