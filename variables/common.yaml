@@ -20,7 +20,7 @@ site_git: "https://github.com/HSLdevcom/digitransit-site.git"
 
 otp_root: "{{docker_build_root}}/otp"
 otp_docker_image: "{{docker_image_base}}/otp"
-otp_exposed_port: 8081
+otp_exposed_port: 8080
 otp_git: https://github.com/HSLdevcom/OpenTripPlanner.git
 otp_graphs:
   finland: http://routeserver:{{route_server_exposed_port}}/Graph.obj
