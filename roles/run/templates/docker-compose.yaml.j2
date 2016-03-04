@@ -3,6 +3,7 @@ reverseproxy:
   links:
    - routeserver
    - otp
+   - otp-data-container
    - navigatorproto
    - hslnow
    - hslalert
@@ -25,11 +26,17 @@ otp:
   image: {{otp_docker_image}}
   links:
    - routeserver
+   - otp-data-container
    - hslalert
    - siri2gtfsrt
    - raildigitraffic2gtfsrt
   expose:
    - "{{otp_exposed_port}}"
+
+otp-data-container:
+  image: {{otp_data_container_docker_image}}
+  expose:
+   - "{{otp_data_container_exposed_port}}"
 
 navigatorproto:
   image: {{navigator_proto_docker_image}}
@@ -55,6 +62,7 @@ raildigitraffic2gtfsrt:
   image: {{raildigitraffic2gtfsrt_docker_image}}
   links:
    - routeserver
+   - otp-data-container
   expose:
    - "{{raildigitraffic2gtfsrt_exposed_port}}"
 
@@ -73,6 +81,8 @@ siri2gtfsrt:
 
 navigatorserver:
   image: {{navigator_server_docker_image}}
+  environment:
+    PORT: {{navigator_server_exposed_port}}
   expose:
    - "{{navigator_server_exposed_port}}"
 

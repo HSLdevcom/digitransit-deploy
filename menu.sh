@@ -52,7 +52,7 @@ function printMenu {
     echo "5) Build Navigator-proto"
     echo "6) Build Navigator-server"
     echo "7) Build Open Trip Planner"
-    echo "8) Build Route server"
+    echo "8) Build Open Trip Planner data container"
     echo "9) Build Siri2GTFS-RT"
     echo "10) Build Digitransit-ui"
     echo "12) "
@@ -113,8 +113,8 @@ function selectAction {
             ansible-playbook -i environments/$ENV -K -s playbooks/build-otp.yaml -u $USERNAME
             ;;
         "8")
-            printAction "Building route server"
-            ansible-playbook -i environments/$ENV -K -s playbooks/build-route-server.yaml -u $USERNAME --ask-vault-pass
+            printAction "Building Open Trip Planner data container"
+            ansible-playbook -i environments/$ENV -K -s playbooks/build-otp-data-container.yaml -u $USERNAME --ask-vault-pass
             ;;
         "9")
             printAction "Building Siri2GTFS-RT"
