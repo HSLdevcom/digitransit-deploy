@@ -1,21 +1,9 @@
 ---
-- name: Ensure otp directory is present
-  file: path={{otp_root}} state=directory
+- name: Ensure otp directory is not present
+  file: path={{otp_root}} state=absent
 
-- name: Move Dockerfile
-  template: src=Dockerfile.j2 dest={{otp_root}}/Dockerfile owner=root group=root mode=0755
+- git: repo={{otp_git}}
+       dest={{otp_root}}
 
-- name: Move Run file
-  template: src=run.sh.j2 dest={{otp_root}}/run.sh owner=root group=root mode=0755
-
-- name: Move Router config file
-  template: src=router-config.finland.json.j2 dest={{otp_root}}/router-config.finland.json
-
-- name: Move Router config file
-  template: src=router-config.hsl.json.j2 dest={{otp_root}}/router-config.hsl.json
-
-- name: Move Build config file
-  template: src=build-config.json.j2 dest={{otp_root}}/build-config.json
-
-- name: Build OTP docker image
-  shell: docker build --tag={{otp_docker_image|quote}} --force-rm=true {{otp_root|quote}} >ansible-otp-build.log 2>&1
+- name: Build docker image
+  shell: docker build --tag={{otp_docker_image|quote}} --force-rm=true {{otpt_root|quote}} >ansible-otp-build.log 2>&1
