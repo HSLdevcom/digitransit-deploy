@@ -26,18 +26,10 @@ otp_graphs:
   finland: http://routeserver:{{route_server_exposed_port}}/Graph.obj
   hsl: http://routeserver:{{route_server_exposed_port}}/hsl/Graph.obj
 
-route_server_root: "{{docker_build_root}}/route-server"
-route_server_docker_image: "{{docker_image_base}}/route-server"
-route_server_exposed_port: 8082
-route_server_fail_build_on_data_error: false
-route_server_data_osm_finland: http://download.geofabrik.de/europe/finland-latest.osm.pbf
-route_server_data_osm_hsl: https://s3.amazonaws.com/metro-extracts.mapzen.com/helsinki_finland.osm.pbf
-route_server_data_tampere: http://data.itsfactory.fi/files/tampere_gtfs_latest.zip
-route_server_data_jyvaskyla: http://data.jyvaskyla.fi/tiedostot/linkkidata.zip
-route_server_data_oulu: http://www.transitdata.fi/oulu/google_transit.zip
-route_server_data_lautta: http://lautta.net/db/gtfs/gtfs.zip
-route_server_data_hsl: http://api.reittiopas.fi/data/google_transit.zip
-route_server_data_matka: http://api.matka.fi/data/gtfs.zip
+otp_data_container_root: "{{docker_build_root}}/otp-data-container"
+otp_data_container_exposed_port: 8080
+otp_data_container_docker_image: "{{docker_image_base}}/opentripplanner-data-container"
+otp_data_container_git: https://github.com/HSLdevcom/OpenTripPlanner-data-container.git
 
 navigator_proto_root: "{{docker_build_root}}/navigator-proto"
 navigator_proto_docker_image: "{{docker_image_base}}/navigator-proto"

@@ -4,4 +4,4 @@
     - ../variables/passwords.yaml
     - ../variables/common.yaml
   roles:
-    - { role: route-server-docker-image }
+    - { role: otp-data-container-docker-image }
