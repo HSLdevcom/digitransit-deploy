@@ -30,16 +30,6 @@ location /images/ {
     proxy_set_header   X-Forwarded-Host $server_name;
 }
 
-location /route-server/ {
-    rewrite /route-server/(.*) /$1  break;
-    proxy_pass         http://routeserver:{{route_server_exposed_port}};
-    proxy_redirect     off;
-    proxy_set_header   Host $host;
-    proxy_set_header   X-Real-IP $remote_addr;
-    proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header   X-Forwarded-Host $server_name;
-}
-
 location /navigator-proto/ {
     rewrite /navigator-proto/(.*) /$1  break;
     proxy_pass         http://navigatorproto:{{navigator_proto_exposed_port}};

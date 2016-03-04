@@ -22,9 +22,6 @@ otp_root: "{{docker_build_root}}/otp"
 otp_docker_image: "{{docker_image_base}}/otp"
 otp_exposed_port: 8080
 otp_git: https://github.com/HSLdevcom/OpenTripPlanner.git
-otp_graphs:
-  finland: http://routeserver:{{route_server_exposed_port}}/Graph.obj
-  hsl: http://routeserver:{{route_server_exposed_port}}/hsl/Graph.obj
 
 otp_data_container_root: "{{docker_build_root}}/otp-data-container"
 otp_data_container_exposed_port: 8080

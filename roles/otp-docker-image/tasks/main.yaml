@@ -6,4 +6,4 @@
        dest={{otp_root}}
 
 - name: Build docker image
-  shell: docker build --tag={{otp_docker_image|quote}} --force-rm=true {{otpt_root|quote}} >ansible-otp-build.log 2>&1
+  shell: docker build --tag={{otp_docker_image|quote}} --force-rm=true {{otp_root|quote}} >ansible-otp-build.log 2>&1
