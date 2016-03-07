@@ -11,7 +11,7 @@ location /hsl-now/ {
 location /otp/ {
     rewrite /otp/routers/(.*)  /otp/routers/$1  break;
     rewrite /otp/(.*)  /$1  break;
-    proxy_pass         http://otp:8081;
+    proxy_pass         http://otp:8080;
     proxy_redirect     off;
     proxy_set_header   Host $host;
     proxy_set_header   X-Real-IP $remote_addr;
@@ -22,7 +22,7 @@ location /otp/ {
 # OTP images
 location /images/ {
     rewrite /images/(.*)  /images/$1  break;
-    proxy_pass         http://otp:8081;
+    proxy_pass         http://otp:8080;
     proxy_redirect     off;
     proxy_set_header   Host $host;
     proxy_set_header   X-Real-IP $remote_addr;
