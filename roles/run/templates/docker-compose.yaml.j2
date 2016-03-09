@@ -84,11 +84,26 @@ digitransitui:
   image: {{digitransit_ui_docker_image}}
   expose:
    - "{{digitransit_ui_exposed_port}}"
+  environment:
+    PORT: {{digitransit_ui_exposed_port}}
+    SENTRY_SECRET_DSN: {{sentry_secret_dsn}}
+    SENTRY_DSN: {{sentry_dsn}}
+    PIWIK_ID: {{digitransit_ui_national_piwik}}
+    PIWIK_ADDRESS: {{piwik_address}}
+    API_URL: {{digitransit_ui_national_server_root}}
 
 digitransituiregional:
-  image: {{digitransit_ui_regional_docker_image}}
+  image: {{digitransit_ui_docker_image}}
   expose:
    - "{{digitransit_ui_exposed_port}}"
+  environment:
+    PORT: {{digitransit_ui_exposed_port}}
+    SENTRY_SECRET_DSN: {{sentry_secret_dsn}}
+    SENTRY_DSN: {{sentry_dsn}}
+    PIWIK_ID: {{digitransit_ui_regional_piwik}}
+    PIWIK_ADDRESS: {{piwik_address}}
+    API_URL: {{digitransit_ui_regional_server_root}}
+    CONFIG: hsl
 
 mapserver:
   image: {{hsl_map_server_docker_image}}

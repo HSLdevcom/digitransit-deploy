@@ -1,9 +1,9 @@
 ---
-- name: Ensure digitransit-ui directory is present
-  file: path={{digitransit_ui_root}} state=directory
+- name: Ensure digitransit-ui directory is not present
+  file: path={{digitransit_ui_root}} state=absent
 
-- name: Move Dockerfile
-  template: src=Dockerfile.j2 dest={{digitransit_ui_root}}/Dockerfile owner=root group=root mode=0755
+- git: repo={{digitransit_ui_git}}
+       dest={{digitransit_ui_root}}
 
 - name: Build digitransit.ui docker image
   shell: docker build --tag={{digitransit_ui_docker_image|quote}} --force-rm=true {{digitransit_ui_root|quote}} >ansible-digitransit-ui-build.log 2>&1
