@@ -5,4 +5,3 @@
     - ../variables/common.yaml
   roles:
     - { role: digitransit-ui-docker-image }
-    - { role: digitransit-ui-regional-docker-image }

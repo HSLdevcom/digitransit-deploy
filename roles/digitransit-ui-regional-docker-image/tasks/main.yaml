@@ -1,9 +1,0 @@
----
-- name: Ensure digitransit-ui-regional directory is present
-  file: path={{digitransit_ui_regional_root}} state=directory
-
-- name: Move Dockerfile
-  template: src=Dockerfile.j2 dest={{digitransit_ui_regional_root}}/Dockerfile owner=root group=root mode=0755
-
-- name: Build digitransit-ui-regional docker image
-  shell: docker build --tag={{digitransit_ui_regional_docker_image|quote}} --force-rm=true {{digitransit_ui_regional_root|quote}} >ansible-digitransit-ui-regional-build.log 2>&1
