@@ -175,6 +175,15 @@ location /pelias/ {
     proxy_set_header   X-Forwarded-Host $server_name;
 }
 
+location /routing-data/v1/ {
+    rewrite /routing-data/v1/(.*) /$1  break;
+    proxy_pass         http://otp-data-container:{{otp_data_container_exposed_port}};
+    proxy_redirect     off;
+    proxy_set_header   Host $host;
+    proxy_set_header   X-Real-IP $remote_addr;
+    proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header   X-Forwarded-Host $server_name;
+}
 location /raildigitraffic2gtfsrt/ {
     rewrite /raildigitraffic2gtfsrt/(.*) /$1  break;
     proxy_pass         http://raildigitraffic2gtfsrt:{{raildigitraffic2gtfsrt_exposed_port}};
