@@ -59,6 +59,8 @@ raildigitraffic2gtfsrt:
    - otp-data-container
   expose:
    - "{{raildigitraffic2gtfsrt_exposed_port}}"
+  environment:
+    ROUTER_ZIP_URL: http://otp-data-container:{{otp_data_container_exposed_port}}/router-finland.zip
 
 siri2gtfsrt:
   image: {{siri2gtfsrt_docker_image}}
