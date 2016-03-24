@@ -75,7 +75,7 @@ raildigitraffic2gtfsrt_git: https://github.com/HSLdevcom/raildigitraffic2gtfsrt
 
 pelias_api_root: "{{docker_build_root}}/pelias-api"
 pelias_api_docker_image: "{{docker_image_base}}/pelias-api"
-pelias_api_exposed_port: 3100
+pelias_api_exposed_port: 8080
 pelias_api_git: https://github.com/HSLdevcom/pelias-api.git
 
 pelias_data_container_root: "{{docker_build_root}}/pelias-data-container"
