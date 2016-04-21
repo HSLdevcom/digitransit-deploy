@@ -10,6 +10,7 @@ RUN mkdir -p {{reverse_proxy_root}}/site
 
 ADD proxy.conf /etc/nginx/nginx.conf
 ADD common.conf /etc/nginx/common.conf
+ADD common2.conf /etc/nginx/common2.conf
 
 RUN chown -R nginx:nogroup {{reverse_proxy_root}}
 

@@ -11,5 +11,8 @@
 - name: Move config commons file
   template: src=common.conf.j2 dest={{reverse_proxy_root}}/common.conf
 
+- name: Move config commons file
+  template: src=common2.conf.j2 dest={{reverse_proxy_root}}/common2.conf
+
 - name: Build Reverse-proxy image
   shell: docker build --tag={{reverse_proxy_docker_image|quote}} --force-rm=true --no-cache=true {{reverse_proxy_root|quote}} >ansible-reverse-proxy-build.log 2>&1
