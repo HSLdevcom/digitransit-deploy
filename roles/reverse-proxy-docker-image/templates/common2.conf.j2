@@ -1,0 +1,59 @@
+location /geocoding/v1/ {
+    rewrite /geocoding/v1/(.*) /v1/$1  break;
+    proxy_pass         http://pelias-api:8080/;
+    proxy_redirect     off;
+    proxy_set_header   Host $host;
+    proxy_set_header   X-Real-IP $remote_addr;
+    proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header   X-Forwarded-Host $server_name;
+}
+
+location /realtime/trip-updates/v1/ {
+    rewrite /realtime/siri2gtfsrt/v1/(.*) /$1  break;
+    proxy_pass         http://siri2gtfsrt:8080/;
+    proxy_redirect     off;
+    proxy_set_header   Host $host;
+    proxy_set_header   X-Real-IP $remote_addr;
+    proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header   X-Forwarded-Host $server_name;
+}
+
+location /realtime/service-alerts/v1/ {
+    rewrite /realtime/service-alerts/v1/(.*) /$1  break;
+    proxy_pass         http://hslalert:8080/;
+    proxy_redirect     off;
+    proxy_set_header   Host $host;
+    proxy_set_header   X-Real-IP $remote_addr;
+    proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header   X-Forwarded-Host $server_name;
+}
+
+location /realtime/vehicle-positions/v1/ {
+    rewrite /realtime/vehicle-positions/v1/(.*) /$1  break;
+    proxy_pass         http://navigatorserver:{{navigator_server_exposed_port}}/;
+    proxy_redirect     off;
+    proxy_set_header   Host $host;
+    proxy_set_header   X-Real-IP $remote_addr;
+    proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header   X-Forwarded-Host $server_name;
+}
+
+location /map/v1/ {
+    rewrite /map/v1/(.*) /$1  break;
+    proxy_pass         http://mapserver:8080/;
+    proxy_redirect     off;
+    proxy_set_header   Host $host;
+    proxy_set_header   X-Real-IP $remote_addr;
+    proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header   X-Forwarded-Host $server_name;
+}
+
+location /routing/v1/ {
+    rewrite /routing/v1/(.*) /otp/$1  break;
+    proxy_pass         http://otp:8080/;
+    proxy_redirect     off;
+    proxy_set_header   Host $host;
+    proxy_set_header   X-Real-IP $remote_addr;
+    proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header   X-Forwarded-Host $server_name;
+}
