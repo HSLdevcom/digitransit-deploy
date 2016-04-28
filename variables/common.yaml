@@ -40,7 +40,7 @@ hsl_now_git: https://github.com/HSLdevcom/hsl-now.git
 
 hsl_alert_root: "{{docker_build_root}}/hsl-alert"
 hsl_alert_docker_image: "{{docker_image_base}}/hsl-alert"
-hsl_alert_exposed_port: 5000
+hsl_alert_exposed_port: 8080
 hsl_alert_git: https://github.com/HSLdevcom/hslalert
 
 oulu_gtfsrt_url: "http://92.62.36.215:8080/gtfs-rt"
