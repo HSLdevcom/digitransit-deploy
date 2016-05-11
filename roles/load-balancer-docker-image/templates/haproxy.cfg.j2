@@ -44,7 +44,7 @@ backend backend-active
     server nginx active:{{reverse_proxy_exposed_port}}
 
 backend backend-passive
-    redirect scheme https if !{ ssl_fc}
+    redirect scheme https if !{ ssl_fc }
     server nginx passive:{{reverse_proxy_exposed_port}}
 
 backend piwik
