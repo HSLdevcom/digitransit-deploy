@@ -5,12 +5,15 @@ global
         user    root
         group   root
         maxconn 1024
+        tune.ssl.default-dh-param 2048
 
 defaults
         log     global
         mode    http
         option  httplog
         option  dontlognull
+        option forwardfor
+        option http-server-close
         timeout connect  5000
         timeout client  30000
         timeout server  30000
@@ -18,18 +21,30 @@ defaults
 frontend www-active
     bind *:80
     use_backend piwik if { hdr(Host) -i piwik.digitransit.fi }
+    reqadd X-Forwarded-Proto:\ http
+    default_backend backend-active
+
+frontend www-active-https
+    bind *:443 ssl crt {{ssl_cert_root}}/matka.hsl.fi.pem
+    reqadd X-Forwarded-Proto:\ https
     default_backend backend-active
 
 frontend www-passive
     bind *:8080
+    reqadd X-Forwarded-Proto:\ http
+    default_backend backend-passive
+
+frontend www-passive-https
+    bind *:443 ssl crt {{ssl_cert_root}}/matka.hsl.fi.pem
+    reqadd X-Forwarded-Proto:\ https
     default_backend backend-passive
 
 backend backend-active
-    mode http
+    redirect scheme https if !{ ssl_fc }
     server nginx active:{{reverse_proxy_exposed_port}}
 
 backend backend-passive
-    mode http
+    redirect scheme https if !{ ssl_fc}
     server nginx passive:{{reverse_proxy_exposed_port}}
 
 backend piwik

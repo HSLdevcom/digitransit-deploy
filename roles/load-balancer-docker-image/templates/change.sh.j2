@@ -41,6 +41,7 @@ docker run -d \
   --publish="8080:8080" \
   --link="environment"$NEW_ACTIVE"_reverseproxy_1:active" \
   --link="environment"$NEW_PASSIVE"_reverseproxy_1:passive" \
+  --volume="/home/reittiopas/docker/certificates:{{ssl_cert_root}}" \
   hsldevcom/load-balancer
 
 # store current active environment number

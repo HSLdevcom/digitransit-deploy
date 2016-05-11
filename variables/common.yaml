@@ -12,6 +12,8 @@ load_balancer_root: "{{docker_build_root}}/load-balancer"
 load_balancer_docker_image: "{{docker_image_base}}/load-balancer"
 load_balancer_exposed_port: 80
 
+ssl_cert_root: "{{load_balancer_root}}"
+
 reverse_proxy_root: "{{docker_build_root}}/reverse-proxy"
 reverse_proxy_docker_image: "{{docker_image_base}}/reverse-proxy"
 reverse_proxy_exposed_port: 8080
