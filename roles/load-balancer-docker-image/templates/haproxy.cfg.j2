@@ -25,7 +25,8 @@ frontend www-active
     default_backend backend-active
 
 frontend www-active-https
-    bind *:443 ssl crt {{ssl_cert_root}}/matka.hsl.fi.pem
+    bind *:443 ssl crt {{ssl_cert_root}}/matka.hsl.fi.pem crt {{ssl_cert_root}}/digitransit-cert.pem
+    use_backend piwik if { hdr(Host) -i piwik.digitransit.fi }
     reqadd X-Forwarded-Proto:\ https
     default_backend backend-active
 
@@ -48,7 +49,7 @@ backend backend-passive
     server nginx passive:{{reverse_proxy_exposed_port}}
 
 backend piwik
-    mode http
+    redirect scheme https if !{ ssl_fc }
     server apache-piwik matka.hsl.fi:8090
     option forwardfor
     option http-server-close
