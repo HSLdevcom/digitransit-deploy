@@ -4,5 +4,5 @@
 [test:vars]
 digitransit_ui_national_piwik=6
 digitransit_ui_regional_piwik=4
-digitransit_ui_national_server_root=http://beta.digitransit.fi
-digitransit_ui_regional_server_root=http://matka.hsl.fi
+digitransit_ui_national_server_root=https://api.digitransit.fi
+digitransit_ui_regional_server_root=https://api.digitransit.fi
