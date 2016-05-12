@@ -31,12 +31,7 @@ frontend www-active-https
     default_backend backend-active
 
 frontend www-passive
-    bind *:8080
-    reqadd X-Forwarded-Proto:\ http
-    default_backend backend-passive
-
-frontend www-passive-https
-    bind *:443 ssl crt {{ssl_cert_root}}/matka.hsl.fi.pem
+    bind *:8080 ssl crt {{ssl_cert_root}}/matka.hsl.fi.pem
     reqadd X-Forwarded-Proto:\ https
     default_backend backend-passive
 
