@@ -9,7 +9,7 @@ location /hsl-now/ {
 }
 
 location /otp/ {
-  rewrite /otp/(.*) $scheme://api.digitransit.fi/routing/v1/$1 permanent;
+  rewrite /otp/(.*) https://api.digitransit.fi/routing/v1/$1 permanent;
 }
 
 # OTP images
@@ -34,15 +34,15 @@ location /navigator-proto/ {
 }
 
 location /hsl-alert/ {
-  rewrite /hsl-alert/(.*) $scheme://api.digitransit.fi/realtime/service-alerts/v1/$1 permanent;
+  rewrite /hsl-alert/(.*) https://api.digitransit.fi/realtime/service-alerts/v1/$1 permanent;
 }
 
 location /siri2gtfsrt/ {
-  rewrite /siri2gtfsrt/(.*) $scheme://api.digitransit.fi/realtime/trip-updates/v1/$1 permanent;
+  rewrite /siri2gtfsrt/(.*) https://api.digitransit.fi/realtime/trip-updates/v1/$1 permanent;
 }
 
 location /navigator-server/ {
-  rewrite /navigator-server/(.*) $scheme://api.digitransit.fi/realtime/vehicle-positions/v1/$1 permanent;
+  rewrite /navigator-server/(.*) https://api.digitransit.fi/realtime/vehicle-positions/v1/$1 permanent;
 }
 
 # For legacy support
