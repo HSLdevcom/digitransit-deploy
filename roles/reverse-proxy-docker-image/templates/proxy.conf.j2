@@ -34,7 +34,7 @@ http {
         server_name matka.hsl.fi;
 
         location / {
-            return 301 https://beta.reittiopas.fi$request_uri
+            return 301 https://beta.reittiopas.fi$request_uri;
         }
 
         location ~ ^/digitransit-ui/? {
