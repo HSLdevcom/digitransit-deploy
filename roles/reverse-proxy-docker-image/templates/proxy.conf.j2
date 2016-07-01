@@ -44,4 +44,18 @@ http {
         include common.conf;
         include common2.conf;
     }
+
+    server {
+        listen {{reverse_proxy_exposed_port}};
+        server_name beta.matka.fi;
+
+        location / {
+            return 301 https://beta.digitransit.fi$request_uri;
+        }
+
+        location ~ ^/digitransit-ui/? {
+            rewrite /digitransit-ui/?(.*) https://beta.digitransit.fi/$1 permanent;
+        }
+
+    }
 }
